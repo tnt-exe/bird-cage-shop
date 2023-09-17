@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,36 @@ namespace DataAccessObject
                     return _instance;
                 }
             }
+        }
+
+        public List<Category> GetAllCategories()
+        {
+            List<Category> categoriesList;
+            try
+            {
+                using var db = new BirdCageShopContext();
+                categoriesList = db.Categories.ToList();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return categoriesList;
+        }
+
+        public Category GetCategoryById(int id)
+        {
+            Category category;
+            try
+            {
+                using var db = new BirdCageShopContext();
+                category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return category;
         }
     }
 }

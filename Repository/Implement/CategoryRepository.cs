@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BusinessObject.Models;
+using DataAccessObject;
 using DataTransferObject;
 using Repository.Interface;
 using System;
@@ -20,12 +22,14 @@ namespace Repository.Implement
 
         public List<CategoryDTO> GetAllCategories()
         {
-            throw new NotImplementedException();
+            List<Category> categoriesList = CategoryDAO.SingletonInstance.GetAllCategories();
+            return _mapper.Map<List<CategoryDTO>>(categoriesList);
         }
 
         public CategoryDTO GetCategoryById(int id)
         {
-            throw new NotImplementedException();
+            Category category = CategoryDAO.SingletonInstance.GetCategoryById(id);
+            return _mapper.Map<CategoryDTO>(category);
         }
     }
 }
