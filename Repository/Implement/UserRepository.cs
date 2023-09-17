@@ -2,6 +2,7 @@
 using BusinessObject.Models;
 using DataAccessObject;
 using DataTransferObject;
+using Microsoft.Extensions.Configuration;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,26 @@ namespace Repository.Implement
         public UserRepository(IMapper mapper)
         {
             _mapper = mapper;
+        }
+
+        private User GetAdminUserFromJson(string email, string pwd)
+        {
+            User adminUser = null;
+            IConfiguration config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", true, true)
+                .Build();
+            string adminEmail = config["AdminAccount:Email"];
+            string adminPwd = config["AdminAccount:Password"];
+            if (email.Equals(adminEmail, StringComparison.Ordinal) && pwd.Equals(adminPwd, StringComparison.Ordinal))
+            {
+                adminUser = new User
+                {
+                    Email = adminEmail,
+                    Password = adminPwd
+                };
+            }
+            return adminUser;
         }
 
         public bool ChangeUserStatus(int userId, int userStatus)
@@ -47,12 +68,20 @@ namespace Repository.Implement
 
         public UserDTO Login(string email, string pwd)
         {
-            User user = UserDAO.SingletonInstance.GetUser(email, pwd);
-            if (user == null)
+            User loginedUser = GetAdminUserFromJson(email, pwd);
+            if (loginedUser != null)
             {
-                return null;
+                return _mapper.Map<UserDTO>(loginedUser);
             }
-            return _mapper.Map<UserDTO>(user);
+            else
+            {
+                loginedUser = UserDAO.SingletonInstance.GetUser(email, pwd);
+                if (loginedUser == null)
+                {
+                    return null;
+                }
+                return _mapper.Map<UserDTO>(loginedUser);
+            }
         }
 
         public bool Register(UserDTO userObj)
