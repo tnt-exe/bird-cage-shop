@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BusinessObject.Models;
+using DataAccessObject;
 using DataTransferObject;
 using Repository.Interface;
 using System;
@@ -18,39 +20,57 @@ namespace Repository.Implement
             _mapper = mapper;
         }
 
-        public bool ChangeUserStatus(int userId, int userstatus)
+        public bool ChangeUserStatus(int userId, int userStatus)
         {
-            throw new NotImplementedException();
+            return UserDAO.SingletonInstance.ChangeUserStatus(userId, userStatus);
         }
 
         public UserDTO GetUserById(int id)
         {
-            throw new NotImplementedException();
+            User user = UserDAO.SingletonInstance.GetUserById(id);
+            if (user == null)
+            {
+                return null;
+            }
+            return _mapper.Map<UserDTO>(user);
         }
 
         public bool IsEmailExisted(string email)
         {
-            throw new NotImplementedException();
+            return UserDAO.SingletonInstance.IsEmailExisted(email);
         }
 
         public bool IsPhoneExisted(string phone)
         {
-            throw new NotImplementedException();
+            return UserDAO.SingletonInstance.IsPhoneExisted(phone);
         }
 
         public UserDTO Login(string email, string pwd)
         {
-            throw new NotImplementedException();
+            User user = UserDAO.SingletonInstance.GetUser(email, pwd);
+            if (user == null)
+            {
+                return null;
+            }
+            return _mapper.Map<UserDTO>(user);
         }
 
-        public bool Register(UserDTO user)
+        public bool Register(UserDTO userObj)
         {
-            throw new NotImplementedException();
+            User newUser = _mapper.Map<User>(userObj);
+            return UserDAO.SingletonInstance.AddUser(newUser);
         }
 
-        public bool Update(UserDTO user)
+        public bool UpdateUserEmailPassword(UserDTO userObj)
         {
-            throw new NotImplementedException();
+            User user = _mapper.Map<User>(userObj);
+            return UserDAO.SingletonInstance.UpdateUserEmailPassword(user);
+        }
+
+        public bool UpdateUserInformation(UserDTO userObj)
+        {
+            User user = _mapper.Map<User>(userObj);
+            return UserDAO.SingletonInstance.UpdateUserInfo(user);
         }
     }
 }

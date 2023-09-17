@@ -11,7 +11,8 @@ namespace Repository.Interface
     {
         UserDTO Login(string email, string pwd);
         bool Register(UserDTO user);
-        bool Update(UserDTO user);
+        bool UpdateUserEmailPassword(UserDTO user);
+        bool UpdateUserInformation(UserDTO user);
         bool ChangeUserStatus(int userId, int userstatus);
         bool IsEmailExisted(string email);
         bool IsPhoneExisted(string phone);
