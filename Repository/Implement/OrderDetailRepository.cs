@@ -23,12 +23,12 @@ namespace Repository.Implement
             throw new NotImplementedException();
         }
 
-        public bool InsertOrderDetail(OrderDetailDTO orderdetail)
+        public bool InsertOrderDetail(OrderDetailDTO orderdetailDTO)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateOrderDetail(OrderDetailDTO orderdetail)
+        public bool UpdateOrderDetail(OrderDetailDTO orderdetailDTO)
         {
             throw new NotImplementedException();
         }

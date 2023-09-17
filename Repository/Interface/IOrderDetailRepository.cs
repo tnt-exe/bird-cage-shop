@@ -11,7 +11,7 @@ namespace Repository.Interface
     public interface IOrderDetailRepository
     {
         List<OrderDetailDTO> GetOrderDetail(int orderId);
-        bool InsertOrderDetail(OrderDetailDTO orderdetail);
-        bool UpdateOrderDetail(OrderDetailDTO orderdetail);
+        bool InsertOrderDetail(OrderDetailDTO orderdetailDTO);
+        bool UpdateOrderDetail(OrderDetailDTO orderdetailDTO);
     }
 }

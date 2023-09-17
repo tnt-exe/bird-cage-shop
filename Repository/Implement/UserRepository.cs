@@ -84,21 +84,21 @@ namespace Repository.Implement
             }
         }
 
-        public bool Register(UserDTO userObj)
+        public bool Register(UserDTO userDTO)
         {
-            User newUser = _mapper.Map<User>(userObj);
+            User newUser = _mapper.Map<User>(userDTO);
             return UserDAO.SingletonInstance.AddUser(newUser);
         }
 
-        public bool UpdateUserEmailPassword(UserDTO userObj)
+        public bool UpdateUserEmailPassword(UserDTO userDTO)
         {
-            User user = _mapper.Map<User>(userObj);
+            User user = _mapper.Map<User>(userDTO);
             return UserDAO.SingletonInstance.UpdateUserEmailPassword(user);
         }
 
-        public bool UpdateUserInformation(UserDTO userObj)
+        public bool UpdateUserInformation(UserDTO userDTO)
         {
-            User user = _mapper.Map<User>(userObj);
+            User user = _mapper.Map<User>(userDTO);
             return UserDAO.SingletonInstance.UpdateUserInfo(user);
         }
     }

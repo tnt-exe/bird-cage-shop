@@ -10,7 +10,7 @@ namespace Repository.Interface
     public interface IOrderRepository
     {
         List<OrderDTO> GetAllOrders();
-        OrderDTO CreateOrder(OrderDTO order);
+        OrderDTO CreateOrder(OrderDTO orderDTO);
         bool ChangeOrderStatus(int orderId, int orderstatus);
         bool Reorder(int orderId);
         List<OrderDTO> GetOrderByUser(string email);
