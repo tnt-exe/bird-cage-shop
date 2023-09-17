@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BusinessObject.Models;
+using DataAccessObject;
 using DataTransferObject;
 using Repository.Interface;
 using System;
@@ -20,7 +22,8 @@ namespace Repository.Implement
 
         public IEnumerable<CageImageDTO> GetCageImages(int cageId)
         {
-            throw new NotImplementedException();
+            IEnumerable<CageImage> cageImages = CageImageDAO.SingletonInstance.GetCageImages(cageId);
+            return _mapper.Map<IEnumerable<CageImageDTO>>(cageImages);
         }
     }
 }
