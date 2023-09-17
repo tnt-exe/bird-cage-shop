@@ -69,7 +69,7 @@ namespace BusinessObject.Migrations
 
                     b.HasKey("CageId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex(new[] { "CategoryId" }, "IX_Cage_CategoryId");
 
                     b.ToTable("Cage", (string)null);
                 });
@@ -94,7 +94,7 @@ namespace BusinessObject.Migrations
 
                     b.HasKey("CageImageId");
 
-                    b.HasIndex("CageId");
+                    b.HasIndex(new[] { "CageId" }, "IX_CageImage_CageId");
 
                     b.ToTable("CageImage", (string)null);
                 });
@@ -142,7 +142,7 @@ namespace BusinessObject.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex(new[] { "UserId" }, "IX_Order_UserId");
 
                     b.ToTable("Order", (string)null);
                 });
@@ -169,9 +169,9 @@ namespace BusinessObject.Migrations
 
                     b.HasKey("OrderDetailId");
 
-                    b.HasIndex("CageId");
+                    b.HasIndex(new[] { "CageId" }, "IX_OrderDetail_CageId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex(new[] { "OrderId" }, "IX_OrderDetail_OrderId");
 
                     b.ToTable("OrderDetail", (string)null);
                 });
@@ -205,6 +205,14 @@ namespace BusinessObject.Migrations
 
                     b.Property<bool?>("Gender")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int?>("Status")
                         .HasColumnType("int");
