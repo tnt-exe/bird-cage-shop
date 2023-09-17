@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using BusinessObject.Enums;
+using BusinessObject.Models;
+using DataAccessObject;
 using DataTransferObject;
 using Repository.Interface;
 using System;
@@ -20,52 +23,62 @@ namespace Repository.Implement
 
         public bool AddNewCage(CageDTO cageDTO)
         {
-            throw new NotImplementedException();
+            Cage cage = _mapper.Map<Cage>(cageDTO);
+            return CageDAO.SingletonInstance.AddNewCage(cage);
         }
 
         public bool ChangeCageStatus(CageDTO cageDTO, int status)
         {
-            throw new NotImplementedException();
+            Cage cage = _mapper.Map<Cage>(cageDTO);
+            return CageDAO.SingletonInstance.ChangeCageStatus(cage, status);
         }
 
         public bool DeleteCage(CageDTO cageDTO)
         {
-            throw new NotImplementedException();
+            Cage cage = _mapper.Map<Cage>(cageDTO);
+            return CageDAO.SingletonInstance.ChangeCageStatus(cage, (int)CageStatus.Unavailable);
         }
 
         public List<CageDTO> GetAllCages()
         {
-            throw new NotImplementedException();
+            List<Cage> cagesList = CageDAO.SingletonInstance.GetAllCages();
+            return _mapper.Map<List<CageDTO>>(cagesList);
         }
 
         public CageDTO GetCageById(int id)
         {
-            throw new NotImplementedException();
+            Cage cage = CageDAO.SingletonInstance.GetCageById(id);
+            return _mapper.Map<CageDTO>(cage);
         }
 
         public List<CageDTO> GetCagesByCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            List<Cage> cagesList = CageDAO.SingletonInstance.GetCagesByCategory(categoryId);
+            return _mapper.Map<List<CageDTO>>(cagesList);
         }
 
         public List<CageDTO> GetCagesByStatus(int status)
         {
-            throw new NotImplementedException();
+            List<Cage> cagesList = CageDAO.SingletonInstance.GetCagesByStatus(status);
+            return _mapper.Map<List<CageDTO>>(cagesList);
         }
 
         public List<CageDTO> GetSearchCages(string keyword)
         {
-            throw new NotImplementedException();
+            List<Cage> cagesList = CageDAO.SingletonInstance.GetSearchCages(keyword);
+            return _mapper.Map<List<CageDTO>>(cagesList);
         }
 
         public List<CageDTO> GetTopCages(int top)
         {
-            throw new NotImplementedException();
+            List<Cage> cagesList = CageDAO.SingletonInstance.GetTopCages(top);
+            return _mapper.Map<List<CageDTO>>(cagesList);
         }
 
         public bool UpdateCage(CageDTO cageDTO)
         {
-            throw new NotImplementedException();
+            Cage cage = _mapper.Map<Cage>(cageDTO);
+            return CageDAO.SingletonInstance.UpdateCage(cage);
         }
     }
 }
