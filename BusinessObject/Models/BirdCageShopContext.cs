@@ -134,6 +134,8 @@ namespace BusinessObject.Models
                 entity.Property(e => e.FullName).HasMaxLength(50);
 
                 entity.Property(e => e.Password).HasMaxLength(100);
+
+                entity.Property(e => e.Phone).HasMaxLength(20);
             });
 
             OnModelCreatingPartial(modelBuilder);
