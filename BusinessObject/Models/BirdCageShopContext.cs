@@ -49,6 +49,8 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("Cage");
 
+                entity.HasIndex(e => e.CategoryId, "IX_Cage_CategoryId");
+
                 entity.Property(e => e.CageName).HasMaxLength(255);
 
                 entity.Property(e => e.Color).HasMaxLength(20);
@@ -66,6 +68,8 @@ namespace BusinessObject.Models
             modelBuilder.Entity<CageImage>(entity =>
             {
                 entity.ToTable("CageImage");
+
+                entity.HasIndex(e => e.CageId, "IX_CageImage_CageId");
 
                 entity.Property(e => e.ImageUrl).HasMaxLength(255);
 
@@ -88,6 +92,8 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("Order");
 
+                entity.HasIndex(e => e.UserId, "IX_Order_UserId");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.UserId)
@@ -97,6 +103,10 @@ namespace BusinessObject.Models
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.ToTable("OrderDetail");
+
+                entity.HasIndex(e => e.CageId, "IX_OrderDetail_CageId");
+
+                entity.HasIndex(e => e.OrderId, "IX_OrderDetail_OrderId");
 
                 entity.HasOne(d => d.Cage)
                     .WithMany(p => p.OrderDetails)
@@ -122,6 +132,8 @@ namespace BusinessObject.Models
                 entity.Property(e => e.Email).HasMaxLength(50);
 
                 entity.Property(e => e.FullName).HasMaxLength(50);
+
+                entity.Property(e => e.Password).HasMaxLength(100);
             });
 
             OnModelCreatingPartial(modelBuilder);
