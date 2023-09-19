@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BusinessObject.Models;
+using DataAccessObject;
 using DataTransferObject;
 using Repository.Interface;
 using System;
@@ -18,29 +20,31 @@ namespace Repository.Implement
             _mapper = mapper;
         }
 
-        public bool ChangeOrderStatus(int orderId, int orderstatus)
-        {
-            throw new NotImplementedException();
-        }
+        public bool ChangeOrderStatus(int orderId, int orderStatus)
+            => OrderDAO.SingletonInstance.ChangeOrderStatus(orderId, orderStatus);
 
-        public OrderDTO CreateOrder(OrderDTO orderDTO)
+        public bool CreateOrder(OrderDTO orderDTO)
         {
-            throw new NotImplementedException();
+            Order order = _mapper.Map<Order>(orderDTO);
+            return OrderDAO.SingletonInstance.CreateOrder(order);
         }
 
         public List<OrderDTO> GetAllOrders()
         {
-            throw new NotImplementedException();
+            List<Order> orderList = OrderDAO.SingletonInstance.GetAllOrders();
+            return _mapper.Map<List<OrderDTO>>(orderList);
         }
 
         public List<OrderDTO> GetOrderByUser(string email)
         {
-            throw new NotImplementedException();
+            List<Order> orderList = OrderDAO.SingletonInstance.GetOrderByUser(email);
+            return _mapper.Map<List<OrderDTO>>(orderList);
         }
 
-        public List<OrderDTO> GetOrderListByStatus(int orderstatus)
+        public List<OrderDTO> GetOrderListByStatus(Enum orderStatus)
         {
-            throw new NotImplementedException();
+            List<Order> orderList = OrderDAO.SingletonInstance.GetOrderListByStatus(int.Parse(orderStatus.ToString()));
+            return _mapper.Map<List<OrderDTO>>(orderList);
         }
 
         public bool Reorder(int orderId)
