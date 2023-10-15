@@ -11,14 +11,14 @@ namespace DataTransferObject
         public int OrderDetailId { get; set; }
         public int? OrderId { get; set; }
         public int? CageId { get; set; }
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
         public int? Quantity { get; set; }
 
         public OrderDetailDTO()
         {
         }
 
-        public OrderDetailDTO(int orderDetailId, int? orderId, int? cageId, double? price, int? quantity)
+        public OrderDetailDTO(int orderDetailId, int? orderId, int? cageId, decimal? price, int? quantity)
         {
             OrderDetailId = orderDetailId;
             OrderId = orderId;
