@@ -1,16 +1,11 @@
 ﻿using BusinessObject.Enums;
 using BusinessObject.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
     public class CageDAO
     {
-        private static CageDAO _instance = null; 
+        private static CageDAO _instance = null;
         private static readonly object _instanceLock = new object();
         private CageDAO() { }
         public static CageDAO SingletonInstance
@@ -37,7 +32,7 @@ namespace DataAccessObject
                 db.Cages.Add(cage);
                 result = db.SaveChanges() > 0;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
