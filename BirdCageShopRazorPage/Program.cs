@@ -1,4 +1,6 @@
-
+using Repository.Implement;
+using Repository.Interface;
+using Repository.UnitOfWork;
 
 namespace BirdCageShopRazorPage
 {
@@ -10,6 +12,20 @@ namespace BirdCageShopRazorPage
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddSession();
+
+            #region repository
+            builder.Services.AddSingleton<ICageComponentRepository, CageComponentRepository>();
+            builder.Services.AddSingleton<ICageImageRepository, CageImageRepository>();
+            builder.Services.AddSingleton<ICageRepository, CageRepository>();
+            builder.Services.AddSingleton<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddSingleton<IComponentRepository, ComponentRepository>();
+            builder.Services.AddSingleton<IOrderDetailRepository, OrderDetailRepository>();
+            builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
+            builder.Services.AddSingleton<IUserRepository, UserRepository>();
+
+            builder.Services.AddSingleton<IUnitOfWork, IUnitOfWork>();
+            #endregion
 
             var app = builder.Build();
 
@@ -22,7 +38,10 @@ namespace BirdCageShopRazorPage
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
