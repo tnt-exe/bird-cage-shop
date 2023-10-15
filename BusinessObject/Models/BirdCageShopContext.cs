@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
@@ -18,8 +19,10 @@ namespace BusinessObject.Models
         }
 
         public virtual DbSet<Cage> Cages { get; set; } = null!;
+        public virtual DbSet<CageComponent> CageComponents { get; set; } = null!;
         public virtual DbSet<CageImage> CageImages { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<Component> Components { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
@@ -35,9 +38,9 @@ namespace BusinessObject.Models
         private string GetConnectionString()
         {
             IConfiguration config = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", true, true)
-            .Build();
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", true, true)
+                .Build();
             var strConn = config["ConnectionStrings:BirdCageShopDB"];
 
             return strConn;
@@ -49,15 +52,11 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("Cage");
 
-                entity.HasIndex(e => e.CategoryId, "IX_Cage_CategoryId");
+                entity.Property(e => e.CageName).HasMaxLength(50);
 
-                entity.Property(e => e.CageName).HasMaxLength(255);
+                entity.Property(e => e.CagePrice).HasColumnType("money");
 
-                entity.Property(e => e.Color).HasMaxLength(20);
-
-                entity.Property(e => e.Description).HasMaxLength(255);
-
-                entity.Property(e => e.Material).HasMaxLength(50);
+                entity.Property(e => e.Description).HasMaxLength(100);
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Cages)
@@ -65,13 +64,26 @@ namespace BusinessObject.Models
                     .HasConstraintName("FK_Cage_Category");
             });
 
+            modelBuilder.Entity<CageComponent>(entity =>
+            {
+                entity.ToTable("CageComponent");
+
+                entity.Property(e => e.Price).HasColumnType("money");
+
+                entity.HasOne(d => d.Cage)
+                    .WithMany(p => p.CageComponents)
+                    .HasForeignKey(d => d.CageId)
+                    .HasConstraintName("FK_CageComponent_Cage");
+
+                entity.HasOne(d => d.Component)
+                    .WithMany(p => p.CageComponents)
+                    .HasForeignKey(d => d.ComponentId)
+                    .HasConstraintName("FK_CageComponent_Component");
+            });
+
             modelBuilder.Entity<CageImage>(entity =>
             {
                 entity.ToTable("CageImage");
-
-                entity.HasIndex(e => e.CageId, "IX_CageImage_CageId");
-
-                entity.Property(e => e.ImageUrl).HasMaxLength(255);
 
                 entity.HasOne(d => d.Cage)
                     .WithMany(p => p.CageImages)
@@ -83,16 +95,31 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("Category");
 
-                entity.Property(e => e.CategoryName)
-                    .HasMaxLength(100)
-                    .IsFixedLength();
+                entity.Property(e => e.CategoryName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Component>(entity =>
+            {
+                entity.ToTable("Component");
+
+                entity.Property(e => e.Color).HasMaxLength(50);
+
+                entity.Property(e => e.ComponentName).HasMaxLength(50);
+
+                entity.Property(e => e.ComponentPrice).HasColumnType("money");
+
+                entity.Property(e => e.Material).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("Order");
 
-                entity.HasIndex(e => e.UserId, "IX_Order_UserId");
+                entity.Property(e => e.OrderDate).HasColumnType("date");
+
+                entity.Property(e => e.ShipDate).HasColumnType("date");
+
+                entity.Property(e => e.TotalPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
@@ -104,9 +131,7 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("OrderDetail");
 
-                entity.HasIndex(e => e.CageId, "IX_OrderDetail_CageId");
-
-                entity.HasIndex(e => e.OrderId, "IX_OrderDetail_OrderId");
+                entity.Property(e => e.Price).HasColumnType("money");
 
                 entity.HasOne(d => d.Cage)
                     .WithMany(p => p.OrderDetails)
@@ -123,19 +148,21 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.Address).HasMaxLength(255);
+                entity.Property(e => e.Address).HasMaxLength(50);
 
-                entity.Property(e => e.AvatarUrl).HasMaxLength(255);
-
-                entity.Property(e => e.BirthDate).HasColumnType("date");
+                entity.Property(e => e.Dob)
+                    .HasColumnType("date")
+                    .HasColumnName("DOB");
 
                 entity.Property(e => e.Email).HasMaxLength(50);
 
                 entity.Property(e => e.FullName).HasMaxLength(50);
 
-                entity.Property(e => e.Password).HasMaxLength(100);
+                entity.Property(e => e.Password).HasMaxLength(50);
 
-                entity.Property(e => e.Phone).HasMaxLength(20);
+                entity.Property(e => e.Phone).HasMaxLength(50);
+
+                entity.Property(e => e.Role).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);
