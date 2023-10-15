@@ -1,9 +1,4 @@
 ﻿using BusinessObject.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
@@ -35,7 +30,7 @@ namespace DataAccessObject
                 using var db = new BirdCageShopContext();
                 cageImages = db.CageImages.Where(ci => ci.CageId == cageId).ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

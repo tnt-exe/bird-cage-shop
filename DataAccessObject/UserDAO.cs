@@ -1,9 +1,4 @@
 ﻿using BusinessObject.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessObject
 {
@@ -33,7 +28,7 @@ namespace DataAccessObject
             try
             {
                 using var db = new BirdCageShopContext();
-                user = db.Users.Where(u => u.Email.Equals(email, StringComparison.Ordinal) 
+                user = db.Users.Where(u => u.Email.Equals(email, StringComparison.Ordinal)
                         && u.Password.Equals(pwd, StringComparison.Ordinal)).FirstOrDefault();
             }
             catch (Exception ex)

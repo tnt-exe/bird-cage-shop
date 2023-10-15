@@ -1,9 +1,4 @@
 ﻿using Repository.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.UnitOfWork
 {
@@ -19,13 +14,13 @@ namespace Repository.UnitOfWork
         private readonly ICageComponentRepository _cageComponentRepo;
 
         public UnitOfWork(
-            IUserRepository userRepo, 
-            ICageRepository cageRepo, 
-            IOrderRepository orderRepo, 
-            ICategoryRepository categoryRepo, 
-            IComponentRepository componentRepo, 
-            ICageImageRepository cageImageRepo, 
-            IOrderDetailRepository orderDetailRepo, 
+            IUserRepository userRepo,
+            ICageRepository cageRepo,
+            IOrderRepository orderRepo,
+            ICategoryRepository categoryRepo,
+            IComponentRepository componentRepo,
+            ICageImageRepository cageImageRepo,
+            IOrderDetailRepository orderDetailRepo,
             ICageComponentRepository cageComponentRepo
             )
         {

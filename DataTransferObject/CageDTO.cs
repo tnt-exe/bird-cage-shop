@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataTransferObject
+﻿namespace DataTransferObject
 {
     public class CageDTO
     {
@@ -23,14 +17,14 @@ namespace DataTransferObject
         }
 
         public CageDTO(
-            int cageId, 
-            string? cageName, 
-            int? status, 
-            decimal? cagePrice, 
-            int? cageSize, 
-            int? cageWeight, 
-            string? description, 
-            int? userId, 
+            int cageId,
+            string? cageName,
+            int? status,
+            decimal? cagePrice,
+            int? cageSize,
+            int? cageWeight,
+            string? description,
+            int? userId,
             int? categoryId
             )
         {

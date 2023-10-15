@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataTransferObject
+﻿namespace DataTransferObject
 {
     public class OrderDTO
     {
@@ -21,12 +15,12 @@ namespace DataTransferObject
         }
 
         public OrderDTO(
-            int orderId, 
-            int? userId, 
-            decimal? totalPrice, 
-            int? status, 
+            int orderId,
+            int? userId,
+            decimal? totalPrice,
+            int? status,
             int? paymentStatus,
-            DateTime? orderDate, 
+            DateTime? orderDate,
             DateTime? shipDate
             )
         {

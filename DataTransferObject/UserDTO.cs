@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataTransferObject
+﻿namespace DataTransferObject
 {
     public class UserDTO
     {
@@ -25,16 +19,16 @@ namespace DataTransferObject
         }
 
         public UserDTO(
-            int userId, 
-            string? fullName, 
+            int userId,
+            string? fullName,
             string? email,
-            string? password, 
-            string? phone, 
+            string? password,
+            string? phone,
             DateTime? dob,
-            bool? gender, 
+            bool? gender,
             string? address,
-            string? avatarUrl, 
-            string? role, 
+            string? avatarUrl,
+            string? role,
             int? status
             )
         {
