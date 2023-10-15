@@ -21,26 +21,6 @@ namespace Repository.Implement
             _mapper = mapper;
         }
 
-        private User GetAdminUserFromJson(string email, string pwd)
-        {
-            User adminUser = null;
-            IConfiguration config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true)
-                .Build();
-            string adminEmail = config["AdminAccount:Email"];
-            string adminPwd = config["AdminAccount:Password"];
-            if (email.Equals(adminEmail, StringComparison.Ordinal) && pwd.Equals(adminPwd, StringComparison.Ordinal))
-            {
-                adminUser = new User
-                {
-                    Email = adminEmail,
-                    Password = adminPwd
-                };
-            }
-            return adminUser;
-        }
-
         public bool ChangeUserStatus(int userId, int userStatus)
         {
             return UserDAO.SingletonInstance.ChangeUserStatus(userId, userStatus);
@@ -68,20 +48,12 @@ namespace Repository.Implement
 
         public UserDTO Login(string email, string pwd)
         {
-            User loginedUser = GetAdminUserFromJson(email, pwd);
-            if (loginedUser != null)
+            User loginedUser = UserDAO.SingletonInstance.GetUser(email, pwd);
+            if (loginedUser == null)
             {
-                return _mapper.Map<UserDTO>(loginedUser);
+                return null;
             }
-            else
-            {
-                loginedUser = UserDAO.SingletonInstance.GetUser(email, pwd);
-                if (loginedUser == null)
-                {
-                    return null;
-                }
-                return _mapper.Map<UserDTO>(loginedUser);
-            }
+            return _mapper.Map<UserDTO>(loginedUser);
         }
 
         public bool Register(UserDTO userDTO)
