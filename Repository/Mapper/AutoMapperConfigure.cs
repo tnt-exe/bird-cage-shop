@@ -13,12 +13,14 @@ namespace Repository.Mapper
     {
         public AutoMapperConfigure()
         {
+            CreateMap<Cage, CageDTO>().ReverseMap();
+            CreateMap<CageComponent, CageComponentDTO>().ReverseMap();
             CreateMap<CageImage, CageImageDTO>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<Component, ComponentDTO>().ReverseMap();
             CreateMap<Order, OrderDTO>().ReverseMap();
-            CreateMap<User, UserDTO>().ReverseMap();
             CreateMap<OrderDetail, OrderDetailDTO>().ReverseMap();
-            CreateMap<Cage, CageDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
         }
     }
 }
