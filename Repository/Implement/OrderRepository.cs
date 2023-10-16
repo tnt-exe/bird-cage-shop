@@ -18,10 +18,16 @@ namespace Repository.Implement
         public bool ChangeOrderStatus(int orderId, int orderStatus)
             => OrderDAO.SingletonInstance.ChangeOrderStatus(orderId, orderStatus);
 
-        public bool CreateOrder(OrderDTO orderDTO)
+        public bool CreateOrder(OrderDTO orderDTO, List<OrderDetailDTO> cartItems)
         {
             Order order = _mapper.Map<Order>(orderDTO);
-            return OrderDAO.SingletonInstance.CreateOrder(order);
+            List<OrderDetail> orderDetails = new List<OrderDetail>();
+            foreach (var item in cartItems)
+            {
+                var orderDetail = _mapper.Map<OrderDetail>(item);
+                orderDetails.Add(orderDetail);
+            }
+            return OrderDAO.SingletonInstance.CreateOrder(order, orderDetails);
         }
 
         public List<OrderDTO> GetAllOrders()
@@ -41,10 +47,6 @@ namespace Repository.Implement
             List<Order> orderList = OrderDAO.SingletonInstance.GetOrderListByStatus(int.Parse(orderStatus.ToString()));
             return _mapper.Map<List<OrderDTO>>(orderList);
         }
-
-        public bool Reorder(int orderId)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

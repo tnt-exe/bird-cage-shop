@@ -54,14 +54,22 @@ namespace DataAccessObject
             return result;
         }
 
-        public bool CreateOrder(Order order)
+        public bool CreateOrder(Order order, List<OrderDetail> orderItems)
         {
             bool result;
             try
             {
-                using var db = new BirdCageShopContext();
-                db.Orders.Add(order);
-                result = db.SaveChanges() > 0;
+                using (var db = new BirdCageShopContext())
+                {
+                    db.Orders.Add(order);
+
+                    foreach (var item in orderItems)
+                    {
+                        db.OrderDetails.Add(item);
+                    }
+                    
+                    result = db.SaveChanges() > 0;
+                }
             }
             catch
             {
@@ -105,5 +113,6 @@ namespace DataAccessObject
             }
             return orderList;
         }
+
     }
 }
