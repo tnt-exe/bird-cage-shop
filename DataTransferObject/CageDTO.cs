@@ -1,12 +1,22 @@
-﻿namespace DataTransferObject
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DataTransferObject
 {
     public class CageDTO
     {
         public int CageId { get; set; }
+
+        [Required]
         public string? CageName { get; set; }
         public int? Status { get; set; }
+
+        [Required]
         public decimal? CagePrice { get; set; }
+
+        [Required]
         public int? CageSize { get; set; }
+
+        [Required]
         public int? CageWeight { get; set; }
         public string? Description { get; set; }
         public int? UserId { get; set; }

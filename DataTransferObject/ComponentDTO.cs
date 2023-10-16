@@ -1,11 +1,17 @@
-﻿namespace DataTransferObject
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DataTransferObject
 {
     public class ComponentDTO
     {
         public int ComponentId { get; set; }
+
+        [Required]
         public string? ComponentName { get; set; }
         public string? Color { get; set; }
         public string? Material { get; set; }
+
+        [Required]
         public decimal? ComponentPrice { get; set; }
 
         public ComponentDTO()
