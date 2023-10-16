@@ -5,7 +5,7 @@ namespace Repository.Interface
     public interface ICageComponentRepository
     {
         List<CageComponentDTO> GetComponentByCageId(int cageId);
-        bool InsertCageComponent(CageComponentDTO cageComponentDTO);
+        bool InsertCageComponent(List<CageComponentDTO> cageComponentList);
         bool UpdateCageComponent(CageComponentDTO cageComponentDTO);
         bool DeleteCageComponent(int cageComponentId);
     }

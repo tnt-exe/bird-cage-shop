@@ -1,4 +1,6 @@
-﻿namespace DataAccessObject
+﻿using BusinessObject.Models;
+
+namespace DataAccessObject
 {
     public class CageComponentDAO
     {
@@ -18,6 +20,28 @@
                     return _instance;
                 }
             }
+        }
+
+        public bool InsertCageComponent(List<CageComponent> cageComponentList)
+        {
+            bool result;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    foreach (var item in cageComponentList)
+                    {
+                        db.CageComponents.Add(item);
+                    }
+
+                    result = db.SaveChanges() > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return result;
         }
     }
 }
