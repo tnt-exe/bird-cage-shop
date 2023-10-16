@@ -1,5 +1,6 @@
 using Repository.Implement;
 using Repository.Interface;
+using Repository.Mapper;
 using Repository.UnitOfWork;
 
 namespace BirdCageShopRazorPage
@@ -13,6 +14,7 @@ namespace BirdCageShopRazorPage
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddSession();
+            builder.Services.AddAutoMapper(typeof(AutoMapperConfigure).Assembly);
 
             #region repository
             builder.Services.AddSingleton<ICageComponentRepository, CageComponentRepository>();
