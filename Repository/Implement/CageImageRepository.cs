@@ -15,10 +15,25 @@ namespace Repository.Implement
             _mapper = mapper;
         }
 
-        public IEnumerable<CageImageDTO> GetCageImages(int cageId)
+        public bool AddCageImage(CageImageDTO cageImageDTO)
         {
-            IEnumerable<CageImage> cageImages = CageImageDAO.SingletonInstance.GetCageImages(cageId);
-            return _mapper.Map<IEnumerable<CageImageDTO>>(cageImages);
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteCageImage(int cageImageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CageImageDTO> GetCageImages(int cageId)
+        {
+            List<CageImage> cageImages = CageImageDAO.SingletonInstance.GetCageImages(cageId);
+            return _mapper.Map<List<CageImageDTO>>(cageImages);
+        }
+
+        public bool UpdateCageImage(CageImageDTO cageImageDTO)
+        {
+            throw new NotImplementedException();
         }
     }
 }

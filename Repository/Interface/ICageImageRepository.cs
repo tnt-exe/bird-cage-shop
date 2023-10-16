@@ -4,6 +4,9 @@ namespace Repository.Interface
 {
     public interface ICageImageRepository
     {
-        IEnumerable<CageImageDTO> GetCageImages(int cageId);
+        List<CageImageDTO> GetCageImages(int cageId);
+        bool AddCageImage(CageImageDTO cageImageDTO);
+        bool UpdateCageImage(CageImageDTO cageImageDTO);
+        bool DeleteCageImage(int cageImageId);
     }
 }
