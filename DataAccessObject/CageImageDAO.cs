@@ -22,9 +22,9 @@ namespace DataAccessObject
             }
         }
 
-        public IEnumerable<CageImage> GetCageImages(int cageId)
+        public List<CageImage> GetCageImages(int cageId)
         {
-            IEnumerable<CageImage> cageImages = null;
+            List<CageImage> cageImages = null;
             try
             {
                 using var db = new BirdCageShopContext();

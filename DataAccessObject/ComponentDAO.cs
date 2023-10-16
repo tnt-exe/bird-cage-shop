@@ -1,4 +1,6 @@
-﻿namespace DataAccessObject
+﻿using BusinessObject.Models;
+
+namespace DataAccessObject
 {
     public class ComponentDAO
     {
@@ -20,5 +22,39 @@
             }
         }
 
+        public List<Component> GetAllComponent()
+        {
+            List<Component> componentList;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    componentList = db.Components.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return componentList;
+        }
+
+        public Component GetComponentById(int componentId)
+        {
+            Component component;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    component = db.Components
+                        .SingleOrDefault(c => c.ComponentId == componentId);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return component;
+        }
     }
 }

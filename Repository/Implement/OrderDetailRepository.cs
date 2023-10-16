@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BusinessObject.Models;
+using DataAccessObject;
 using DataTransferObject;
 using Repository.Interface;
 
@@ -15,17 +17,8 @@ namespace Repository.Implement
 
         public List<OrderDetailDTO> GetOrderDetail(int orderId)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool InsertOrderDetail(OrderDetailDTO orderdetailDTO)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool UpdateOrderDetail(OrderDetailDTO orderdetailDTO)
-        {
-            throw new NotImplementedException();
+            List<OrderDetail> detailList = OrderDetailDAO.SingletonInstance.GetAll(orderId);
+            return _mapper.Map<List<OrderDetailDTO>>(detailList);
         }
     }
 }
