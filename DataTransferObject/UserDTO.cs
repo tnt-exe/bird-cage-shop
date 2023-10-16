@@ -1,11 +1,20 @@
-﻿namespace DataTransferObject
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DataTransferObject
 {
     public class UserDTO
     {
         public int UserId { get; set; }
         public string? FullName { get; set; }
+
+        [Required]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
         public string? Email { get; set; }
+
+        [Required]
         public string? Password { get; set; }
+
+        [Phone(ErrorMessage = "Invalid phone number")]
         public string? Phone { get; set; }
         public DateTime? Dob { get; set; }
         public bool? Gender { get; set; }
