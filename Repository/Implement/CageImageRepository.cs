@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessObject.Enums;
 using BusinessObject.Models;
 using DataAccessObject;
 using DataTransferObject;
@@ -17,12 +18,13 @@ namespace Repository.Implement
 
         public bool AddCageImage(CageImageDTO cageImageDTO)
         {
-            throw new NotImplementedException();
+            CageImage cageImg = _mapper.Map<CageImage>(cageImageDTO);
+            return CageImageDAO.SingletonInstance.AddCageImage(cageImg);
         }
 
         public bool DeleteCageImage(int cageImageId)
         {
-            throw new NotImplementedException();
+            return CageImageDAO.SingletonInstance.ChangeCageImgStatus(cageImageId, (byte) CageImageEnum.Deleted);
         }
 
         public List<CageImageDTO> GetCageImages(int cageId)
@@ -33,7 +35,8 @@ namespace Repository.Implement
 
         public bool UpdateCageImage(CageImageDTO cageImageDTO)
         {
-            throw new NotImplementedException();
+            CageImage cageImg = _mapper.Map<CageImage>(cageImageDTO);
+            return CageImageDAO.SingletonInstance.UpdateCageImage(cageImg);
         }
     }
 }

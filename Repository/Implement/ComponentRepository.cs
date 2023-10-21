@@ -29,7 +29,8 @@ namespace Repository.Implement
 
         public List<ComponentDTO> GetSearchComponent(string keyword)
         {
-            throw new NotImplementedException();
+            List<Component> componentList = ComponentDAO.SingletonInstance.GetSearchComponents(keyword);
+            return _mapper.Map<List<ComponentDTO>>(componentList);
         }
     }
 }

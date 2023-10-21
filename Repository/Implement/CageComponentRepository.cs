@@ -17,12 +17,13 @@ namespace Repository.Implement
 
         public bool DeleteCageComponent(int cageComponentId)
         {
-            throw new NotImplementedException();
+            return CageComponentDAO.SingletonInstance.DeleteCageComponent(cageComponentId);
         }
 
         public List<CageComponentDTO> GetComponentByCageId(int cageId)
         {
-            throw new NotImplementedException();
+            List<CageComponent> cageComponents = CageComponentDAO.SingletonInstance.GetCageComponents(cageId);
+            return _mapper.Map<List<CageComponentDTO>>(cageComponents);
         }
 
         public bool InsertCageComponent(List<CageComponentDTO> cageComponentList)
@@ -38,7 +39,8 @@ namespace Repository.Implement
 
         public bool UpdateCageComponent(CageComponentDTO cageComponentDTO)
         {
-            throw new NotImplementedException();
+            CageComponent cageComponent = _mapper.Map<CageComponent>(cageComponentDTO);
+            return CageComponentDAO.SingletonInstance.UpdateCageComponent(cageComponent);
         }
     }
 }

@@ -22,6 +22,25 @@ namespace DataAccessObject
             }
         }
 
+        public List<CageComponent> GetCageComponents(int cageId)
+        {
+            List<CageComponent> cageComponentList = null;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    cageComponentList = db.CageComponents
+                        .Where(component => component.CageId == cageId)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return cageComponentList;
+        }
+
         public bool InsertCageComponent(List<CageComponent> cageComponentList)
         {
             bool result;
@@ -34,6 +53,50 @@ namespace DataAccessObject
                         db.CageComponents.Add(item);
                     }
 
+                    result = db.SaveChanges() > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return result;
+        }
+
+        public bool UpdateCageComponent(CageComponent cageComponent)
+        {
+            bool result = false;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    CageComponent componentObj = db.CageComponents
+                        .Find(cageComponent.ComponentId);
+                    if (componentObj != null)
+                    {
+                        db.Entry(componentObj).CurrentValues.SetValues(cageComponent);
+                        result = db.SaveChanges() > 0;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return result;
+        }
+
+        public bool DeleteCageComponent(int cageComponentId)
+        {
+            bool result;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    CageComponent componentObj = db.CageComponents
+                        .Where(component => component.ComponentId == cageComponentId)
+                        .FirstOrDefault();
+                    db.Remove(componentObj);
                     result = db.SaveChanges() > 0;
                 }
             }

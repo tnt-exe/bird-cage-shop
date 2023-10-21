@@ -7,7 +7,7 @@
         Custom = 3
     }
 
-    public enum CageImage
+    public enum CageImageEnum
     {
         Deleted = 0,
         Available = 1
