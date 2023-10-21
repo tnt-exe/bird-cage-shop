@@ -28,13 +28,81 @@ namespace DataAccessObject
             try
             {
                 using var db = new BirdCageShopContext();
-                cageImages = db.CageImages.Where(ci => ci.CageId == cageId).ToList();
+                cageImages = db.CageImages.Where(image => image.CageId == cageId).ToList();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
             return cageImages;
+        }
+
+        public bool AddCageImage(CageImage cageImg)
+        {
+            bool result;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    db.CageImages.Add(cageImg);
+                    result = db.SaveChanges() > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return result;
+        }
+
+        public bool DeleteCageImage(int cageImgId)
+        {
+            bool result;
+
+            return false;
+        }
+
+        public bool UpdateCageImage(CageImage cageImg)
+        {
+            bool result = false;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    CageImage cageObj = db.CageImages.Find(cageImg.CageImageId);
+                    if (cageObj != null)
+                    {
+                        db.Entry(cageObj).CurrentValues.SetValues(cageImg);
+                        result = db.SaveChanges() > 0;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return result;
+        }
+
+        public bool ChangeCageImgStatus(int cageImgId, int status)
+        {
+            bool result;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    CageImage cageObj = db.CageImages
+                        .Where(image => image.CageImageId == cageImgId)
+                        .FirstOrDefault();
+                    cageObj.Status = status;
+                    result = db.SaveChanges() > 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return result;
         }
     }
 }
