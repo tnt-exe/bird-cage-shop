@@ -8,8 +8,6 @@ namespace DataTransferObject
 
         [Required]
         public string? ComponentName { get; set; }
-        public string? Color { get; set; }
-        public string? Material { get; set; }
 
         [Required]
         public decimal? ComponentPrice { get; set; }
@@ -18,12 +16,10 @@ namespace DataTransferObject
         {
         }
 
-        public ComponentDTO(int componentId, string? componentName, string? color, string? material, decimal? componentPrice)
+        public ComponentDTO(int componentId, string? componentName, decimal? componentPrice)
         {
             ComponentId = componentId;
             ComponentName = componentName;
-            Color = color;
-            Material = material;
             ComponentPrice = componentPrice;
         }
     }

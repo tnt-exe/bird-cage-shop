@@ -7,18 +7,6 @@
         public int? CageId { get; set; }
         public decimal? Price { get; set; }
         public int? Quantity { get; set; }
-
-        public OrderDetailDTO()
-        {
-        }
-
-        public OrderDetailDTO(int orderDetailId, int? orderId, int? cageId, decimal? price, int? quantity)
-        {
-            OrderDetailId = orderDetailId;
-            OrderId = orderId;
-            CageId = cageId;
-            Price = price;
-            Quantity = quantity;
-        }
+        public CageDTO? Cage { get; set; }
     }
 }

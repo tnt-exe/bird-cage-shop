@@ -15,6 +15,16 @@ namespace Repository.Implement
             _mapper = mapper;
         }
 
+        public List<CageComponentDTO> GetList()
+        {
+            return _mapper.Map<List<CageComponentDTO>>(CageComponentDAO.SingletonInstance.GetList());
+        }
+
+        public CageComponentDTO GetCageComponentById(int id)
+        {
+            return _mapper.Map< CageComponentDTO>(CageComponentDAO.SingletonInstance.GetCageComponentById(id));
+        }
+
         public bool DeleteCageComponent(int cageComponentId)
         {
             return CageComponentDAO.SingletonInstance.DeleteCageComponent(cageComponentId);

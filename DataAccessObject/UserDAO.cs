@@ -24,18 +24,17 @@ namespace DataAccessObject
 
         public User GetUser(string email, string pwd)
         {
-            User user;
             try
             {
                 using var db = new BirdCageShopContext();
-                user = db.Users.Where(u => u.Email.Equals(email, StringComparison.Ordinal)
-                        && u.Password.Equals(pwd, StringComparison.Ordinal)).FirstOrDefault();
+                var user = db.Users.Where(u => u.Email.Equals(email)
+                        && u.Password.Equals(pwd)).FirstOrDefault();
+                return user;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return user;
         }
 
         public bool AddUser(User user)

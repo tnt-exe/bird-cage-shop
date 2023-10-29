@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var logged = HttpContextAccessor.HttpContext?.User.Claims.Any() ?? false;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,11 +25,26 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Home/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Cage/Index">Bird Cage</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Order/Index">Order</a>
+                        </li>
+                        @if(!logged){
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
+                            </li>
+                        }
+                        @if (logged){
+                            <li class="nav-item">
+                                <form action="/logout" method="post">
+                                    <a class="nav-link text-dark" href="#" onclick="this.parentNode.submit()">Logout</a>
+                                </form>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -17,7 +17,7 @@ namespace BusinessObject.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.23")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -37,9 +37,6 @@ namespace BusinessObject.Migrations
                     b.Property<decimal?>("CagePrice")
                         .HasColumnType("money");
 
-                    b.Property<int?>("CageSize")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CageWeight")
                         .HasColumnType("int");
 
@@ -49,6 +46,15 @@ namespace BusinessObject.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Radius")
+                        .HasColumnType("int");
 
                     b.Property<int?>("Status")
                         .HasColumnType("int");
@@ -74,8 +80,16 @@ namespace BusinessObject.Migrations
                     b.Property<int?>("CageId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Color")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<int?>("ComponentId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Material")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("money");
@@ -144,20 +158,12 @@ namespace BusinessObject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ComponentId"), 1L, 1);
 
-                    b.Property<string>("Color")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("ComponentName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal?>("ComponentPrice")
                         .HasColumnType("money");
-
-                    b.Property<string>("Material")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ComponentId");
 
@@ -173,13 +179,13 @@ namespace BusinessObject.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
                     b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("PaymentStatus")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ShipDate")
-                        .HasColumnType("date");
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("Status")
                         .HasColumnType("int");
@@ -246,6 +252,7 @@ namespace BusinessObject.Migrations
                         .HasColumnName("DOB");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -257,6 +264,7 @@ namespace BusinessObject.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 

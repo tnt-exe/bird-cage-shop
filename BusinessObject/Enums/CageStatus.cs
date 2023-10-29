@@ -2,9 +2,10 @@
 {
     public enum CageStatus
     {
+        Undefined = -1,
         Unavailable = 0,
         Available = 1,
-        Custom = 3
+        Custom = 2,
     }
 
     public enum CageImageEnum

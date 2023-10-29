@@ -8,28 +8,34 @@ namespace DataTransferObject
 
         [Required]
         public string? CageName { get; set; }
-        public int? Status { get; set; }
+        public string? Status { get; set; }
 
-        [Required]
         public decimal? CagePrice { get; set; }
 
         [Required]
-        public int? CageSize { get; set; }
+        public int? Height { get; set; }
+        [Required]
+        public int? Radius { get; set; }
 
         [Required]
         public int? CageWeight { get; set; }
         public string? Description { get; set; }
         public int? UserId { get; set; }
         public int? CategoryId { get; set; }
+        public string? ImageUrl { get; set; }
 
-        public CageDTO()
+        public CategoryDTO? Category { get; set; }
+
+        public ICollection<CageComponentDTO> CageComponents { get; set; } = new List<CageComponentDTO>();
+
+        /*public CageDTO()
         {
         }
 
         public CageDTO(
             int cageId,
             string? cageName,
-            int? status,
+            string? status,
             decimal? cagePrice,
             int? cageSize,
             int? cageWeight,
@@ -47,6 +53,6 @@ namespace DataTransferObject
             Description = description;
             UserId = userId;
             CategoryId = categoryId;
-        }
+        }*/
     }
 }

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BirdCageShopRazorPage", "BirdCageShopRazorPage\BirdCageShopRazorPage.csproj", "{5CC15020-C1C7-4843-B178-4BB1EBA0CA4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdCageShopRazorPage", "BirdCageShopRazorPage\BirdCageShopRazorPage.csproj", "{5CC15020-C1C7-4843-B178-4BB1EBA0CA4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObject", "BusinessObject\BusinessObject.csproj", "{453415C1-64B7-4E4E-8A52-9560A5388BD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObject", "BusinessObject\BusinessObject.csproj", "{453415C1-64B7-4E4E-8A52-9560A5388BD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessObject", "DataAccessObject\DataAccessObject.csproj", "{BE925927-7A7C-466B-8C96-E47F7D1122E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessObject", "DataAccessObject\DataAccessObject.csproj", "{BE925927-7A7C-466B-8C96-E47F7D1122E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransferObject", "DataTransferObject\DataTransferObject.csproj", "{E773D012-DB7E-4775-A994-338998F04673}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTransferObject", "DataTransferObject\DataTransferObject.csproj", "{E773D012-DB7E-4775-A994-338998F04673}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{C1149BFC-A833-4045-8F2E-F77FAE15E4F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{C1149BFC-A833-4045-8F2E-F77FAE15E4F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

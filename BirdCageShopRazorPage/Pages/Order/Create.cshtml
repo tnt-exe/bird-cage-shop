@@ -1,0 +1,17 @@
+﻿@page
+@model BirdCageShopRazorPage.Pages.Order.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<form method="post">
+    <input type="submit" value="test post" />
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

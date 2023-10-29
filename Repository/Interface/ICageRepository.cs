@@ -14,5 +14,6 @@ namespace Repository.Interface
         List<CageDTO> GetCagesByCategory(int categoryId);
         List<CageDTO> GetTopCages(int top);
         CageDTO GetCageById(int id);
+        bool RemoveCage(int id);
     }
 }

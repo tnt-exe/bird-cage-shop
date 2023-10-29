@@ -1,4 +1,6 @@
-﻿namespace BusinessObject.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BusinessObject.Models
 {
     public partial class User
     {
@@ -9,8 +11,10 @@
 
         public int UserId { get; set; }
         public string? FullName { get; set; }
-        public string? Email { get; set; }
-        public string? Password { get; set; }
+        [Required]
+        public string Email { get; set; } = default!;
+        [Required]
+        public string Password { get; set; } = default!;
         public string? Phone { get; set; }
         public DateTime? Dob { get; set; }
         public bool? Gender { get; set; }

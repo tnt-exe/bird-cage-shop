@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessObject.Enums;
 using BusinessObject.Models;
 using DataAccessObject;
 using DataTransferObject;
@@ -15,19 +16,33 @@ namespace Repository.Implement
             _mapper = mapper;
         }
 
+        public OrderDTO GetOrderById(int id)
+        {
+            return _mapper.Map<OrderDTO>(OrderDAO.SingletonInstance.GetOrderById(id));
+        }
+
+        public bool UpdateOrder(Order updateOrder)
+        {
+            return OrderDAO.SingletonInstance.UpdateOrder(updateOrder);
+        }
+
+        public Order? GetLatestSuitableOrderOfUser(int userId)
+        {
+            // Lấy order đang trong trạng thái waiting
+            // Lấy order của user theo userId
+            // Lấy order mới đc tạo gần đây
+
+            var status = (int)(OrderStatus)Enum.Parse(typeof(OrderStatus), "Waiting");
+            return OrderDAO.SingletonInstance.GetSuiatbleOrder(userId, status);
+        }
+
         public bool ChangeOrderStatus(int orderId, int orderStatus)
             => OrderDAO.SingletonInstance.ChangeOrderStatus(orderId, orderStatus);
 
-        public bool CreateOrder(OrderDTO orderDTO, List<OrderDetailDTO> cartItems)
+        public bool CreateOrder(OrderDTO orderDTO)
         {
             Order order = _mapper.Map<Order>(orderDTO);
-            List<OrderDetail> orderDetails = new List<OrderDetail>();
-            foreach (var item in cartItems)
-            {
-                var orderDetail = _mapper.Map<OrderDetail>(item);
-                orderDetails.Add(orderDetail);
-            }
-            return OrderDAO.SingletonInstance.CreateOrder(order, orderDetails);
+            return OrderDAO.SingletonInstance.CreateOrder(order);
         }
 
         public List<OrderDTO> GetAllOrders()

@@ -15,10 +15,25 @@ namespace Repository.Implement
             _mapper = mapper;
         }
 
+        public OrderDetailDTO getOrderDetailById(int id)
+        {
+            return _mapper.Map<OrderDetailDTO>(OrderDetailDAO.SingletonInstance.GetById(id));
+        }
+
         public List<OrderDetailDTO> GetOrderDetail(int orderId)
         {
             List<OrderDetail> detailList = OrderDetailDAO.SingletonInstance.GetAll(orderId);
             return _mapper.Map<List<OrderDetailDTO>>(detailList);
+        }
+
+        public bool AddNewOrderDetail(OrderDetailDTO newEntity)
+        {
+            return OrderDetailDAO.SingletonInstance.AddNewOrderDetail(_mapper.Map<OrderDetail>(newEntity));
+        }
+
+        public bool UpdateOrderDetail(OrderDetailDTO update)
+        {
+            return OrderDetailDAO.SingletonInstance.UpdateOrderDetail(_mapper.Map<OrderDetail>(update));
         }
     }
 }

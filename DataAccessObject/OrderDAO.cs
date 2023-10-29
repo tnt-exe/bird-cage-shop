@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessObject
 {
@@ -19,6 +20,18 @@ namespace DataAccessObject
                     }
                     return _instance;
                 }
+            }
+        }
+
+        public Order? GetOrderById(int id)
+        {
+            using (var db = new BirdCageShopContext())
+            {
+                return db.Orders
+                    .Where(o => o.OrderId == id)
+                    .Include(nameof(Order.OrderDetails) + "." + nameof(OrderDetail.Cage))
+                    .AsNoTracking()
+                    .FirstOrDefault();
             }
         }
 
@@ -54,7 +67,7 @@ namespace DataAccessObject
             return result;
         }
 
-        public bool CreateOrder(Order order, List<OrderDetail> orderItems)
+        public bool CreateOrder(Order order)
         {
             bool result;
             try
@@ -62,12 +75,6 @@ namespace DataAccessObject
                 using (var db = new BirdCageShopContext())
                 {
                     db.Orders.Add(order);
-
-                    foreach (var item in orderItems)
-                    {
-                        db.OrderDetails.Add(item);
-                    }
-                    
                     result = db.SaveChanges() > 0;
                 }
             }
@@ -95,23 +102,25 @@ namespace DataAccessObject
 
         public List<Order> GetOrderByUser(string email)
         {
-            List<Order> orderList;
-            try
-            {
-                using var db = new BirdCageShopContext();
-                orderList = db.Users
-                    .Where(u => u.Email == email)
-                    .Join(db.Orders,
-                        user => user.UserId, // Foreign key within Users table
-                        order => order.UserId, // Foreign key within Orders table
-                        (user, order) => order) // Result selector
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return orderList;
+            using var db = new BirdCageShopContext();
+            return db.Orders.Where(o => o.User!.Email.Equals(email)).ToList();
+        }
+
+        public Order? GetSuiatbleOrder(int userId, int status)
+        {
+            using var db = new BirdCageShopContext();
+            return db.Orders
+                .Where(o => o.UserId == userId && o.Status == status)
+                .Include(o => o.OrderDetails)
+                .AsNoTracking()
+                .FirstOrDefault();
+        }
+
+        public bool UpdateOrder(Order updateOrder)
+        {
+            using var db = new BirdCageShopContext();
+            db.Update(updateOrder);
+            return db.SaveChanges() > 0;
         }
 
     }

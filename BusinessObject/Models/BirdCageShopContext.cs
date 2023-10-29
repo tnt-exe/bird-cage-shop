@@ -75,6 +75,10 @@ namespace BusinessObject.Models
                     .WithMany(p => p.CageComponents)
                     .HasForeignKey(d => d.ComponentId)
                     .HasConstraintName("FK_CageComponent_Component");
+
+                entity.Property(e => e.Material).HasMaxLength(50);
+
+                entity.Property(e => e.Color).HasMaxLength(50);
             });
 
             modelBuilder.Entity<CageImage>(entity =>
@@ -98,22 +102,14 @@ namespace BusinessObject.Models
             {
                 entity.ToTable("Component");
 
-                entity.Property(e => e.Color).HasMaxLength(50);
-
                 entity.Property(e => e.ComponentName).HasMaxLength(50);
 
                 entity.Property(e => e.ComponentPrice).HasColumnType("money");
-
-                entity.Property(e => e.Material).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("Order");
-
-                entity.Property(e => e.OrderDate).HasColumnType("date");
-
-                entity.Property(e => e.ShipDate).HasColumnType("date");
 
                 entity.Property(e => e.TotalPrice).HasColumnType("money");
 

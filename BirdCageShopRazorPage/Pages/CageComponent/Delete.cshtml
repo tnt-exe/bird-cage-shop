@@ -1,0 +1,52 @@
+﻿@page
+@model BirdCageShopRazorPage.Pages.CageComponent.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CageComponent</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CageComponent.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CageComponent.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CageComponent.Color)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CageComponent.Color)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CageComponent.Material)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CageComponent.Material)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CageComponent.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CageComponent.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CageComponent.Component)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CageComponent.Component.ComponentId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="CageComponent.CageComponentId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

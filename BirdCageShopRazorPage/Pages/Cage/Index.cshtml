@@ -1,0 +1,127 @@
+﻿@page
+@model BirdCageShopRazorPage.Pages.Cage.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["notification"] != null)
+{
+    <h2 style="color:blue">@TempData["notification"]</h2>
+}
+
+<h1>View List</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+@foreach (var item in Model.Cage) {
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-1"></div> <!-- Empty first 1 column -->
+            <div class="col-md-10 card">
+                <div class="card-body row">
+                    <div class="col-md-3">
+                        <a asp-page="./Details" asp-route-id="@item.CageId" style="text-decoration: none; color: inherit;">
+                            @if (item.ImageUrl is null)
+                            {
+                                <img src="https://raw.githubusercontent.com/khoaLe12/Public-Image/main/cage_image.png" style="height: auto; width: 100%;">
+                            }
+                            else
+                            {
+                                <img src="@item.ImageUrl" style="height: auto; width: 100%;">
+                            }
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <a asp-page="./Details" asp-route-id="@item.CageId" style="text-decoration: none; color: inherit;">
+                            <div class="row mt-3">
+                                <label>
+                                    Cage Name: @item.CageName /---------------/ Status: @item.Status
+                                </label>
+                            </div>
+                            <div class="row mt-3">
+                                Price: @item.CagePrice VNĐ
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-1">
+                        @if (item.Status is not null && item.Status.Equals("Available"))
+                        {
+                            <a asp-page="./MakeOrder" asp-route-id="@item.CageId">Đặt hàng</a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div> <!-- Empty last 1 column -->
+        </div>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].CageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].CagePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].Radius)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].CageWeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cage[0].UserId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Cage) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CageName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CagePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Radius)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CageWeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.CageId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.CageId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.CageId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,149 @@
+﻿@page
+@model BirdCageShopRazorPage.Pages.Cage.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+
+    Dictionary<string,int> maximum = new Dictionary<string, int>();
+    maximum.Add("Đáy", 2);
+    maximum.Add("Trụ", 2);
+    maximum.Add("Móc", 1);
+    maximum.Add("Cửa", 2);
+    maximum.Add("Nan", 50);
+    maximum.Add("0", 0);
+}
+
+<h1>Edit</h1>
+
+<h4>Cage</h4>
+<hr />
+<div class="row">
+    <form method="post">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Cage.CageId" />
+            <div class="form-group">
+                <label asp-for="Cage.CageName" class="control-label"></label>
+                <input asp-for="Cage.CageName" class="form-control" />
+                <span asp-validation-for="Cage.CageName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cage.Status" class="control-label"></label>
+                <input asp-for="Cage.Status" class="form-control" />
+                <span asp-validation-for="Cage.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cage.CagePrice" class="control-label"></label>
+                <input asp-for="Cage.CagePrice" class="form-control" />
+                <span asp-validation-for="Cage.CagePrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cage.Height" class="control-label"></label>
+                <input asp-for="Cage.Height" class="form-control" />
+                <span asp-validation-for="Cage.Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cage.Radius" class="control-label"></label>
+                <input asp-for="Cage.Radius" class="form-control" />
+                <span asp-validation-for="Cage.Radius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cage.CageWeight" class="control-label"></label>
+                <input asp-for="Cage.CageWeight" class="form-control" />
+                <span asp-validation-for="Cage.CageWeight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cage.Description" class="control-label"></label>
+                <input asp-for="Cage.Description" class="form-control" />
+                <span asp-validation-for="Cage.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cage.UserId" class="control-label"></label>
+                <input asp-for="Cage.UserId" class="form-control" />
+                <span asp-validation-for="Cage.UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cage.CategoryId" class="control-label"></label>
+                <select asp-for="Cage.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="Cage.CategoryId" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <h2>List of components</h2>
+
+            <div class="row">
+                <div class="col-md-2">
+                    Name
+                </div>
+                <div class="col-md-2">
+                    Color
+                </div>
+                <div class="col-md-2">
+                    Material
+                </div>
+                <div class="col-md-2">
+                    Quantity
+                </div>
+                <div class="col-md-2">
+                    Price Per Unit
+                </div>
+                <div class="col-md-2">
+                    Total Price
+                </div>
+            </div>
+            @for (int i = 0; i < Model.CageComponents.Count; i++)
+            {
+                <input type="hidden" asp-for="CageComponents[i].ComponentId" />
+                <input type="hidden" asp-for="CageComponents[i].CageId" />
+                <input type="hidden" asp-for="CageComponents[i].CageComponentId" />
+                <div class="card">
+                    <div class="card-body row">
+                        <div class="col-md-2">
+                            <label> @(Model.CageComponents[i].Component?.ComponentName ?? "Undefined") </label>
+                        </div>
+                        <div class="col-md-2">
+                            <input asp-for="CageComponents[i].Color" />
+                        </div>
+                        <div class="col-md-2">
+                            <input asp-for="CageComponents[i].Material" />
+                        </div>
+                        <div class="col-md-2">
+                            <input class="quantity" type="number" asp-for="CageComponents[i].Quantity" oninput="updateToTalPrice(this)" min="@maximum[Model.CageComponents[i].Component?.ComponentName ?? "0"]" />
+                        </div>
+                        <div class="col-md-2">
+                            <input type="hidden" class="price" value="@(Model.CageComponents[i].Component?.ComponentPrice ?? 0)" readonly />
+                            <label>@(Model.CageComponents[i].Component?.ComponentPrice ?? 0) VNĐ</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="totalPrice" asp-for="CageComponents[i].Price" readonly />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+<script>
+    function updateToTalPrice(input) {
+        var quantity = input.value;
+        var price = input.parentElement.nextElementSibling.children[0].value;
+        var totalPrice = input.parentElement.nextElementSibling.nextElementSibling.children[0];
+
+        totalPrice.value = price * quantity;
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

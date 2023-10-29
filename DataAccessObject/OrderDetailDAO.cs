@@ -1,4 +1,5 @@
 ﻿using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessObject
 {
@@ -22,6 +23,14 @@ namespace DataAccessObject
             }
         }
 
+        public OrderDetail? GetById(int id)
+        {
+            using (var db = new BirdCageShopContext())
+            {
+                return db.OrderDetails.Where(od => od.OrderDetailId == id).AsNoTracking().FirstOrDefault();
+            }
+        }
+
         public List<OrderDetail> GetAll(int orderId)
         {
             List<OrderDetail> detailList;
@@ -39,6 +48,20 @@ namespace DataAccessObject
                 throw new Exception(ex.Message);
             }
             return detailList;
+        }
+
+        public bool AddNewOrderDetail(OrderDetail newEntity)
+        {
+            using var db = new BirdCageShopContext();
+            db.OrderDetails.Add(newEntity);
+            return db.SaveChanges() > 0;
+        }
+
+        public bool UpdateOrderDetail(OrderDetail updateEntity)
+        {
+            using var db = new BirdCageShopContext();
+            db.Update(updateEntity);
+            return db.SaveChanges() > 0;
         }
     }
 }

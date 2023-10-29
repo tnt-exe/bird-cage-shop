@@ -21,6 +21,36 @@ namespace DataAccessObject
                 }
             }
         }
+         
+        public List<CageComponent> GetList()
+        {
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    return db.CageComponents.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public CageComponent GetCageComponentById(int id)
+        {
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    return db.CageComponents.Find(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public List<CageComponent> GetCageComponents(int cageId)
         {

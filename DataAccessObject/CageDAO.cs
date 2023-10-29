@@ -1,5 +1,6 @@
 ﻿using BusinessObject.Enums;
 using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessObject
 {
@@ -21,6 +22,27 @@ namespace DataAccessObject
                     return _instance;
                 }
             }
+        }
+
+        public bool RemoveCage(int id)
+        {
+            bool result = false;
+            try
+            {
+                using var db = new BirdCageShopContext();
+                var cage = db.Cages.Find(id);
+                if(cage is null)
+                {
+                    return result;
+                }
+                db.Cages.Remove(cage);
+                result = db.SaveChanges() > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return result;
         }
 
         public bool AddNewCage(Cage cage)
@@ -62,7 +84,7 @@ namespace DataAccessObject
             try
             {
                 using var db = new BirdCageShopContext();
-                cages = db.Cages.ToList();
+                cages = db.Cages.AsQueryable().Include(c => c.Category).ToList();
             }
             catch (Exception ex)
             {
@@ -73,17 +95,21 @@ namespace DataAccessObject
 
         public Cage GetCageById(int id)
         {
-            Cage cage;
             try
             {
-                using var db = new BirdCageShopContext();
-                cage = db.Cages.Where(c => c.CageId == id).FirstOrDefault();
+                using (var db = new BirdCageShopContext())
+                {
+                    return db.Cages
+                    .Where(c => c.CageId == id)
+                    .Include(nameof(Cage.CageComponents) + "." + nameof(CageComponent.Component))
+                    .AsNoTracking()
+                    .FirstOrDefault();
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return cage;
         }
 
         public List<Cage> GetCagesByCategory(int categoryId)
@@ -154,13 +180,9 @@ namespace DataAccessObject
             bool result = false;
             try
             {
-                var cage = GetCageById(cageObj.CageId);
-                if (cage != null)
-                {
-                    using var db = new BirdCageShopContext();
-                    db.Entry(cage).CurrentValues.SetValues(cageObj);
-                    result = db.SaveChanges() > 0;
-                }
+                using var db = new BirdCageShopContext();
+                db.Update(cageObj);
+                result = db.SaveChanges() > 0;
             }
             catch (Exception ex)
             {

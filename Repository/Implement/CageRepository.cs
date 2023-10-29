@@ -75,5 +75,10 @@ namespace Repository.Implement
             Cage cage = _mapper.Map<Cage>(cageDTO);
             return CageDAO.SingletonInstance.UpdateCage(cage);
         }
+
+        public bool RemoveCage(int id)
+        {
+            return CageDAO.SingletonInstance.RemoveCage(id);
+        }
     }
 }

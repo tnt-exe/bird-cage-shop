@@ -9,8 +9,6 @@
 
         public int ComponentId { get; set; }
         public string? ComponentName { get; set; }
-        public string? Color { get; set; }
-        public string? Material { get; set; }
         public decimal? ComponentPrice { get; set; }
 
         public virtual ICollection<CageComponent> CageComponents { get; set; }

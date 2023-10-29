@@ -1,0 +1,82 @@
+﻿@page
+@model BirdCageShopRazorPage.Pages.Order.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@if (TempData["notification"] != null)
+{
+    <h3 style="color:blue">@TempData["notification"]</h3>
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Danh sách giỏ hàng</h1>
+
+        @if (Model.Order.Count() == 0)
+        {
+            <h2>Giỏ hàng trống</h2>
+        }
+    </div>
+
+    <div class="col-md-2">
+        @if (Model.Order.Where(o => new string("Waiting").Equals(o.Status)).Count() == 0)
+        {
+            <form action="/Order/Create" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit">Thêm giỏ hàng mới</button>
+            </form>
+        }
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].PaymentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].ShipDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Order) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipDate)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
