@@ -21,7 +21,7 @@ namespace DataAccessObject
                 }
             }
         }
-         
+
         public List<CageComponent> GetList()
         {
             try

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataTransferObject;
-using Microsoft.AspNetCore.Mvc;
+﻿using DataTransferObject;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Repository.Interface;
 
 namespace BirdCageShopRazorPage.Pages.Cage
@@ -19,7 +13,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
             _cageRepository = cageRepository;
         }
 
-        public IList<CageDTO> Cage { get;set; } = default!;
+        public IList<CageDTO> Cage { get; set; } = default!;
 
         public void OnGet()
         {

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using BusinessObject.Models;
-using DataAccessObject;
-using DataTransferObject;
+﻿using DataTransferObject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Interface;
+using System.Security.Claims;
 
 namespace BirdCageShopRazorPage.Pages.Order
 {
@@ -29,10 +23,10 @@ namespace BirdCageShopRazorPage.Pages.Order
 
         public IActionResult OnGet()
         {
-        //ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
+            //ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
             return Page();
         }
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -45,7 +39,7 @@ namespace BirdCageShopRazorPage.Pages.Order
 
             var userId = _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             var check = int.TryParse(userId, out var id);
-            if(check)
+            if (check)
             {
                 var newOrder = new OrderDTO
                 {

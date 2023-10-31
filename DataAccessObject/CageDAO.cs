@@ -31,7 +31,7 @@ namespace DataAccessObject
             {
                 using var db = new BirdCageShopContext();
                 var cage = db.Cages.Find(id);
-                if(cage is null)
+                if (cage is null)
                 {
                     return result;
                 }

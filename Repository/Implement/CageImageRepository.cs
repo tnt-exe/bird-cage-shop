@@ -24,7 +24,7 @@ namespace Repository.Implement
 
         public bool DeleteCageImage(int cageImageId)
         {
-            return CageImageDAO.SingletonInstance.ChangeCageImgStatus(cageImageId, (byte) CageImageEnum.Deleted);
+            return CageImageDAO.SingletonInstance.ChangeCageImgStatus(cageImageId, (byte)CageImageEnum.Deleted);
         }
 
         public List<CageImageDTO> GetCageImages(int cageId)

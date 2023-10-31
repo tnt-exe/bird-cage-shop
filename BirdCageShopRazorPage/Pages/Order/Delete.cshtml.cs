@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BusinessObject.Models;
 using OrderEntity = BusinessObject.Models.Order;
 
 namespace BirdCageShopRazorPage.Pages.Order
@@ -20,7 +15,7 @@ namespace BirdCageShopRazorPage.Pages.Order
         }
 
         [BindProperty]
-      public OrderEntity Order { get; set; } = default!;
+        public OrderEntity Order { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,7 +30,7 @@ namespace BirdCageShopRazorPage.Pages.Order
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Order = order;
             }

@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using BusinessObject.Enums;
-using BusinessObject.Models;
-using DataTransferObject;
+﻿using DataTransferObject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Repository.Implement;
 using Repository.Interface;
 
 namespace BirdCageShopRazorPage.Pages.Cage
@@ -23,8 +15,8 @@ namespace BirdCageShopRazorPage.Pages.Cage
         private readonly IComponentRepository _componentRepository;
         private readonly IAuthorizationService _authorizationService;
 
-        public CreateModel(ICageRepository cageRepository, 
-            ICategoryRepository categoryRepository, 
+        public CreateModel(ICageRepository cageRepository,
+            ICategoryRepository categoryRepository,
             IComponentRepository componentRepository,
             IAuthorizationService authorizationService)
         {
@@ -43,7 +35,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
             }
 
             var components = _componentRepository.GetAllComponent();
-            foreach(var item in components)
+            foreach (var item in components)
             {
                 var cageComponent = new CageComponentDTO
                 {
@@ -101,7 +93,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
                 return RedirectToPage("/Forbidden");
             }
 
-            if(Cage.Status is null)
+            if (Cage.Status is null)
             {
                 Cage.Status = "Custom";
             }

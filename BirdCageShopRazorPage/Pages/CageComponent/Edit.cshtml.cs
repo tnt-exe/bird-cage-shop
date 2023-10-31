@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BusinessObject.Models;
-using DataTransferObject;
 using Repository.Interface;
 
 namespace BirdCageShopRazorPage.Pages.CageComponent
@@ -37,8 +32,8 @@ namespace BirdCageShopRazorPage.Pages.CageComponent
                 return NotFound();
             }
             CageComponent = cagecomponent;
-           ViewData["CageId"] = new SelectList(_cageRepository.GetAllCages(), "CageId", "CageId");
-           ViewData["ComponentId"] = new SelectList(_componentRepository.GetAllComponent(), "ComponentId", "ComponentId");
+            ViewData["CageId"] = new SelectList(_cageRepository.GetAllCages(), "CageId", "CageId");
+            ViewData["ComponentId"] = new SelectList(_componentRepository.GetAllComponent(), "ComponentId", "ComponentId");
             return Page();
         }
 
@@ -72,7 +67,7 @@ namespace BirdCageShopRazorPage.Pages.CageComponent
 
         private bool CageComponentExists(int id)
         {
-          return _cageComponentRepository.GetCageComponentById(id) != null;
+            return _cageComponentRepository.GetCageComponentById(id) != null;
         }
     }
 }

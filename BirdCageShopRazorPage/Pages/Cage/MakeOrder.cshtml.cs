@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
-using BusinessObject.Models;
-using DataAccessObject;
 using DataTransferObject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Interface;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using System.Xml.Linq;
 
 namespace BirdCageShopRazorPage.Pages.Cage
 {
@@ -21,7 +17,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
         private readonly IOrderDetailRepository _orderDetailRepository;
         private readonly IMapper _mapper;
 
-        public MakeOrderModel(ICageRepository cageRepository, 
+        public MakeOrderModel(ICageRepository cageRepository,
             IHttpContextAccessor httpContextAccessor,
             IOrderRepository orderRepository,
             IOrderDetailRepository orderDetailRepository,
@@ -67,10 +63,10 @@ namespace BirdCageShopRazorPage.Pages.Cage
             if (check)
             {
                 var order = _orderRepository.GetLatestSuitableOrderOfUser(userId);
-                if(order is not null)
+                if (order is not null)
                 {
                     var existedOrderDetail = order.OrderDetails.Where(od => od.CageId == id).FirstOrDefault();
-                    if(existedOrderDetail is not null)
+                    if (existedOrderDetail is not null)
                     {
                         OrderDetail = _mapper.Map<OrderDetailDTO>(existedOrderDetail);
                         TotalMoney = OrderDetail.Price ?? 0;
@@ -79,7 +75,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
                     }
                 }
             }
-            
+
 
             return Page();
         }
@@ -102,7 +98,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
             if (OrderDetail is not null)
             {
                 var order = _orderRepository.GetOrderById(OrderDetail.OrderId ?? 0);
-                if(order is not null)
+                if (order is not null)
                 {
                     if (Quantity == OrderDetail.Quantity)
                     {

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DataTransferObject;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using BusinessObject.Models;
-using OrderEntity = BusinessObject.Models.Order;
-using DataTransferObject;
 using Repository.Interface;
-using Microsoft.AspNetCore.Authorization;
 
 namespace BirdCageShopRazorPage.Pages.Order
 {
@@ -23,7 +16,7 @@ namespace BirdCageShopRazorPage.Pages.Order
             _orderRepository = orderRepository;
         }
 
-        public OrderDTO Order { get; set; } = default!; 
+        public OrderDTO Order { get; set; } = default!;
 
         public IActionResult OnGet(int? id)
         {
@@ -32,7 +25,7 @@ namespace BirdCageShopRazorPage.Pages.Order
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Order = order;
             }

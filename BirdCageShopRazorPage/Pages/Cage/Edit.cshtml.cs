@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataTransferObject;
+﻿using DataTransferObject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Repository.Implement;
 using Repository.Interface;
-using CageEntity = BusinessObject.Models.Cage;
 
 namespace BirdCageShopRazorPage.Pages.Cage
 {
@@ -63,7 +56,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
             }*/
 
             var checkCage = _cageRepository.GetCageById(Cage.CageId);
-            if(checkCage == null)
+            if (checkCage == null)
             {
                 return NotFound();
             }

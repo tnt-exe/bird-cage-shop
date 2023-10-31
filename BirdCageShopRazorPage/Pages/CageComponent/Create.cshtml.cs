@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using BusinessObject.Models;
-using DataTransferObject;
-using AutoMapper;
 
 namespace BirdCageShopRazorPage.Pages.CageComponent
 {
@@ -23,19 +18,19 @@ namespace BirdCageShopRazorPage.Pages.CageComponent
 
         public IActionResult OnGet()
         {
-        ViewData["CageId"] = new SelectList(_context.Cages, "CageId", "CageId");
-        ViewData["ComponentId"] = new SelectList(_context.Components, "ComponentId", "ComponentId");
+            ViewData["CageId"] = new SelectList(_context.Cages, "CageId", "CageId");
+            ViewData["ComponentId"] = new SelectList(_context.Components, "ComponentId", "ComponentId");
             return Page();
         }
 
         [BindProperty]
         public CageComponentDTO CageComponent { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.CageComponents == null || CageComponent == null)
+            if (!ModelState.IsValid || _context.CageComponents == null || CageComponent == null)
             {
                 return Page();
             }

@@ -22,7 +22,7 @@ namespace Repository.Implement
 
         public CageComponentDTO GetCageComponentById(int id)
         {
-            return _mapper.Map< CageComponentDTO>(CageComponentDAO.SingletonInstance.GetCageComponentById(id));
+            return _mapper.Map<CageComponentDTO>(CageComponentDAO.SingletonInstance.GetCageComponentById(id));
         }
 
         public bool DeleteCageComponent(int cageComponentId)

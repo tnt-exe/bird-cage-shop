@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Interface;
@@ -29,7 +28,7 @@ namespace BirdCageShopRazorPage.Pages
             if (ModelState.IsValid)
             {
                 var user = _userRepository.Login(LoginUser.Email, LoginUser.Password);
-                if(user is null)
+                if (user is null)
                 {
                     TempData["warning"] = "Invalid email or password";
                     return Page();

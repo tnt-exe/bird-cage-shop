@@ -62,6 +62,6 @@ namespace Repository.Implement
             List<Order> orderList = OrderDAO.SingletonInstance.GetOrderListByStatus(int.Parse(orderStatus.ToString()));
             return _mapper.Map<List<OrderDTO>>(orderList);
         }
-        
+
     }
 }
