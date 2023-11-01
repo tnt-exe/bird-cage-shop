@@ -7,79 +7,72 @@
 
 <h1>Details</h1>
 
-<div>
-    <h4>Cage</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-10">
+<h4>Cage</h4>
+<hr />
+<div class="row">
+    <div class="col-6">
+        <div>
             <dl class="row">
-                <dt class="col-sm-2">
+                <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.CageName)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9">
                     @Html.DisplayFor(model => model.Cage.CageName)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.Status)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9">
                     @Html.DisplayFor(model => model.Cage.Status)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.CagePrice)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9">
                     @Html.DisplayFor(model => model.Cage.CagePrice)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.Height)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9">
                     @Html.DisplayFor(model => model.Cage.Height)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.Radius)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9">
                     @Html.DisplayFor(model => model.Cage.Radius)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.CageWeight)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9">
                     @Html.DisplayFor(model => model.Cage.CageWeight)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.Description)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9">
                     @Html.DisplayFor(model => model.Cage.Description)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.UserId)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9">
                     @Html.DisplayFor(model => model.Cage.UserId)
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-2 mt-2">
                     @Html.DisplayNameFor(model => model.Cage.Category)
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-9 mt-2">
                     @Html.DisplayFor(model => model.Cage.Category.CategoryName)
                 </dd>
             </dl>
         </div>
-
-        <div class="col-md-2">
-            @if (new string("Available").Equals(Model.Cage.Status))
-            {
-                    <a asp-page="./MakeOrder" asp-route-id="@Model.Cage.CageId">Đặt hàng</a>
-            }
-        </div>
     </div>
-
-    <h4>Danh sách thành phần</h4>
-    <table class="table">
+    <div class="col-6">
+        <h4>Danh sách thành phần</h4>
+        <table class="table col-12">
     <thead>
         <tr>
             <th>
@@ -100,7 +93,7 @@
             <th>
                 Total Price
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -132,8 +125,13 @@
         }
      <tbody>
     </table>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Cage?.CageId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="d-inline-block">
+        @if (new string("Available").Equals(Model.Cage.Status))
+        {
+            <a asp-page="./MakeOrder" asp-route-id="@Model.Cage.CageId" class="btn btn-secondary">Đặt hàng</a>
+        }
+    <a asp-page="./Edit" asp-route-id="@Model.Cage?.CageId" class="btn btn-warning pt-2">Edit</a>
+    <a asp-page="./Index" class="btn btn-primary">Back to List</a>
 </div>

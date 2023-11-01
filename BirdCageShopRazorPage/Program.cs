@@ -1,4 +1,5 @@
 using BirdCageShopRazorPage.Permission;
+using BusinessObject.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Repository.Implement;
@@ -21,6 +22,8 @@ namespace BirdCageShopRazorPage
             builder.Services.AddRazorPages();
 
             builder.Services.AddAutoMapper(typeof(AutoMapperConfigure).Assembly);
+
+            builder.Services.AddDbContext<BirdCageShopContext>();
 
             #region repository
             builder.Services.AddSingleton<ICageComponentRepository, CageComponentRepository>();
