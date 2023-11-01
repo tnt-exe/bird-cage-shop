@@ -23,8 +23,6 @@ namespace BirdCageShopRazorPage
 
             builder.Services.AddAutoMapper(typeof(AutoMapperConfigure).Assembly);
 
-            builder.Services.AddDbContext<BirdCageShopContext>();
-
             #region repository
             builder.Services.AddSingleton<ICageComponentRepository, CageComponentRepository>();
             builder.Services.AddSingleton<ICageImageRepository, CageImageRepository>();
