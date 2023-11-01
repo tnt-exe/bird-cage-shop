@@ -20,6 +20,16 @@ namespace Repository.Implement
             return UserDAO.SingletonInstance.ChangeUserStatus(userId, userStatus);
         }
 
+        public List<UserDTO> GetAllUsers()
+        {
+            List<User> users = UserDAO.SingletonInstance.Users;
+            if (users == null)
+            {
+                return null;
+            }
+            return _mapper.Map<List<UserDTO>>(users);
+        }
+
         public UserDTO GetUserById(int id)
         {
             User user = UserDAO.SingletonInstance.GetUserById(id);

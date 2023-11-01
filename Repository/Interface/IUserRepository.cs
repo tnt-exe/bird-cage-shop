@@ -12,5 +12,6 @@ namespace Repository.Interface
         bool IsEmailExisted(string email);
         bool IsPhoneExisted(string phone);
         UserDTO GetUserById(int id);
+        List<UserDTO> GetAllUsers();
     }
 }

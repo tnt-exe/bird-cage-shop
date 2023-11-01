@@ -22,6 +22,22 @@ namespace DataAccessObject
             }
         }
 
+        public List<User> Users
+        {
+            get
+            {
+                try
+                {
+                    using var db = new BirdCageShopContext();
+                    return db.Users.ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
         public User GetUser(string email, string pwd)
         {
             try

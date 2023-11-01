@@ -83,30 +83,36 @@
             </div>
             @for (int i = 0; i < Model.CageComponents.Count; i++)
             {
-                <input type="hidden" asp-for="CageComponents[i].ComponentId" />
-                <div class="card">
-                    <div class="card-body row">
-                        <div class="col-md-2">
-                            <label>@Model.CageComponents[i].Component!.ComponentName</label>
-                        </div>
-                        <div class="col-md-2">
-                            <input asp-for="CageComponents[i].Color" />
-                        </div>
-                        <div class="col-md-2">
-                            <input asp-for="CageComponents[i].Material" />
-                        </div>
-                        <div class="col-md-2">
-                            <input class="quantity" type="number" asp-for="CageComponents[i].Quantity" oninput="updateToTalPrice(this)" min="@Model.CageComponents[i].Quantity" />
-                        </div>
-                        <div class="col-md-2">
-                            <input type="hidden" class="price" value="@Model.CageComponents[i].Component!.ComponentPrice" readonly />
-                            <label>@Model.CageComponents[i].Component!.ComponentPrice VNĐ</label>
-                        </div>
-                        <div class="col-md-2">
-                            <input class="totalPrice" asp-for="CageComponents[i].Price" readonly />
+                @if (Model.CageComponents[i].Component!.Required)
+                {
+                    <input type="hidden" asp-for="CageComponents[i].ComponentId" />
+                    <div class="card">
+                        <div class="card-body row">
+                            <div class="col-md-2">
+                                <label>@Model.CageComponents[i].Component!.ComponentName</label>
+                            </div>
+                            <div class="col-md-2">
+                                <input asp-for="CageComponents[i].Color" />
+                            </div>
+                            <div class="col-md-2">
+                                <input asp-for="CageComponents[i].Material" />
+                            </div>
+                            <div class="col-md-2">
+                                <input class="quantity" type="number" asp-for="CageComponents[i].Quantity" oninput="updateToTalPrice(this)" value="@Model.CageComponents[i].Component!.QuantityRequired" min="@Model.CageComponents[i].Component!.QuantityRequired" />
+                            </div>
+                            <div class="col-md-2">
+                                <input type="hidden" class="price" value="@Model.CageComponents[i].Component!.ComponentPrice" readonly />
+                                <label>@Model.CageComponents[i].Component!.ComponentPrice VNĐ</label>
+                            </div>
+                            @{
+                                var total = Model.CageComponents[i].Component!.ComponentPrice * Model.CageComponents[i].Component!.QuantityRequired;
+                            }
+                            <div class="col-md-2">
+                                <input class="totalPrice" asp-for="CageComponents[i].Price" value="@total" readonly />
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
 

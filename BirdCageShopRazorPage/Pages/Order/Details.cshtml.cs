@@ -31,5 +31,10 @@ namespace BirdCageShopRazorPage.Pages.Order
             }
             return Page();
         }
+
+        public IActionResult OnPost(int? orderId)
+        {
+            return Page();
+        }
     }
 }

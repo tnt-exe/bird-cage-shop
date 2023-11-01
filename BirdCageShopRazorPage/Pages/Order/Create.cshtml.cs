@@ -31,7 +31,7 @@ namespace BirdCageShopRazorPage.Pages.Order
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            var policyCheck = await _authorizationService.AuthorizeAsync(User, "Staff");
+            var policyCheck = await _authorizationService.AuthorizeAsync(User, "Customer");
             if (!policyCheck.Succeeded)
             {
                 return RedirectToPage("/Forbidden");

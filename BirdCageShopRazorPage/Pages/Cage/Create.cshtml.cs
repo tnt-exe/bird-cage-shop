@@ -28,7 +28,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
 
         public async Task<IActionResult> OnGet()
         {
-            var policyCheck = await _authorizationService.AuthorizeAsync(User, "Staff");
+            var policyCheck = await _authorizationService.AuthorizeAsync(User, "Customer");
             if (!policyCheck.Succeeded)
             {
                 return RedirectToPage("/Forbidden");
@@ -42,34 +42,6 @@ namespace BirdCageShopRazorPage.Pages.Cage
                     ComponentId = item.ComponentId,
                     Component = item,
                 };
-
-                switch (item.ComponentName)
-                {
-                    case "Đáy":
-                        cageComponent.Quantity = 2;
-                        cageComponent.Price = 2 * item.ComponentPrice;
-                        break;
-
-                    case "Trụ":
-                        cageComponent.Quantity = 2;
-                        cageComponent.Price = 2 * item.ComponentPrice;
-                        break;
-
-                    case "Móc":
-                        cageComponent.Quantity = 1;
-                        cageComponent.Price = item.ComponentPrice;
-                        break;
-
-                    case "Cửa":
-                        cageComponent.Quantity = 2;
-                        cageComponent.Price = 2 * item.ComponentPrice;
-                        break;
-
-                    case "Nan":
-                        cageComponent.Quantity = 50;
-                        cageComponent.Price = 50 * item.ComponentPrice;
-                        break;
-                }
 
                 CageComponents.Add(cageComponent);
             }
@@ -87,7 +59,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            var policyCheck = await _authorizationService.AuthorizeAsync(User, "Staff");
+            var policyCheck = await _authorizationService.AuthorizeAsync(User, "Customer");
             if (!policyCheck.Succeeded)
             {
                 return RedirectToPage("/Forbidden");
