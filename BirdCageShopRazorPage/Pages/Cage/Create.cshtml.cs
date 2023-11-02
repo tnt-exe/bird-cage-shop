@@ -34,8 +34,8 @@ namespace BirdCageShopRazorPage.Pages.Cage
                 return RedirectToPage("/Forbidden");
             }
 
-            var components = _componentRepository.GetAllComponent();
-            foreach (var item in components)
+            Components = _componentRepository.GetAllComponent();
+            /*foreach (var item in components)
             {
                 var cageComponent = new CageComponentDTO
                 {
@@ -44,7 +44,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
                 };
 
                 CageComponents.Add(cageComponent);
-            }
+            }*/
             ViewData["CageStatus"] = new SelectList(new string[] { "Unavailable", "Available" });
             ViewData["CategoryId"] = new SelectList(_categoryRepository.GetAllCategories(), "CategoryId", "CategoryName");
             return Page();
@@ -55,6 +55,8 @@ namespace BirdCageShopRazorPage.Pages.Cage
 
         [BindProperty]
         public List<CageComponentDTO> CageComponents { get; set; } = new();
+        [BindProperty]
+        public List<ComponentDTO> Components { get; set; } = new();
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
