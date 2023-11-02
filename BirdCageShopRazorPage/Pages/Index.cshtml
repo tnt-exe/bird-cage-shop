@@ -32,12 +32,12 @@
             <span>Crafted with care for your birds' comfort and safety</span>
         </div>
         <div class="service_item">
-            <i class="fa-solid fa-feather-pointed"></i>
+            <i class="fa-solid fa-wind"></i>
             <h3>Fast Delivery</h3>
             <span>Swift shipping for bird lovers on the fly</span>
         </div>
         <div class="service_item">
-            <i class="fa-solid fa-phone-flip"></i>
+            <i class="fa-solid fa-check-double"></i>
             <h3>Accurate Orders</h3>
             <span>Precise orders with dedicated support</span>
         </div>
@@ -62,7 +62,7 @@
                 <h3>@item.CageName</h3>
                 <h5>@item.Description</h5>
                 <span>@item.CagePrice</span>
-                <button><a style="color: white; text-decoration: none" asp-page="Cage" asp-route-id="@item.CageId"><i class="fa-solid fa-cart-plus me-2"></i>Add to Cart</a></button>
+                <button><a style="color: white; text-decoration: none" asp-page="/Cage/Details" asp-route-id="@item.CageId"><i class="fa-solid fa-cart-plus me-2"></i>Add to Cart</a></button>
             </div>
         }
 
