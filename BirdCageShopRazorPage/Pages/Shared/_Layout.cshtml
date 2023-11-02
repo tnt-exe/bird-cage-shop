@@ -12,37 +12,71 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BirdCageShopRazorPage.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="container">
+    <div style="padding: 0 148px">
         <header class="d-flex align-items-center justify-content-between my-2">
-            <a asp-page="/Home/Index" class="text-decoration-none fs-3 text-dark fw-bold">
+            <a asp-page="/Index" class="text-decoration-none fs-3 text-dark fw-bold">
                 <i class="fa-solid fa-feather-pointed"></i> BCage
             </a>
             
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a asp-page="/Home/Index" class="nav-link px-2 link-success border-3 border-bottom border-success"><i class="fa-solid fa-house me-2"></i>Home</a></li>
-                <li><a asp-page="/Cage/Index" class="nav-link px-2 link-secondary"><i class="fa-solid fa-tag me-2"></i>Products</a></li>
-                <li><a asp-page="/Order/Index" class="nav-link px-2 link-secondary"><i class="fa-solid fa-cart-shopping me-2"></i> Cart</a></li>
+                <li><a asp-page="/Index" class="nav-link px-2 link-success border-3 border-bottom border-success px-3"><i class="fa-solid fa-house me-2"></i>Home</a></li>
+                <li><a asp-page="/Cage/Index" class="nav-link px-2 link-secondary"><i class="fa-solid fa-tag me-2 px-3"></i>Products</a></li>
+                <li><a asp-page="/Order/Index" class="nav-link px-2 link-secondary"><i class="fa-solid fa-cart-shopping me-2 px-3"></i> Cart</a></li>
             </ul>
 
             <div class="col-md-3 text-info text-end">
-                <a asp-page="/Login" class="btn btn-success text-decoration-none">Signin</a>
+                @if(!logged)
+                {
+                    <a asp-page="/Login" class="nav_button">Signin</a>
+                }
+                @if(logged) {
+                    <a asp-page="/Logout" class="nav_button"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
+                }
                 @*<a asp-page="/Home/Index" class="d-block btn btn btn-outline-primary text-decoration-none">Signin</a>*@
             </div>
 
         </header>
     </div>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="m-0 p-0">
+        @RenderBody()
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Group3 Bird Cage Shop - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer>
+        <div class="main">
+            <a asp-page="/Index">
+                <i class="fa-solid fa-feather-pointed"></i> BCage
+            </a>
+            <p>At BCage Shop, we provide a feathered friend's paradise, offering a wide range of high-quality bird cages and accessories. Explore our collection to discover the perfect combination of style, comfort, and safety for your beloved birds.</p>
+            <p>&copy; 2023 - Group3 Bird Cage Shop</p>
+            <p>Designed team: FromTeam3</p>
+        </div>
+
+        <div class="navigation">
+            <h2>Navigation</h2>
+            <p><a asp-page="/Index">Home</a></p>
+            <p><a asp-page="/Cage/Index">Product</a></p>
+            <p><a asp-page="/Order/Index">Cart</a></p>
+            <p> <a href="#">Profile</a></p>
+        </div>
+
+        <div class="share">
+            <h2>Stay Connect</h2>
+            <p><i class="fa-brands fa-square-facebook me-2"></i>RaeKyo@12345</p>
+            <p><i class="fa-brands fa-square-github me-2"></i>tien-rayujin</p>
+            <p><i class="fa-brands fa-instagram me-2"></i>RaeKyo@za1234</p>
+        </div>
+
+        <div class="contact">
+            <h2>Contact us</h2>
+            <p><i class="fa-solid fa-phone me-2"></i>0908.098.989</p>
+            <p><i class="fa-solid fa-at me-2 me-2"></i>RaeKyo@gmail.com</p>
+            <p><i class="fa-solid fa-location-dot me-2"></i>NVH Sinh vien Khu Dai hoc quoc gia</p>
         </div>
     </footer>
 

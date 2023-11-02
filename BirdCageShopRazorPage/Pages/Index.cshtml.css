@@ -1,0 +1,238 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+section {
+    padding: 64px;
+}
+
+.hero {
+    height: 90vh;
+    width: 100%;
+    background-color: #739d79;
+    position: relative;
+    background-image: url('https://www.peterleesfabrics.co.uk/images/products/1426945159.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    .hero .hero_content {
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        width: 450px;
+        min-height: 60%;
+        z-index: 20;
+        background-color: white;
+        border-radius: 12px;
+        opacity: 0.8;
+        padding: 32px;
+    }
+
+        .hero .hero_content h2 {
+            font-size: 48px;
+            line-height: 120%;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #3A3A3A;
+        }
+
+        .hero .hero_content span {
+            font-size: 16px;
+            opacity: 0.85;
+            display: block;
+            color: #898989;
+        }
+
+        .hero .hero_content button {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            padding: 12px 48px;
+            border: none;
+            background-color: #a4d587;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+        }
+
+    .hero .hero_img {
+        width: 800px;
+        height: 80%;
+        position: absolute;
+        top: 10%;
+        right: 8%;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .hero .hero_img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.92;
+        }
+
+    .hero .hero_pricing {
+        width: 290px;
+        height: fit-content;
+        background-color: white;
+        opacity: 0.85;
+        position: absolute;
+        bottom: 32px;
+        right: 32px;
+        padding: 16px;
+        text-align: left;
+        color: #3A3A3A;
+    }
+
+        .hero .hero_pricing h4 {
+            font-weight: 500;
+            font-size: 20px;
+        }
+
+        .hero .hero_pricing span {
+            font-weight: 300;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .hero .hero_pricing p {
+            font-weight: 500;
+        }
+
+.service {
+}
+
+    .service .service_item_container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+        margin: 0 32px;
+    }
+
+    .service .service_item {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: #3A3A3A;
+    }
+
+        .service .service_item i {
+            font-size: 64px;
+            margin-bottom: 12px;
+            color: #a4d587;
+        }
+
+        .service .service_item h3 {
+            font-weight: 500;
+        }
+
+        .service .service_item span {
+            color: #A3A3A3;
+        }
+
+
+
+.product {
+    text-align: center;
+    background-color: #F7F7F7;
+}
+
+    .product h2 {
+        font-weight: 500;
+        font-size: 32px;
+        margin-bottom: 32px;
+    }
+
+    .product .product_item_container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .product .product_item {
+        width: 100%;
+        height: fit-content;
+        margin: 0 32px;
+        padding: 32px;
+        position: relative;
+        border: 1px solid #D8D8D8;
+        text-align: left;
+        background-color: white;
+    }
+
+        .product .product_item img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product .product_item h3 {
+            font-size: 20px;
+            margin-top: 16px;
+        }
+
+        .product .product_item h5 {
+            color: #616161;
+            margin-top: 4px;
+        }
+
+        .product .product_item span {
+            display: block;
+            margin-top: 4px;
+        }
+
+            .product .product_item span::after {
+                content: " VND"
+            }
+
+        .product .product_item button {
+            display: block;
+            margin-top: 16px;
+            text-align: center;
+            padding: 12px 48px;
+            border: none;
+            background-color: #a4d587;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            float: right;
+        }
+
+.customization {
+    text-align: center;
+}
+
+    .customization h2 {
+        font-size: 32px;
+        font-weight: 500;
+        margin-bottom: 16px;
+    }
+
+    .customization p {
+        font-size: 1rem;
+        display: block;
+        margin: 0 auto;
+        width: 50%;
+        margin-bottom: 24px;
+    }
+
+    .customization button {
+        text-align: center;
+        padding: 12px 48px;
+        border: none;
+        background-color: white;
+        border-radius: 6px;
+        color: #a4d587;
+        border: 1px solid #a4d587;
+        font-weight: 500;
+    }
