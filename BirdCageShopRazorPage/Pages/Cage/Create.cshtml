@@ -12,23 +12,32 @@
 
 <h4>Cage</h4>
 <hr />
-<div class="row">
-    <form method="post">
-        <div class="col-md-4">
+<div>
+    <form method="post" class="row">
+        <div class="col-4 border border-3 bm-3">
+            <h2>Cage Information</h2>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Cage.CageName" class="control-label"></label>
+                <label asp-for="Cage.CageName" class="control-label">Cage Name</label>
                 <input asp-for="Cage.CageName" class="form-control" />
                 <span asp-validation-for="Cage.CageName" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Cage.ImageUrl" class="control-label">Preview Image</label>
+                <input asp-for="Cage.ImageUrl" class="form-control" type="file" id="imageInput" accept="image/*"/>
+                <div class="col-12 mt-2">
+                    <img id="previewImage" src="" alt="Image Preview" class="img-fluid w-100 h-100">
+                </div>
+                <span asp-validation-for="Cage.ImageUrl" class="text-danger"></span>
+            </div>
             @if(checkRole){
-                <div class="form-group">
+                <div class="form-group mt-1">
                     <label asp-for="Cage.Status" class="control-label"></label>
                     <select asp-for="Cage.Status" class="form-control" asp-items="ViewBag.CageStatus"></select>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Cage.CagePrice" class="control-label"></label>
-                    <input asp-for="Cage.CagePrice" class="form-control" />
+                    <label asp-for="Cage.CagePrice" class="control-label">Price</label>
+                    <input asp-for="Cage.CagePrice" class="form-control" type="number"/>
                     <span asp-validation-for="Cage.CagePrice" class="text-danger"></span>
                 </div>
             }
@@ -43,7 +52,7 @@
                 <span asp-validation-for="Cage.Radius" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cage.CageWeight" class="control-label"></label>
+                <label asp-for="Cage.CageWeight" class="control-label">Weight</label>
                 <input asp-for="Cage.CageWeight" class="form-control" />
                 <span asp-validation-for="Cage.CageWeight" class="text-danger"></span>
             </div>
@@ -53,31 +62,31 @@
                 <span asp-validation-for="Cage.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cage.CategoryId" class="control-label"></label>
+                <label asp-for="Cage.CategoryId" class="control-label">Cage Category</label>
                 <select asp-for="Cage.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
         </div>
 
-        <div class="form-group">
-            <h2>List of components</h2>
+        <div class="col-8">
+            <h2 class="mt-2">List of components</h2>
 
-            <div class="row">
-                <div class="col-md-2">
+            <div>
+                <div>
                     Name
                 </div>
-                <div class="col-md-2">
-                    Color
-                </div>
-                <div class="col-md-2">
+                <div>
                     Material
                 </div>
-                <div class="col-md-2">
+                <div>
                     Quantity
                 </div>
-                <div class="col-md-2">
+                <div>
+                    Color
+                </div>
+                <div>
                     Price Per Unit
                 </div>
-                <div class="col-md-2">
+                <div>
                     Total Price
                 </div>
             </div>
@@ -92,13 +101,13 @@
                                 <label>@Model.CageComponents[i].Component!.ComponentName</label>
                             </div>
                             <div class="col-md-2">
-                                <input asp-for="CageComponents[i].Color" />
-                            </div>
-                            <div class="col-md-2">
                                 <input asp-for="CageComponents[i].Material" />
                             </div>
                             <div class="col-md-2">
                                 <input class="quantity" type="number" asp-for="CageComponents[i].Quantity" oninput="updateToTalPrice(this)" value="@Model.CageComponents[i].Component!.QuantityRequired" min="@Model.CageComponents[i].Component!.QuantityRequired" />
+                            </div>
+                            <div class="col-md-2">
+                                <input asp-for="CageComponents[i].Color" />
                             </div>
                             <div class="col-md-2">
                                 <input type="hidden" class="price" value="@Model.CageComponents[i].Component!.ComponentPrice" readonly />
@@ -108,7 +117,7 @@
                                 var total = Model.CageComponents[i].Component!.ComponentPrice * Model.CageComponents[i].Component!.QuantityRequired;
                             }
                             <div class="col-md-2">
-                                <input class="totalPrice" asp-for="CageComponents[i].Price" value="@total" readonly />
+                                Total Price<input class="totalPrice" asp-for="CageComponents[i].Price" value="@total" readonly />
                             </div>
                         </div>
                     </div>
@@ -116,7 +125,7 @@
             }
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-3 text-center">
             <input type="submit" value="Create" class="btn btn-success" />
             <a asp-page="Index" class="btn btn-primary">Back to List</a>
         </div>
@@ -124,6 +133,16 @@
 </div>
 
 <script>
+    const imageInput = document.getElementById('imageInput');
+    const previewImage = document.getElementById('previewImage');
+
+    imageInput.onchange = evt => {
+        const [file] = imageInput.files
+        if (file) {
+            previewImage.src = URL.createObjectURL(file)
+        }
+    }
+
     function updateToTalPrice(input){
         var quantity = input.value;
         var price = input.parentElement.nextElementSibling.children[0].value;
