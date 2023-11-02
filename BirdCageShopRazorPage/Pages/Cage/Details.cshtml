@@ -4,6 +4,9 @@
 @{
     ViewData["Title"] = "Details";
 }
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 <h1>Details</h1>
 
@@ -118,8 +121,8 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-page="/CageComponent/Edit" asp-route-id="@item.CageComponentId">Edit</a> |
-                <a asp-page="/CageComponent/Delete" asp-route-id="@item.CageComponentId">Delete</a>
+                <a asp-page="/CageComponent/Edit" asp-route-id="@item.CageComponentId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
+                <a asp-page="/CageComponent/Delete" asp-route-id="@item.CageComponentId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
             </td>
         </tr>
         }

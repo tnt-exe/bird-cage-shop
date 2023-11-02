@@ -9,7 +9,6 @@
 <h4>Order</h4>
 <hr/>
 <h3>Danh sách mặt hàng</h3>
-<button class="btn btn-info">Thêm</button>
 
 <div class="row">
     <div class="col-8">
@@ -39,7 +38,22 @@
                                         Giá mỗi đơn vị: @item.Cage?.CagePrice
                                     </label><br />
                                     <label class="ml-3">
-                                        Trạng thái: @(item.Cage?.Status ?? "")
+                                        Trạng thái:
+                                        @switch (item.Cage.Status)
+                                        {
+                                            case "Undefined":
+                                                <span class="badge bg-dark text-white">@Html.DisplayFor(modelItem => item.Cage.Status)</span>
+                                                break;
+                                            case "Unavailable":
+                                                <span class="badge bg-danger">@Html.DisplayFor(modelItem => item.Cage.Status)</span>
+                                                break;
+                                            case "Available":
+                                                <span class="badge bg-success">@Html.DisplayFor(modelItem => item.Cage.Status)</span>
+                                                break;
+                                            case "Custom":
+                                                <span class="badge bg-info text-dark">@Html.DisplayFor(modelItem => item.Cage.Status)</span>
+                                                break;
+                                        }
                                     </label><br />
                                     <label>
                                         Số lượng đặt: @item.Quantity
@@ -58,8 +72,8 @@
         }
     </div>
 
-    <div class="col-4 mt-3">
-    <dl class="row">
+    <div class="col-4 mt-3 border position-relative">
+        <dl class="row mt-4">
         <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Order.TotalPrice)
         </dt>
@@ -70,13 +84,44 @@
             @Html.DisplayNameFor(model => model.Order.Status)
         </dt>
         <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.Order.Status)
+                @switch (Model.Order.Status!)
+                {
+                    case "Undefined":
+                        <span class="badge bg-dark text-white">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                        break;
+                    case "Pending":
+                        <span class="badge bg-warning">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                        break;
+                    case "Processing":
+                        <span class="badge bg-primary">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                        break;
+                    case "Completed":
+                        <span class="badge bg-success">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                        break;
+                    case "Cancelled":
+                        <span class="badge bg-danger">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                        break;
+                    case "Waiting":
+                        <span class="badge bg-secondary">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                        break;
+                }
         </dd>
         <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Order.PaymentStatus)
         </dt>
         <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.Order.PaymentStatus)
+                @switch (Model.Order.PaymentStatus!)
+                {
+                    case "None":
+                        <span class="badge bg-secondary">@Html.DisplayFor(modelItem => Model.Order.PaymentStatus)</span>
+                        break;
+                    case "Unpaid":
+                        <span class="badge bg-danger">@Html.DisplayFor(modelItem => Model.Order.PaymentStatus)</span>
+                        break;
+                    case "Paid":
+                        <span class="badge bg-success">@Html.DisplayFor(modelItem => Model.Order.PaymentStatus)</span>
+                        break;
+                }
         </dd>
         <dt class="col-sm-4">
             @Html.DisplayNameFor(model => model.Order.OrderDate)
@@ -90,13 +135,14 @@
         <dd class="col-sm-8">
             @Html.DisplayFor(model => model.Order.ShipDate)
         </dd>
-    </dl>
-</div>
+        </dl>
+        <form method="post" class="mb-3" style="position: absolute; bottom: 0; width: 100%;">
+            <button type="submit" asp-route-orderId="@Model.Order.OrderId" class="btn btn-success">Confirm</button>
+        </form>
+    </div>
 </div>
 
-<div>
-    <form method="post">
-        <button type="submit" asp-route-orderId="@Model.Order.OrderId" class="btn btn-success">Confirm</button>
-    </form>
-    <a asp-page="./Index" class="btn btn-primary mt-3">Back to List</a>
+<div class="mt-3">
+    <button class="btn btn-info">Thêm Order</button>
+    <a asp-page="./Index" class="btn btn-primary">Back to List</a>
 </div>

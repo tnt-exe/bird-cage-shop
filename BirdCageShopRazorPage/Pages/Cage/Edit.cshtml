@@ -99,7 +99,7 @@
                 <input type="hidden" asp-for="CageComponents[i].ComponentId" />
                 <input type="hidden" asp-for="CageComponents[i].CageId" />
                 <input type="hidden" asp-for="CageComponents[i].CageComponentId" />
-                <div class="card">
+                <div class="card mt-2">
                     <div class="card-body row">
                         <div class="col-md-2">
                             <label> @(Model.CageComponents[i].Component?.ComponentName ?? "Undefined") </label>
@@ -129,7 +129,7 @@
         </div>
 
         <div class="form-group pt-5">
-            <input type="submit" value="Save" class="btn btn-success" />
+            <input type="submit" value="Save" class="btn btn-success"/>
             <a asp-page="./Index" class="btn btn-primary">Back to List</a>
         </div>
     </form>

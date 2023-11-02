@@ -114,7 +114,7 @@
                     @switch (item.Status!)
                     {
                         case "Undefined":
-                            <span class="badge bg-dark">@Html.DisplayFor(modelItem => item.Status)</span>
+                            <span class="badge bg-dark text-white">@Html.DisplayFor(modelItem => item.Status)</span>
                             break;
                         case "Unavailable":
                             <span class="badge bg-danger">@Html.DisplayFor(modelItem => item.Status)</span>
@@ -161,8 +161,8 @@
                         <br/>
                 }
                 <a asp-page="./Edit" asp-route-id="@item.CageId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
-                    <a asp-page="./Details" asp-route-id="@item.CageId"><i class="fa fa-info" style="font-size: 24px;"></i></a>
-                    <a asp-page="./Delete" asp-route-id="@item.CageId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
+                <a asp-page="./Details" asp-route-id="@item.CageId"><i class="fa fa-info" style="font-size: 24px;"></i></a>
+                <a asp-page="./Delete" asp-route-id="@item.CageId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
             </td>
         </tr>
 }

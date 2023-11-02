@@ -4,11 +4,13 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<h1>List Component</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -28,7 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.CageComponent[0].Component)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -50,9 +52,9 @@
                 @Html.DisplayFor(modelItem => item.Component.ComponentId)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.CageComponentId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.CageComponentId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CageComponentId">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@item.CageComponentId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
+                    <a asp-page="./Details" asp-route-id="@item.CageComponentId"><i class="fa fa-info" style="font-size: 24px;"></i></a>
+                    <a asp-page="./Delete" asp-route-id="@item.CageComponentId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
             </td>
         </tr>
 }
