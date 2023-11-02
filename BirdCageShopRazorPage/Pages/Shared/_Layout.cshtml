@@ -12,44 +12,28 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BirdCageShopRazorPage.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">BirdCageShopRazorPage</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Home/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Cage/Index">Bird Cage</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Order/Index">Order</a>
-                        </li>
-                        @if(!logged){
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
-                            </li>
-                        }
-                        @if (logged){
-                            <li class="nav-item">
-                                <form action="/logout" method="post">
-                                    <a class="nav-link text-dark" href="#" onclick="this.parentNode.submit()">Logout</a>
-                                </form>
-                            </li>
-                        }
-                    </ul>
-                </div>
+    <div class="container">
+        <header class="d-flex align-items-center justify-content-between my-2">
+            <a asp-page="/Home/Index" class="text-decoration-none fs-3 text-dark fw-bold">
+                <i class="fa-solid fa-feather-pointed"></i> BCage
+            </a>
+            
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a asp-page="/Home/Index" class="nav-link px-2 link-success border-3 border-bottom border-success"><i class="fa-solid fa-house me-2"></i>Home</a></li>
+                <li><a asp-page="/Cage/Index" class="nav-link px-2 link-secondary"><i class="fa-solid fa-tag me-2"></i>Products</a></li>
+                <li><a asp-page="/Order/Index" class="nav-link px-2 link-secondary"><i class="fa-solid fa-cart-shopping me-2"></i> Cart</a></li>
+            </ul>
+
+            <div class="col-md-3 text-info text-end">
+                <a asp-page="/Login" class="btn btn-success text-decoration-none">Signin</a>
+                @*<a asp-page="/Home/Index" class="d-block btn btn btn-outline-primary text-decoration-none">Signin</a>*@
             </div>
-        </nav>
-    </header>
+
+        </header>
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -58,7 +42,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - BirdCageShopRazorPage - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2023 - Group3 Bird Cage Shop - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
