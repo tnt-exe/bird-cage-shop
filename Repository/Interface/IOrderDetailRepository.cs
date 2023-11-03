@@ -10,6 +10,8 @@ namespace Repository.Interface
 
         bool UpdateOrderDetail(OrderDetailDTO update);
 
+        bool DeleteOrderDetail(int detailId);
+
         OrderDetailDTO getOrderDetailById(int id);
     }
 }

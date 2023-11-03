@@ -1,4 +1,5 @@
-﻿using DataTransferObject;
+﻿using BusinessObject.Enums;
+using DataTransferObject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,10 +11,13 @@ namespace BirdCageShopRazorPage.Pages.Order
     public class DetailsModel : PageModel
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IOrderDetailRepository _orderDetailRepository;
 
-        public DetailsModel(IOrderRepository orderRepository)
+
+        public DetailsModel(IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
         {
             _orderRepository = orderRepository;
+            _orderDetailRepository = orderDetailRepository;
         }
 
         public OrderDTO Order { get; set; } = default!;
@@ -32,9 +36,29 @@ namespace BirdCageShopRazorPage.Pages.Order
             return Page();
         }
 
-        public IActionResult OnPost(int? orderId)
+        //public IActionResult OnPost(int? orderId)
+        //{
+        //    return Page();
+        //}
+
+        public IActionResult OnGetRemoveCageItem(int? detailId)
         {
-            return Page();
+            if (detailId != null)
+            {
+                _orderDetailRepository.DeleteOrderDetail((int)detailId);
+                return RedirectToPage();
+            }
+            return NotFound();
+        }
+
+        public IActionResult OnGetConfirmOrder(int? orderId)
+        {
+            if (orderId != null)
+            {
+                _orderRepository.ChangeOrderStatus((int)orderId, (int)OrderStatus.Pending);
+                return RedirectToPage("./Index");
+            }
+            return NotFound();
         }
     }
 }
