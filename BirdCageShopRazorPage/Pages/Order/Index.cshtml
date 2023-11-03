@@ -4,9 +4,6 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-
-
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -65,10 +62,41 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                    @switch (item.Status!)
+                    {
+                        case "Undefined":
+                            <span class="badge bg-dark text-white">@Html.DisplayFor(modelItem => item.Status)</span>
+                            break;
+                        case "Pending":
+                            <span class="badge bg-warning">@Html.DisplayFor(modelItem => item.Status)</span>
+                            break;
+                        case "Processing":
+                            <span class="badge bg-primary">@Html.DisplayFor(modelItem => item.Status)</span>
+                            break;
+                        case "Completed":
+                            <span class="badge bg-success">@Html.DisplayFor(modelItem => item.Status)</span>
+                            break;
+                        case "Cancelled":
+                            <span class="badge bg-danger">@Html.DisplayFor(modelItem => item.Status)</span>
+                            break;
+                        case "Waiting":
+                            <span class="badge bg-secondary">@Html.DisplayFor(modelItem => item.Status)</span>
+                            break;
+                    }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaymentStatus)
+                    @switch (item.PaymentStatus!)
+                    {
+                        case "None":
+                            <span class="badge bg-secondary">@Html.DisplayFor(modelItem => item.PaymentStatus)</span>
+                            break;
+                        case "Unpaid":
+                            <span class="badge bg-danger">@Html.DisplayFor(modelItem => item.PaymentStatus)</span>
+                            break;
+                        case "Paid":
+                            <span class="badge bg-success">@Html.DisplayFor(modelItem => item.PaymentStatus)</span>
+                            break;
+                    }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)

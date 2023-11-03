@@ -18,6 +18,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        /*$(document).ready(function () {
+            $('.nav li a').click(function (e) {
+                $('.nav li a').removeClass('link-success border-3 border-bottom border-success');
+
+                $(this).addClass('link-success border-3 border-bottom border-success');
+                //e.preventDefault();
+            });
+        });*/
+        $(document).ready(function () {
+            var activeNavItem = localStorage.getItem('activeNavItem');
+
+            if (activeNavItem) {
+                $('.nav li a').removeClass('link-success border-3 border-bottom border-success');
+                $('.nav li a[data-target="' + activeNavItem + '"]').addClass('link-success border-3 border-bottom border-success');
+            }
+
+            $('.nav li a').click(function (e) {
+                $('.nav li a').removeClass('link-success border-3 border-bottom border-success');
+                $(this).addClass('link-success border-3 border-bottom border-success');
+                var target = $(this).data('target');
+                localStorage.setItem('activeNavItem', target);
+            });
+        });
+    </script>
 </head>
 <body>
     <div style="padding: 0 148px">
@@ -27,15 +54,15 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a asp-page="/Index" class="nav-link px-2 link-success border-3 border-bottom border-success px-4"><i class="fa-solid fa-house me-2"></i>Home</a></li>
-                <li><a asp-page="/Cage/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-tag me-2"></i>Products</a></li>
-                <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-cart-shopping me-2"></i> Cart</a></li>
+                <li><a asp-page="/Index" class="nav-link px-2 link-secondary px-4" data-target="home"><i class="fa-solid fa-house me-2"></i>Home</a></li>
+                <li><a asp-page="/Cage/Index" class="nav-link px-4 link-secondary px-3" data-target="products"><i class="fa-solid fa-tag me-2"></i>Products</a></li>
+                <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3" data-target="cart"><i class="fa-solid fa-cart-shopping me-2"></i> Cart</a></li>
 
                 @* Admin/ Staff *@
                 @if (checkRole)
                 {
-                    <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-shapes me-2"></i> Component</a></li>
-                    <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-cart-shopping me-2"></i> Category</a></li>
+                    <li><a asp-page="/Component/Index" class="nav-link px-4 link-secondary px-3" data-target="component"><i class="fa-solid fa-shapes me-2"></i> Component</a></li>
+                    <li><a asp-page="/Category/Index" class="nav-link px-4 link-secondary px-3" data-target="category"><i class="fa-solid fa-cart-shopping me-2"></i> Category</a></li>
                 }
             </ul>
 
