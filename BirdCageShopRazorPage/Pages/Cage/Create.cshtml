@@ -15,7 +15,7 @@
     <hr />
 </div>
 <div>
-    <form method="post" class="row ml-3 mx-3">
+    <form method="post" class="row ml-3" enctype="multipart/form-data">
         <div class="col-4 border border-3 py-3">
             <h2>Cage Information</h2>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -25,14 +25,14 @@
                 <span asp-validation-for="Cage.CageName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Cage.ImageUrl" class="control-label">Preview Image</label>
-                <input asp-for="Cage.ImageUrl" class="form-control" type="file" id="imageInput" accept="image/*"/>
+                <label asp-for="Cage.Image" class="control-label">Preview Image</label>
+                <input asp-for="Cage.Image" class="form-control" type="file" id="imageInput" accept="image/*"/>
                 <div class="col-12 mt-2">
                     <img id="previewImage" src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg" 
                          alt="Picture Preview"
                          class="img-fluid w-100 h-100">
                 </div>
-                <span asp-validation-for="Cage.ImageUrl" class="text-danger"></span>
+                <span asp-validation-for="Cage.Image" class="text-danger"></span>
             </div>
             @if(checkRole){
                 <div class="form-group mt-1">
@@ -44,6 +44,9 @@
                     <input asp-for="Cage.CagePrice" class="form-control" type="number"/>
                     <span asp-validation-for="Cage.CagePrice" class="text-danger"></span>
                 </div>
+            }
+            else{
+                <input asp-for="Cage.Status" type="hidden" value="2"/>
             }
             <div class="form-group">
                 <label asp-for="Cage.Height" class="control-label"></label>
@@ -74,70 +77,62 @@
         <div class="col-8">
             <h2 class="mt-2 text-center">List of components</h2>
 
-            <div class="row">
-                <div class="col-6">
-                    <div class="mt-4 fw-bolder">
-                        Name
-                    </div>
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-7">
-                            <div class="mt-4">
-                                Material
-                            </div>
-                            <div class="mt-4">
-                                Quantity
-                            </div>
-                            <div class="mt-4">
-                                Total Price
-                            </div>
-                        </div>
-                        <div class="col-5 text-center">
-                            Color
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center align-items-center">
-                    <div class="text-center display-5">
-                        Price Per Unit
-                    </div>
-                </div>
-            </div>
             @for (int i = 0; i < Model.Components.Count; i++)
             {
                 @if (Model.Components[i].Required)
                 {
-                    <input type="hidden" asp-for="Components[i].ComponentId" />
+                    Model.CageComponents.Add(new DataTransferObject.CageComponentDTO());
+                    var totalPrice = Model.Components[i].ComponentPrice * Model.Components[i].QuantityRequired;
+                    <input type="hidden" asp-for="CageComponents[i].ComponentId" value="Components[i].ComponentId" />
+
                     <div class="card">
                         <div class="card-body row">
-                            <div class="col-md-2">
-                                <label>@Model.Components[i].ComponentName</label>
+                            <div class="col-6">
+                                <div class="col-md-2">
+                                    <label class="mt-4 fw-bolder">@Model.Components[i].ComponentName</label>
+                                </div>
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-7">
+                                        <div class="mt-4">
+                                            <text>Material: </text>
+                                            <input asp-for="CageComponents[i].Material" />
+                                        </div>
+                                        <div class="mt-4">
+                                            <text>Amount: </text>
+                                            <input class="quantity" type="number"
+                                           asp-for="CageComponents[i].Quantity"
+                                           oninput="updateToTalPrice(this)"
+                                           value="@Model.Components[i].QuantityRequired"
+                                           min="@Model.Components[i].QuantityRequired" />
+                                        </div>
+                                    </div>
+                                    <div class="col-5 text-center">
+                                        <text>Color: </text>
+                                        <input asp-for="CageComponents[i].Color" />
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <text>Total Price: </text>
+                                    <input class="totalPrice" asp-for="CageComponents[i].Price"
+                                   value="@totalPrice" readonly />
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <input class="quantity" type="number" asp-for="Components[i].ComponentPrice" oninput="updateToTalPrice(this)" value="@Model.CageComponents[i].Component!.QuantityRequired" min="@Model.CageComponents[i].Component!.QuantityRequired" />
-                            </div>
-                            <div class="col-md-2">
-                                <!--select asp-for="Cage.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"-->>
-                                @* <input asp-for="Components[i].Color" /> *@
-                            </div>
-                            <div class="col-md-2">
-                                @* <input type="hidden" class="price" value="@Model.Components[i].Material" readonly /> *@
-                                <label>@Model.Components[i].ComponentPrice VNĐ</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input class="price" type="number" min="@Model.Components[i].QuantityRequired"/>
-                                <label>@Model.Components[i].ComponentPrice VNĐ</label>
-                            </div>
-                            @{
-                                var total = Model.Components[i].ComponentPrice * Model.Components[i].QuantityRequired;
-                            }
-                            <div class="col-md-2">
-                                @* Total Price<input class="totalPrice" asp-for="Components[i].Price" value="@total" readonly /> *@
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <input type="hidden" class="price" value="@Model.Components[i]!.ComponentPrice" readonly />
+                                <label class="text-center display-5">@Model.Components[i]!.ComponentPrice VNĐ/cái</label>
                             </div>
                         </div>
                     </div>
                 }
             }
         </div>
+
+        @if(!checkRole){
+            <div class="row mt-3 mb-3">
+                <label class="col-3">Quantity order </label>
+                <input class="col-7" type="number" asp-for="Quantity" min="0"/>
+            </div>
+        }
 
         <div class="form-group mt-3 text-center">
             <input type="submit" value="Create" class="btn btn-success" />

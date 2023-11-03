@@ -1,7 +1,9 @@
 using BirdCageShopRazorPage.Permission;
 using BusinessObject.Models;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Repository.CloudinaryConfig;
 using Repository.Implement;
 using Repository.Interface;
 using Repository.Mapper;
@@ -14,6 +16,8 @@ namespace BirdCageShopRazorPage
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var Configuration = builder.Configuration;
+
             // Add services to the container.
             builder.Services.AddScoped<IAuthorizationHandler, HasScopeHandler>();
 
@@ -22,6 +26,18 @@ namespace BirdCageShopRazorPage
             builder.Services.AddRazorPages();
 
             builder.Services.AddAutoMapper(typeof(AutoMapperConfigure).Assembly);
+
+            #region Cloudinary
+            var cloudinaryConfig = Configuration.GetSection("CloudinaryConfig").Get<CloudinaryConfig>();
+            Account cloudinaryAccount = new Account
+            {
+                Cloud = cloudinaryConfig.CloudName,
+                ApiKey = cloudinaryConfig.ApiKey,
+                ApiSecret = cloudinaryConfig.ApiSecret,
+            };
+            Cloudinary cloudinary = new Cloudinary(cloudinaryAccount);
+            builder.Services.AddSingleton(cloudinary);
+            #endregion
 
             #region repository
             builder.Services.AddSingleton<ICageComponentRepository, CageComponentRepository>();

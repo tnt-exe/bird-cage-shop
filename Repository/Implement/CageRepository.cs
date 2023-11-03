@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BusinessObject.Enums;
 using BusinessObject.Models;
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
 using DataAccessObject;
 using DataTransferObject;
 using Repository.Interface;
@@ -10,15 +12,32 @@ namespace Repository.Implement
     public class CageRepository : ICageRepository
     {
         private readonly IMapper _mapper;
+        private readonly Cloudinary _cloudinary;
 
-        public CageRepository(IMapper mapper)
+        public CageRepository(IMapper mapper, Cloudinary cloudinary)
         {
             _mapper = mapper;
+            _cloudinary = cloudinary;
         }
 
         public bool AddNewCage(CageDTO cageDTO)
         {
             Cage cage = _mapper.Map<Cage>(cageDTO);
+
+            if (cageDTO.Image is not null && cageDTO.Image.Length > 0)
+            {
+                var uploadFile = new ImageUploadParams
+                {
+                    File = new FileDescription(cageDTO.Image.FileName, cageDTO.Image.OpenReadStream())
+                };
+                var uploadResult = _cloudinary.Upload(uploadFile);
+                if (uploadResult.Error is not null)
+                {
+                    return false;
+                }
+                cage.ImageUrl = uploadResult.SecureUrl.ToString();
+            }
+
             return CageDAO.SingletonInstance.AddNewCage(cage);
         }
 

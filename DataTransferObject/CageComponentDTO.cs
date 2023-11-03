@@ -7,7 +7,7 @@
         public int? CageId { get; set; }
         public string? Color { get; set; }
         public string? Material { get; set; }
-        public int? Quantity { get; set; }
+        public int Quantity { get; set; } = 0;
         public decimal? Price { get; set; }
 
         public ComponentDTO? Component { get; set; }
@@ -16,7 +16,7 @@
         {
         }
 
-        public CageComponentDTO(int cageComponentId, int? componentId, int? cageId, int? quantity, decimal? price)
+        public CageComponentDTO(int cageComponentId, int? componentId, int? cageId, int quantity, decimal? price)
         {
             CageComponentId = cageComponentId;
             ComponentId = componentId;
