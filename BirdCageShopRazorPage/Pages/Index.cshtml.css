@@ -1,17 +1,4 @@
-﻿
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-section {
-    padding: 64px;
-}
-
-.hero {
+﻿.hero {
     height: 90vh;
     width: 100%;
     background-color: #739d79;
@@ -145,6 +132,8 @@ section {
 .product {
     text-align: center;
     background-color: #F7F7F7;
+    padding-left: 175px;
+    padding-right: 175px;
 }
 
     .product h2 {
@@ -169,6 +158,7 @@ section {
         border: 1px solid #D8D8D8;
         text-align: left;
         background-color: white;
+        border-radius: 8px;
     }
 
         .product .product_item img {
@@ -183,6 +173,7 @@ section {
 
         .product .product_item h5 {
             color: #616161;
+            font-size: 12px;
             margin-top: 4px;
         }
 
@@ -197,6 +188,7 @@ section {
 
         .product .product_item button {
             display: block;
+            width: 100%;
             margin-top: 16px;
             text-align: center;
             padding: 12px 48px;
