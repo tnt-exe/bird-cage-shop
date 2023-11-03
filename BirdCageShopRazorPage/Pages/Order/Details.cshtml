@@ -87,23 +87,26 @@
         <dd class="col-sm-8">
                 @switch (Model.Order.Status!)
                 {
-                    case "Undefined":
-                        <span class="badge bg-dark text-white">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                    case -1:
+                        <span class="badge bg-dark text-white">Undefined</span>
                         break;
-                    case "Pending":
-                        <span class="badge bg-warning">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                    case 0:
+                        <span class="badge bg-warning">Pending</span>
                         break;
-                    case "Processing":
-                        <span class="badge bg-primary">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                    case 1:
+                        <span class="badge bg-primary">Processing</span>
                         break;
-                    case "Completed":
-                        <span class="badge bg-success">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                    case 2:
+                        <span class="badge bg-success">Completed</span>
                         break;
-                    case "Cancelled":
-                        <span class="badge bg-danger">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                    case 3:
+                        <span class="badge bg-danger">Cancelled</span>
                         break;
-                    case "Waiting":
-                        <span class="badge bg-secondary">@Html.DisplayFor(modelItem => Model.Order.Status)</span>
+                    case 4:
+                        <span class="badge bg-secondary">Waiting</span>
+                        break;
+                    case 5:
+                        <span class="badge bg-warning">Custom</span>
                         break;
                 }
         </dd>
@@ -113,14 +116,14 @@
         <dd class="col-sm-8">
                 @switch (Model.Order.PaymentStatus!)
                 {
-                    case "None":
-                        <span class="badge bg-secondary">@Html.DisplayFor(modelItem => Model.Order.PaymentStatus)</span>
+                    case -1:
+                        <span class="badge bg-secondary">None</span>
                         break;
-                    case "Unpaid":
-                        <span class="badge bg-danger">@Html.DisplayFor(modelItem => Model.Order.PaymentStatus)</span>
+                    case 0:
+                        <span class="badge bg-danger">Unpaid</span>
                         break;
-                    case "Paid":
-                        <span class="badge bg-success">@Html.DisplayFor(modelItem => Model.Order.PaymentStatus)</span>
+                    case 1:
+                        <span class="badge bg-success">Paid</span>
                         break;
                 }
         </dd>

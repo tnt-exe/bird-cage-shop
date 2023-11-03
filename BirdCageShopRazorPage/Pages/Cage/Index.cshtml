@@ -21,7 +21,9 @@
                 @* <i class="fa-solid fa-pen me-2" style="font-size: 24px; color:white; opacity:0.5"></i> *@
             </h2>
             <p>Make your bird's home uniquely theirs. Choose from a range of colors, sizes, and accessories to create a one-of-a-kind bird cage tailored to your feathered friend's preferences</p>
-            <button>Try now</button>
+            <form method="get" asp-page="./Create">
+                <button type="submit">Try now</button>
+            </form>
         </section>
 
         <section class="product">
@@ -154,7 +156,7 @@ else
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @if (item.Status is not null && item.Status.Equals("Available"))
+                            @if (item.Status is not null && item.Status == 1)
                             {
                                 <a asp-page="./MakeOrder" asp-route-id="@item.CageId">Order</a>
                                 <br />

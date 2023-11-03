@@ -150,7 +150,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
                             UserId = id,
                             TotalPrice = newOrderDetail.Price,
                             OrderDate = DateTime.Now,
-                            Status = "Waiting"
+                            Status = (int)BusinessObject.Enums.OrderStatus.Waiting
                         };
 
                         newOrder.OrderDetails = new List<OrderDetailDTO>() { newOrderDetail };

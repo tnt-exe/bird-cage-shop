@@ -7,6 +7,7 @@
         Processing = 1,
         Completed = 2,
         Cancelled = 3,
-        Waiting = 4
+        Waiting = 4,
+        Custom = 5
     }
 }

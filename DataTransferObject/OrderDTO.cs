@@ -5,8 +5,8 @@
         public int OrderId { get; set; }
         public int? UserId { get; set; }
         public decimal? TotalPrice { get; set; }
-        public string? Status { get; set; }
-        public string? PaymentStatus { get; set; }
+        public int? Status { get; set; }
+        public int? PaymentStatus { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? ShipDate { get; set; }
 
