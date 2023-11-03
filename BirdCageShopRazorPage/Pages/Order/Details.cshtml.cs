@@ -43,13 +43,13 @@ namespace BirdCageShopRazorPage.Pages.Order
         //    return Page();
         //}
 
-        public IActionResult OnGetRemoveCageItem(int? detailId, int? quantity, int orderId)
+        public IActionResult OnGetRemoveCageItem(int? detailId, int orderId)
         {
-            if (detailId != null && quantity != null)
+            if (detailId != null)
             {
                 var order = _orderRepository.GetOrderById(orderId);
                 var detail = _orderDetailRepository.getOrderDetailById((int)detailId);
-                order.TotalPrice -= detail.Price * (decimal)quantity;
+                order.TotalPrice -= detail.Price;
 
                 _orderRepository.UpdateOrder(order);
 

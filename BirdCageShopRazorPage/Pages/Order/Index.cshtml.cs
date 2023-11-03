@@ -1,4 +1,5 @@
-﻿using DataTransferObject;
+﻿using BusinessObject.Enums;
+using DataTransferObject;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Interface;
 using System.Security.Claims;
@@ -25,12 +26,16 @@ namespace BirdCageShopRazorPage.Pages.Order
 
             if (new string("Customer").Equals(role))
             {
-                Order = _orderRepository.GetOrderByUser(email ?? "");
+                Order = _orderRepository.GetOrderByUser(email ?? "")
+                    .Where(o => o.Status != (int)OrderStatus.Undefined)
+                    .ToList();
             }
 
             if (new string("Staff").Equals(role) || new string("Admin").Equals(role))
             {
-                Order = _orderRepository.GetAllOrders();
+                Order = _orderRepository.GetAllOrders()
+                    .Where(o => o.Status != (int)OrderStatus.Waiting)
+                    .ToList();
             }
         }
     }
