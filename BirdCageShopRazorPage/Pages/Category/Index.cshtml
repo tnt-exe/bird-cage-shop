@@ -1,0 +1,63 @@
+﻿@page
+@using BusinessObject.Enums;
+@model BirdCageShopRazorPage.Pages.Category.IndexModel
+
+@{
+    ViewData["Title"] = "Category";
+}
+
+
+@if (TempData["cate-notification"] != null)
+{
+    <h2 style="color:blue">@TempData["cate-notification"]</h2>
+}
+<p>
+    <a class="btn btn-primary" asp-page="Create">Create</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category[0].CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category[0].Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Category) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @{
+                    if (item.Status == (int?) CategoryStatus.Active)
+                    {
+                        <span class="badge badge-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">Inactive</span>
+                    }
+                }
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.CategoryId">Edit</a>
+                @{
+                    if (item.Status == (int?) CategoryStatus.Active)
+                    {
+                        <a class="btn btn-primary" asp-page-handler="changeStatus" asp-route-id="@item.CategoryId">Delete</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary disabled">Delete</a>
+                    }
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -32,5 +32,15 @@ namespace Repository.Implement
             List<Component> componentList = ComponentDAO.SingletonInstance.GetSearchComponents(keyword);
             return _mapper.Map<List<ComponentDTO>>(componentList);
         }
+
+        public bool AddComponent(ComponentDTO component)
+        {
+            return ComponentDAO.SingletonInstance.AddComponent(_mapper.Map<Component>(component));
+        }
+
+        public bool UpdateComponent(ComponentDTO component)
+        {
+            return ComponentDAO.SingletonInstance.UpdateComponent(_mapper.Map<Component>(component));
+        }
     }
 }
