@@ -69,7 +69,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
 
             if (Cage.Status is null)
             {
-                Cage.Status = "Custom";
+                Cage.Status = (int)BusinessObject.Enums.CageStatus.Custom;
             }
 
             Cage.CageComponents = CageComponents;
