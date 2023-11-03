@@ -8,7 +8,7 @@ namespace DataTransferObject
 
         [Required]
         public string? CageName { get; set; }
-        public string? Status { get; set; }
+        public int? Status { get; set; }
 
         public decimal? CagePrice { get; set; }
 

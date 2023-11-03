@@ -10,11 +10,11 @@ namespace Repository.Mapper
         public AutoMapperConfigure()
         {
             CreateMap<Cage, CageDTO>()
-                .ForMember(dest => dest.Status, options => options.MapFrom(src => Enum.GetName(typeof(CageStatus), src.Status ?? -1)))
+                //.ForMember(dest => dest.Status, options => options.MapFrom(src => Enum.GetName(typeof(CageStatus), src.Status ?? -1)))
                 .ForMember(dest => dest.CageComponents, options => options.MapFrom(src => src.CageComponents))
                 .ReverseMap()
-                .ForMember(dest => dest.CageComponents, options => options.MapFrom(src => src.CageComponents))
-                .ForMember(dest => dest.Status, options => options.MapFrom(src => (int)(CageStatus)Enum.Parse(typeof(CageStatus), src.Status ?? "Undefined")));
+                .ForMember(dest => dest.CageComponents, options => options.MapFrom(src => src.CageComponents));
+                //.ForMember(dest => dest.Status, options => options.MapFrom(src => (int)(CageStatus)Enum.Parse(typeof(CageStatus), src.Status ?? "Undefined")));
 
             CreateMap<CageComponent, CageComponentDTO>().ReverseMap();
             CreateMap<CageImage, CageImageDTO>().ReverseMap();

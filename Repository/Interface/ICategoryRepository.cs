@@ -6,5 +6,8 @@ namespace Repository.Interface
     {
         List<CategoryDTO> GetAllCategories();
         CategoryDTO GetCategoryById(int id);
+        bool AddCategory(CategoryDTO category);
+        bool UpdateCategory(CategoryDTO category);
+        bool DeleteCategory(int id);
     }
 }

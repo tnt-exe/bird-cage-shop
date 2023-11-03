@@ -51,5 +51,52 @@ namespace DataAccessObject
             }
             return category;
         }
+
+        public bool AddCategory(Category category)
+        {
+            try
+            {
+                using var db = new BirdCageShopContext();
+                db.Categories.Add(category);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return true;
+        }
+
+        public bool UpdateCategory(Category category)
+        {
+            try
+            {
+                using var db = new BirdCageShopContext();
+                db.Categories.Update(category);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return true;
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            try
+            {
+                using var db = new BirdCageShopContext();
+                var category = db.Categories.SingleOrDefault(c => c.CategoryId == id);
+                category.Status = 0;
+                db.Categories.Update(category);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return true;
+        }
     }
 }

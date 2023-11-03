@@ -75,5 +75,39 @@ namespace DataAccessObject
             }
             return componentList;
         }
+
+        public bool AddComponent(Component component)
+        {
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    db.Components.Add(component);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return true;
+        }
+
+        public bool UpdateComponent(Component component)
+        {
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    db.Components.Update(component);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return true;
+        }
     }
 }

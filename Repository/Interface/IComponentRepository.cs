@@ -7,5 +7,7 @@ namespace Repository.Interface
         List<ComponentDTO> GetAllComponent();
         List<ComponentDTO> GetSearchComponent(string keyword);
         ComponentDTO GetComponentById(int id);
+        bool AddComponent(ComponentDTO component);
+        bool UpdateComponent(ComponentDTO component);
     }
 }

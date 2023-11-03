@@ -26,5 +26,22 @@ namespace Repository.Implement
             Category category = CategoryDAO.SingletonInstance.GetCategoryById(id);
             return _mapper.Map<CategoryDTO>(category);
         }
+
+        public bool AddCategory(CategoryDTO category)
+        {
+            Category categoryModel = _mapper.Map<Category>(category);
+            return CategoryDAO.SingletonInstance.AddCategory(categoryModel);
+        }
+
+        public bool UpdateCategory(CategoryDTO category)
+        {
+            Category categoryModel = _mapper.Map<Category>(category);
+            return CategoryDAO.SingletonInstance.UpdateCategory(categoryModel);
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            return CategoryDAO.SingletonInstance.DeleteCategory(id);
+        }
     }
 }
