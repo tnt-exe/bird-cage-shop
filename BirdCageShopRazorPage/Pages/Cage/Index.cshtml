@@ -60,7 +60,7 @@ else
         <div class="mx-3 justify-content-between">
             <h2 class="text-center display-3 fw-bold">List of all Cages</h2>
             <br/>
-            <a asp-page="Create" class="btn btn-primary me-auto">Create New</a>
+            <a asp-page="Create" class="btn btn-primary me-auto">Create</a>
         </div>
     <div class="px-3 pt-2">
         <table class="table table-striped">
@@ -163,9 +163,9 @@ else
                                 <a asp-page="./MakeOrder" asp-route-id="@item.CageId" class="text-center text-xl">Order</a>
                                 <br />
                             }
-                            <a asp-page="./Edit" asp-route-id="@item.CageId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
-                            <a asp-page="./Details" asp-route-id="@item.CageId"><i class="fa fa-info" style="font-size: 24px;"></i></a>
-                            <a asp-page="./Delete" asp-route-id="@item.CageId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
+                            <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.CageId"><i class="fa fa-info" style="font-size: 24px;"></i></a>
+                            <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.CageId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
+                            <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.CageId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
                         </td>
                     </tr>
                 }

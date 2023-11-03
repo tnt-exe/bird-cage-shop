@@ -9,12 +9,12 @@
 </head>
 
 <div class="row">
-    <div class="col-md-10 mx-3">
-        <h1>Danh sách giỏ hàng</h1>
+    <div class="col-md-10 mx-3 mb-3">
+        <h2 class="fw-bold display-4">Danh sách giỏ hàng</h2>
 
         @if (Model.Order.Count() == 0)
         {
-            <h2 class="display-2 text-center fw-bold">Giỏ hàng trống</h2>
+            <h2 class="display-4 fw-bold">Giỏ hàng trống</h2>
         }
     </div>
 
@@ -57,7 +57,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Order) {
-        <tr>
+        <tr class="align-middle">
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
@@ -105,8 +105,8 @@
                 @Html.DisplayFor(modelItem => item.ShipDate)
             </td>
             <td>
-                    <a asp-page="./Details" asp-route-id="@item.OrderId"><i class="fa fa-info" style="font-size: 24px;"></i></a>
-                    <a asp-page="./Delete" asp-route-id="@item.OrderId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
+                    <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.OrderId"><i class="fa fa-info" style="font-size: 24px;"></i></a>
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.OrderId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
             </td>
         </tr>
 }

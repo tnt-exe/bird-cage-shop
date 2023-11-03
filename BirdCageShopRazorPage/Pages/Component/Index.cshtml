@@ -14,10 +14,11 @@
 </head>
 
 <div>
-    <a class="btn btn-primary" asp-page="Create">Create</a>
+    <h2 class="text-center display-4 fw-bold">Component List</h2>
+    <a class="btn btn-primary mx-3" asp-page="Create">Create</a>
 </div>
-<table class="table">
-    <thead>
+<table class="table table-striped mx-3 mt-4 border rounded-circle" style="width: 98%;">
+    <thead style="background-color: #B5DA98">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Component[0].ComponentName)
@@ -31,12 +32,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Component[0].QuantityRequired)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Component) {
-        <tr>
+        <tr class="align-middle">
             <td>
                 @Html.DisplayFor(modelItem => item.ComponentName)
             </td>
@@ -50,9 +51,14 @@
                 @Html.DisplayFor(modelItem => item.QuantityRequired)
             </td>
             <td>
-                <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.ComponentId">Edit</a>
+                    <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.ComponentId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<style>
+    .table-striped tbody tr:nth-child(even) {
+        background-color: #C6ECBE;
+    }
+</style>
