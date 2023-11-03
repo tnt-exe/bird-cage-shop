@@ -1,0 +1,78 @@
+﻿@page
+@using BusinessObject.Enums;
+@model BirdCageShopRazorPage.Pages.User.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Dob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.User) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @{
+                    if (item.Status == (int)UserStatus.Ban)
+                    {
+                        <span class="badge bg-danger">Ban</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    var btnText = item.Status == (int)UserStatus.Ban ? "Unban" : "Ban";
+                }
+                <a class="btn btn-danger" asp-page-handler="changeStatus" asp-route-currentStatus="@item.Status" asp-route-userId="@item.UserId">@btnText</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
