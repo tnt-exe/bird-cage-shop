@@ -27,6 +27,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Cage.CageId" />
             <div class="form-group">
+                <label asp-for="Cage.Image" class="control-label">Preview Image</label>
+                <input asp-for="Cage.Image" class="form-control" type="file" id="imageInput" accept="image/*" />
+                <div class="col-12 mt-2">
+                    <img id="previewImage" src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
+                         alt="Picture Preview"
+                         class="img-fluid w-100 h-100">
+                </div>
+                <span asp-validation-for="Cage.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Cage.CageName" class="control-label"></label>
                 <input asp-for="Cage.CageName" class="form-control" />
                 <span asp-validation-for="Cage.CageName" class="text-danger"></span>
@@ -138,6 +148,16 @@
 </div>
 
 <script>
+    const imageInput = document.getElementById('imageInput');
+    const previewImage = document.getElementById('previewImage');
+
+    imageInput.onchange = evt => {
+        const [file] = imageInput.files
+        if (file) {
+            previewImage.src = URL.createObjectURL(file)
+        }
+    }
+
     function updateToTalPrice(input) {
         var quantity = input.value;
         var price = input.parentElement.nextElementSibling.children[0].value;
