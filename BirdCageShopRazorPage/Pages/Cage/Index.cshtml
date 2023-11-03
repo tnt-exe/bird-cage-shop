@@ -62,9 +62,9 @@ else
             <br/>
             <a asp-page="Create" class="btn btn-primary me-auto">Create New</a>
         </div>
-    <div class="px-3">
+    <div class="px-3 pt-2">
         <table class="table table-striped">
-            <thead>
+            <thead style="background-color: #B5DA98">
                 <tr>
                     <th>
                         <label>Preview</label>
@@ -173,3 +173,8 @@ else
         </table>
     </div>
 }
+<style>
+    .table-striped tbody tr:nth-child(even) {
+        background-color: #C6ECBE;
+    }
+</style>

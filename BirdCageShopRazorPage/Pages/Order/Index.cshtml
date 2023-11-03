@@ -32,16 +32,13 @@
     </div>
 </div>
 
-<div class="ms-3">
-    <a asp-page="Create" class="btn btn-primary">Create New Order</a>
-</div>
 @if (TempData["notification"] != null)
 {
     <h3 style="color:green" class="text-center">@TempData["notification"]</h3>
 }
 
 <table class="table table-striped mx-3">
-    <thead>
+    <thead style="background-color: #B5DA98">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Order[0].TotalPrice)
@@ -87,3 +84,8 @@
 }
     </tbody>
 </table>
+<style>
+    .table-striped tbody tr:nth-child(even) {
+        background-color: #C6ECBE;
+    }
+</style>

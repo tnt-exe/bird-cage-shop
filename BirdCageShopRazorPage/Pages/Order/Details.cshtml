@@ -139,7 +139,7 @@
             @Html.DisplayFor(model => model.Order.ShipDate)
         </dd>
         </dl>
-        <form method="post" class="mb-3" style="position: absolute; bottom: 0; width: 100%;">
+        <form method="post" class="mb-3 pt-3" style="position: absolute; bottom: 0; width: 100%;">
             <button type="submit" asp-route-orderId="@Model.Order.OrderId" class="btn btn-success">Confirm</button>
         </form>
     </div>
