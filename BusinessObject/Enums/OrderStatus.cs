@@ -1,4 +1,4 @@
-﻿namespace BusinessObject.Enums
+namespace BusinessObject.Enums
 {
     public enum OrderStatus
     {

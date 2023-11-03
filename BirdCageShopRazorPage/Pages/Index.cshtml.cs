@@ -19,7 +19,7 @@ namespace BirdCageShopRazorPage.Pages
 
         public void OnGetAsync()
         {
-            Cage = _cageRepository.GetAllCages();
+            Cage = _cageRepository.GetAllCages().Where(c => c.Status == (int)BusinessObject.Enums.CageStatus.Available).ToList();
         }
     }
 }

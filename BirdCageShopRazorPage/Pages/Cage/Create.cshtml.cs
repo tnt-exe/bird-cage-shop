@@ -53,6 +53,8 @@ namespace BirdCageShopRazorPage.Pages.Cage
                 "intStatus", "stringStatus"
             );
             ViewData["CategoryId"] = new SelectList(_categoryRepository.GetAllCategories(), "CategoryId", "CategoryName");
+            ViewData["Color"] = new SelectList(new string[] { "None", "Red", "Green", "Yellow", "Blue", "Black", "White"});
+            ViewData["Material"] = new SelectList(new string[] { "Wood", "Iron", "Plastic", "Galvanized Steel", "Stainless Steel" });
             return Page();
         }
 

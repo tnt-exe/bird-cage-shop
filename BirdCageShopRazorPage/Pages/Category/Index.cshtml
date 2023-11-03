@@ -5,16 +5,19 @@
 @{
     ViewData["Title"] = "Category";
 }
-
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
 @if (TempData["cate-notification"] != null)
 {
-    <h2 style="color:blue">@TempData["cate-notification"]</h2>
+    <h2 style="color:green" class="text-center">@TempData["cate-notification"]</h2>
 }
-<p>
-    <a class="btn btn-primary" asp-page="Create">Create</a>
-</p>
-<table class="table">
+<div class="ms-3">
+    <h2 class="text-center fw-bold display-4">Category List</h2>
+    <a class="btn btn-primary mb-3" asp-page="Create">Create</a>
+</div>
+<table class="table table-striped mx-3 align-items-center justify-content-center" style="width: 98%;">
     <thead>
         <tr>
             <th>
@@ -23,37 +26,36 @@
             <th>
                 @Html.DisplayNameFor(model => model.Category[0].Status)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Category) {
-        <tr>
+        <tr class="align-middle">
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                @{
-                    if (item.Status == (int?) CategoryStatus.Active)
+                    @if (item.Status == (int?) CategoryStatus.Active)
                     {
-                        <span class="badge badge-success">Active</span>
+                            <span class="badge bg-success">Active</span>
                     }
                     else
                     {
-                        <span class="badge badge-danger">Inactive</span>
+                        <span class="badge bg-danger">Inactive</span>
                     }
-                }
             </td>
             <td>
-                <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.CategoryId">Edit</a>
+                    <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.CategoryId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
                 @{
                     if (item.Status == (int?) CategoryStatus.Active)
                     {
-                        <a class="btn btn-primary" asp-page-handler="changeStatus" asp-route-id="@item.CategoryId">Delete</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-page-handler="changeStatus" asp-route-id="@item.CategoryId">
+                            <i class="fa fa-trash" style="font-size: 24px;"></i></a>
                     }
                     else
                     {
-                        <a class="btn btn-primary disabled">Delete</a>
+                            <a class="btn btn-sm btn-outline-secondary disabled"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
                     }
                 }
             </td>

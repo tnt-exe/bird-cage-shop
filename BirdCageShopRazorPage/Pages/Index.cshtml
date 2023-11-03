@@ -2,6 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    int count = 1;
 }
 
 <section class="hero">
@@ -50,20 +51,24 @@
    <div class="product_item_container">
         @foreach (var item in Model.Cage)
         {
-            <div class="product_item">
-                @if (item.ImageUrl is null)
-                {
-                    <img src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg" />
-                }
-                else
-                {
-                    <img src="@item.ImageUrl" />
-                }
-                <h3>@item.CageName</h3>
-                <h5>@item.Description</h5>
-                <span>@item.CagePrice</span>
-                <button><a style="color: white; text-decoration: none" asp-page="/Cage/Details" asp-route-id="@item.CageId"><i class="fa-solid fa-cart-plus me-2"></i>Add to Cart</a></button>
-            </div>
+            @if ((item.Status == (int)BusinessObject.Enums.CageStatus.Available) && count<5)
+            {
+                <div class="product_item">
+                    @if (item.ImageUrl is null)
+                    {
+                        <img src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg" />
+                    }
+                    else
+                    {
+                        <img src="@item.ImageUrl" />
+                    }
+                    <h3>@item.CageName</h3>
+                    <h5>@item.Description</h5>
+                    <span>@item.CagePrice</span>
+                    <button><a style="color: white; text-decoration: none" asp-page="/Cage/MakeOrder" asp-route-id="@item.CageId"><i class="fa-solid fa-plus me-2"></i>View</a></button>
+                </div>
+            }
+            count++;
         }
 
    </div>
