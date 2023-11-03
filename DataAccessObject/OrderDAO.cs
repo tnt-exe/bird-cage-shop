@@ -74,7 +74,7 @@ namespace DataAccessObject
             {
                 using (var db = new BirdCageShopContext())
                 {
-                    db.Orders.Add(order);
+                    db.Add(order);
                     result = db.SaveChanges() > 0;
                 }
             }

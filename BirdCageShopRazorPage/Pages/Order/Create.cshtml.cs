@@ -45,7 +45,7 @@ namespace BirdCageShopRazorPage.Pages.Order
                 {
                     UserId = id,
                     OrderDate = DateTime.Now,
-                    Status = "Waiting",
+                    Status = (int)BusinessObject.Enums.OrderStatus.Waiting,
                     TotalPrice = 0
                 };
                 var result = _orderRepository.CreateOrder(newOrder);
