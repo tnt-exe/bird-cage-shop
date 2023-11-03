@@ -18,7 +18,7 @@
     <a class="btn btn-primary mx-3" asp-page="Create">Create</a>
 </div>
 <table class="table table-striped mx-3 mt-4 border rounded-circle" style="width: 98%;">
-    <thead style="background-color: #B5DA98">
+    <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Component[0].ComponentName)
@@ -51,14 +51,9 @@
                 @Html.DisplayFor(modelItem => item.QuantityRequired)
             </td>
             <td>
-                    <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@item.ComponentId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
+                    <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.ComponentId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
-<style>
-    .table-striped tbody tr:nth-child(even) {
-        background-color: #C6ECBE;
-    }
-</style>

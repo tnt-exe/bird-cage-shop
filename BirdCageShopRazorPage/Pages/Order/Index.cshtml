@@ -51,13 +51,13 @@ else
                             @switch (item.PaymentStatus!)
                             {
                                 case (int)BusinessObject.Enums.PaymentStatus.None:
-                                    <span>None</span>
+                                    <span class="badge bg-secondary">None</span>
                                     break;
                                 case (int)BusinessObject.Enums.PaymentStatus.Unpaid:
-                                    <span>Unpaid</span>
+                                    <span class="badge bg-danger">Unpaid</span>
                                     break;
                                 case (int)BusinessObject.Enums.PaymentStatus.Paid:
-                                    <span>Paid</span>
+                                    <span class="badge bg-success">Paid</span>
                                     break;
                             }
                         </td>
@@ -85,8 +85,14 @@ else
                             }
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-outline-primary" asp-page="./Details" asp-route-id="@item.OrderId">View</a>
-                            <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.OrderId">Delete</a>
+                            <a class="btn btn-sm btn-outline-primary" asp-page="./Details" asp-route-id="@item.OrderId">
+                                <i class="fa fa-info" style="font-size: 24px;"></i></a>
+                            <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.OrderId">
+                                <i class="fa fa-edit" style="font-size: 24px;"></i>
+                            </a>
+                            <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.OrderId">
+                                <i class="fa fa-trash" style="font-size: 24px;"></i>
+                            </a>
                         </td>
                     </tr>
                 }
