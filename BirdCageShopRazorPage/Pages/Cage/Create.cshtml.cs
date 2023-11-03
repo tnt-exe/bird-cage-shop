@@ -35,7 +35,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
             }
 
             Components = _componentRepository.GetAllComponent();
-            /*foreach (var item in components)
+            foreach (var item in Components)
             {
                 var cageComponent = new CageComponentDTO
                 {
@@ -44,7 +44,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
                 };
 
                 CageComponents.Add(cageComponent);
-            }*/
+            }
             ViewData["CageStatus"] = new SelectList(new string[] { "Unavailable", "Available" });
             ViewData["CategoryId"] = new SelectList(_categoryRepository.GetAllCategories(), "CategoryId", "CategoryName");
             return Page();
