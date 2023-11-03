@@ -50,37 +50,37 @@ else
                         <td>
                             @switch (item.PaymentStatus!)
                             {
-                                case "None":
-                                    <span>@Html.DisplayFor(modelItem => item.PaymentStatus)</span>
+                                case (int)BusinessObject.Enums.PaymentStatus.None:
+                                    <span>None</span>
                                     break;
-                                case "Unpaid":
-                                    <span>@Html.DisplayFor(modelItem => item.PaymentStatus)</span>
+                                case (int)BusinessObject.Enums.PaymentStatus.Unpaid:
+                                    <span>Unpaid</span>
                                     break;
-                                case "Paid":
-                                    <span>@Html.DisplayFor(modelItem => item.PaymentStatus)</span>
+                                case (int)BusinessObject.Enums.PaymentStatus.Paid:
+                                    <span>Paid</span>
                                     break;
                             }
                         </td>
                         <td>
                             @switch (item.Status!)
                             {
-                                case "Undefined":
-                                    <span class="badge bg-dark text-white">@Html.DisplayFor(modelItem => item.Status)</span>
+                                case (int)BusinessObject.Enums.OrderStatus.Undefined:
+                                    <span class="badge bg-dark text-white">Undefined</span>
                                     break;
-                                case "Pending":
-                                    <span class="badge bg-warning">@Html.DisplayFor(modelItem => item.Status)</span>
+                                case (int)BusinessObject.Enums.OrderStatus.Pending:
+                                    <span class="badge bg-warning">Pending</span>
                                     break;
-                                case "Processing":
-                                    <span class="badge bg-primary">@Html.DisplayFor(modelItem => item.Status)</span>
+                                case (int)BusinessObject.Enums.OrderStatus.Processing:
+                                    <span class="badge bg-primary">Processing</span>
                                     break;
-                                case "Completed":
-                                    <span class="badge bg-success">@Html.DisplayFor(modelItem => item.Status)</span>
+                                case (int)BusinessObject.Enums.OrderStatus.Completed:
+                                    <span class="badge bg-success">Completed</span>
                                     break;
-                                case "Cancelled":
-                                    <span class="badge bg-danger">@Html.DisplayFor(modelItem => item.Status)</span>
+                                case (int)BusinessObject.Enums.OrderStatus.Cancelled:
+                                    <span class="badge bg-danger">Cancelled</span>
                                     break;
-                                case "Waiting":
-                                    <span class="badge bg-secondary">@Html.DisplayFor(modelItem => item.Status)</span>
+                                case (int)BusinessObject.Enums.OrderStatus.Waiting:
+                                    <span class="badge bg-secondary">Waiting</span>
                                     break;
                             }
                         </td>
