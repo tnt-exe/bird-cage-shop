@@ -9,7 +9,9 @@
 
 @if (TempData["notification"] != null)
 {
-    <h2 style="color:blue">@TempData["notification"]</h2>
+    <div class="alert alert-primary m-0" role="alert">
+        @TempData["notification"]
+    </div>
 }
 @if (!checkRole)
 {
@@ -21,7 +23,7 @@
                 @* <i class="fa-solid fa-pen me-2" style="font-size: 24px; color:white; opacity:0.5"></i> *@
             </h2>
             <p>Make your bird's home uniquely theirs. Choose from a range of colors, sizes, and accessories to create a one-of-a-kind bird cage tailored to your feathered friend's preferences</p>
-            <button>Try now</button>
+            <button><a style="color: #a4d587; text-decoration: none" asp-page="/Cage/Create">Try now</a></button>
         </section>
 
         <section class="product">

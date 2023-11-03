@@ -1,7 +1,9 @@
 ﻿@inject IHttpContextAccessor HttpContextAccessor
 @{
     var logged = HttpContextAccessor.HttpContext?.User.Claims.Any() ?? false;
+    var checkRole = HttpContextAccessor.HttpContext?.User.Claims.Where(c => c.Type == "scope").Any(c => c.Value.Contains("Staff") || c.Value.Contains("Admin")) ?? false;
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +30,13 @@
                 <li><a asp-page="/Index" class="nav-link px-2 link-success border-3 border-bottom border-success px-4"><i class="fa-solid fa-house me-2"></i>Home</a></li>
                 <li><a asp-page="/Cage/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-tag me-2"></i>Products</a></li>
                 <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-cart-shopping me-2"></i> Cart</a></li>
+
+                @* Admin/ Staff *@
+                @if (checkRole)
+                {
+                    <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-shapes me-2"></i> Component</a></li>
+                    <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-cart-shopping me-2"></i> Category</a></li>
+                }
             </ul>
 
             <div class="col-md-3 text-info text-end">
