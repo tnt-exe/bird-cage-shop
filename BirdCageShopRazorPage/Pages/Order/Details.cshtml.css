@@ -1,0 +1,22 @@
+﻿.wrapper {
+}
+
+.order_detail {
+}
+
+
+    .order_detail p {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+    }
+
+        .order_detail p::after {
+            content: ":"
+        }
+
+    .order_detail span {
+        display: block;
+        margin-bottom: 12px;
+    }

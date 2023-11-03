@@ -57,7 +57,8 @@
                 <li><a asp-page="/Index" class="nav-link px-2 link-secondary px-4" data-target="home"><i class="fa-solid fa-house me-2"></i>Home</a></li>
                 <li><a asp-page="/Cage/Index" class="nav-link px-4 link-secondary px-3" data-target="products"><i class="fa-solid fa-tag me-2"></i>Products</a></li>
                 <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3" data-target="cart"><i class="fa-solid fa-cart-shopping me-2"></i> Cart</a></li>
-
+                @* <li><a asp-page="/Order/Index" class="nav-link px-4 link-secondary px-3" data-target="order-history"><i class="fa-solid fa-cart-flatbed me-2"></i> Order History</a></li> *@
+                
                 @* Admin/ Staff *@
                 @if (checkRole)
                 {
@@ -75,7 +76,6 @@
                 else
                 {
                     <form method="post" action="/logout">
-                        @* <a asp-page="/logout" class="nav_button"><i class="fa-solid fa-right-from-bracket"></i></a> *@
                         <button type="submit" class="nav_button"><i class="fa-solid fa-right-from-bracket"></i></button>
                     </form>
                 }

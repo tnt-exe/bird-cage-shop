@@ -65,7 +65,7 @@
                     <h3>@item.CageName</h3>
                     <h5>@item.Description</h5>
                     <span>@item.CagePrice</span>
-                    <button><a style="color: white; text-decoration: none" asp-page="/Cage/Details" asp-route-id="@item.CageId"><i class="fa-solid fa-cart-plus me-2"></i>Add to Cart</a></button>
+                    <button><a style="color: white; text-decoration: none" asp-page="/Cage/MakeOrder" asp-route-id="@item.CageId"><i class="fa-solid fa-plus me-2"></i>View</a></button>
                 </div>
             }
             count++;
