@@ -145,12 +145,12 @@
     .product .product_item_container {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
         flex-wrap: nowrap;
     }
 
     .product .product_item {
-        width: 100%;
+        width: 400px;
         height: fit-content;
         margin: 0 32px;
         padding: 32px;
