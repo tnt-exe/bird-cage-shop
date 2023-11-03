@@ -8,11 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<h1>Details</h1>
+<div class="px-4">
+    <h1>Details</h1>
 
-<h4>Cage</h4>
-<hr />
-<div class="row">
+    <h4>Cage</h4>
+    <hr />
+</div>
+<div class="row px-4 py-1">
     <div class="col-6">
         <div>
             <dl class="row">
@@ -130,11 +132,11 @@
     </table>
     </div>
 </div>
-<div class="d-inline-block">
+<div class="flex text-center mt-4">
         @if (new string("Available").Equals(Model.Cage.Status))
         {
             <a asp-page="./MakeOrder" asp-route-id="@Model.Cage.CageId" class="btn btn-secondary">Đặt hàng</a>
         }
-    <a asp-page="./Edit" asp-route-id="@Model.Cage?.CageId" class="btn btn-warning pt-2">Edit</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Cage?.CageId" class="btn btn-warning pt-2 mx-4">Edit</a>
     <a asp-page="./Index" class="btn btn-primary">Back to List</a>
 </div>

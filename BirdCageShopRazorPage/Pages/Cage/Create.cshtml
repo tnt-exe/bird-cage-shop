@@ -8,12 +8,14 @@
     var checkRole = HttpContextAccessor.HttpContext?.User.Claims.Where(c => c.Type == "scope").Any(c => c.Value.Contains("Staff") || c.Value.Contains("Admin")) ?? false;
 }
 
-<h1>Create</h1>
+<div class="mx-3">
+    <h1>Create</h1>
 
-<h4>Cage</h4>
-<hr />
+    <h4>Cage</h4>
+    <hr />
+</div>
 <div>
-    <form method="post" class="row ml-3">
+    <form method="post" class="row ml-3 mx-3">
         <div class="col-4 border border-3 py-3">
             <h2>Cage Information</h2>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
