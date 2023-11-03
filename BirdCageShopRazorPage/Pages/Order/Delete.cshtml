@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "Delete";
 }
+<div class="px-3">
+    <h1>Delete</h1>
 
 <h1>Delete</h1>
 
@@ -50,9 +52,10 @@
         </dd>
     </dl>
     
-    <form method="post">
-        <input type="hidden" asp-for="Order.OrderId" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-page="./Index" class="btn btn-primary">Back to List</a>
-    </form>
+        <form method="post" class="mb-3">
+            <input type="hidden" asp-for="Order.OrderId" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+        </form>
+    </div>
 </div>

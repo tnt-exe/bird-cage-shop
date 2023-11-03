@@ -35,5 +35,10 @@ namespace Repository.Implement
         {
             return OrderDetailDAO.SingletonInstance.UpdateOrderDetail(_mapper.Map<OrderDetail>(update));
         }
+
+        public bool DeleteOrderDetail(int detailId)
+        {
+            return OrderDetailDAO.SingletonInstance.DeleteOrderDetail(detailId);
+        }
     }
 }

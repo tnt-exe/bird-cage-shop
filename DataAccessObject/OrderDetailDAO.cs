@@ -63,5 +63,17 @@ namespace DataAccessObject
             db.Update(updateEntity);
             return db.SaveChanges() > 0;
         }
+
+        public bool DeleteOrderDetail(int detailId)
+        {
+            using var db = new BirdCageShopContext();
+            var detail = db.OrderDetails.Where(od => od.OrderDetailId == detailId).FirstOrDefault();
+            if (detail != null)
+            {
+                db.OrderDetails.Remove(detail);
+                return db.SaveChanges() > 0;
+            }
+            return false;
+        }
     }
 }

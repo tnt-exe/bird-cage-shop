@@ -1,4 +1,6 @@
 ﻿using BusinessObject.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DataAccessObject
 {
@@ -128,9 +130,12 @@ namespace DataAccessObject
             try
             {
                 using var db = new BirdCageShopContext();
-                User user = db.Users.Where(u => u.UserId == userObj.UserId).FirstOrDefault();
-                user.Email = userObj.Email;
-                user.Password = userObj.Password;
+                var user = db.Users.Find(userObj.UserId);
+
+                userObj.Status = user.Status;
+                userObj.Role = user.Role;
+                
+                db.Entry(user).CurrentValues.SetValues(userObj);
                 result = db.SaveChanges() > 0;
             }
             catch (Exception ex)

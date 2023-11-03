@@ -6,16 +6,13 @@
 }
 
 
-@if (TempData["notification"] != null)
-{
-    <h3 style="color:blue">@TempData["notification"]</h3>
-}
+
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-10 mx-3">
         <h1>Danh sách giỏ hàng</h1>
 
         @if (Model.Order.Count() == 0)
@@ -35,8 +32,15 @@
     </div>
 </div>
 
+<div class="ms-3">
+    <a asp-page="Create" class="btn btn-primary">Create New Order</a>
+</div>
+@if (TempData["notification"] != null)
+{
+    <h3 style="color:green" class="text-center">@TempData["notification"]</h3>
+}
 
-<table class="table">
+<table class="table table-striped mx-3">
     <thead>
         <tr>
             <th>
