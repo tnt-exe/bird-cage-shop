@@ -21,9 +21,10 @@ namespace Repository.Implement
             return _mapper.Map<OrderDTO>(OrderDAO.SingletonInstance.GetOrderById(id));
         }
 
-        public bool UpdateOrder(Order updateOrder)
+        public bool UpdateOrder(OrderDTO updateOrder)
         {
-            return OrderDAO.SingletonInstance.UpdateOrder(updateOrder);
+            Order orderModel = _mapper.Map<Order>(updateOrder);
+            return OrderDAO.SingletonInstance.UpdateOrder(orderModel);
         }
 
         public Order? GetLatestSuitableOrderOfUser(int userId)

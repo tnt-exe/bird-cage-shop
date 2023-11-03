@@ -109,7 +109,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
                         order.TotalPrice += (Quantity - OrderDetail.Quantity) * Cage.CagePrice;
                         OrderDetail.Quantity = Quantity;
                         OrderDetail.Price = Quantity * Cage.CagePrice;
-                        var c1 = _orderRepository.UpdateOrder(_mapper.Map<BusinessObject.Models.Order>(order));
+                        var c1 = _orderRepository.UpdateOrder(order);
                         var c2 = _orderDetailRepository.UpdateOrderDetail(OrderDetail);
 
                         if (c1 && c2)
@@ -177,7 +177,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
                         };
                         order.TotalPrice += Cage.CagePrice * Quantity;
 
-                        var c1 = _orderRepository.UpdateOrder(order);
+                        var c1 = _orderRepository.UpdateOrder(_mapper.Map<OrderDTO>(order));
                         var c2 = _orderDetailRepository.AddNewOrderDetail(newOrderDetail);
 
                         if (c1 && c2)

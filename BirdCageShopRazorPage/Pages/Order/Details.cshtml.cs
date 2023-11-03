@@ -1,5 +1,7 @@
-﻿using BusinessObject.Enums;
+﻿using AutoMapper;
+using BusinessObject.Enums;
 using DataTransferObject;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -41,10 +43,16 @@ namespace BirdCageShopRazorPage.Pages.Order
         //    return Page();
         //}
 
-        public IActionResult OnGetRemoveCageItem(int? detailId)
+        public IActionResult OnGetRemoveCageItem(int? detailId, int? quantity, int orderId)
         {
-            if (detailId != null)
+            if (detailId != null && quantity != null)
             {
+                var order = _orderRepository.GetOrderById(orderId);
+                var detail = _orderDetailRepository.getOrderDetailById((int)detailId);
+                order.TotalPrice -= detail.Price * (decimal)quantity;
+
+                _orderRepository.UpdateOrder(order);
+
                 _orderDetailRepository.DeleteOrderDetail((int)detailId);
                 return RedirectToPage();
             }

@@ -63,7 +63,8 @@
                                     <label>
                                         Tổng: @item.Price
                                     </label><br />
-                                    <a class="btn btn-danger mt-3" asp-route-detailId="@item.OrderDetailId" asp-page-handler="removeCageItem">Remove</a>
+                                    <a class="btn btn-danger mt-3" asp-route-detailId="@item.OrderDetailId" asp-route-orderId="@Model.Order.OrderId"
+                                    asp-route-quantity="@item.Quantity" asp-page-handler="removeCageItem">Remove</a>
                                 </div>
                             </a>
                         </div>
