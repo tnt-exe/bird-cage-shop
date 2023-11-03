@@ -13,13 +13,14 @@ section {
 
 .nav_button {
     text-align: center;
-    padding: 12px 48px;
+    padding: 12px 14px;
     border: none;
     border: 1px solid #a4d587;
-    border-radius: 30px;
+    border-radius: 8px;
     color: #a4d587;
     font-weight: 500;
     text-decoration: none;
+    background-color: white;
 }
 
     .nav_button:hover {

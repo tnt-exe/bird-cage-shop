@@ -23,7 +23,7 @@
             <a asp-page="/Index" class="text-decoration-none fs-3 text-dark fw-bold">
                 <i class="fa-solid fa-feather-pointed"></i> BCage
             </a>
-            
+
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a asp-page="/Index" class="nav-link px-2 link-success border-3 border-bottom border-success px-4"><i class="fa-solid fa-house me-2"></i>Home</a></li>
                 <li><a asp-page="/Cage/Index" class="nav-link px-4 link-secondary px-3"><i class="fa-solid fa-tag me-2"></i>Products</a></li>
@@ -31,19 +31,23 @@
             </ul>
 
             <div class="col-md-3 text-info text-end">
-                @if(!logged)
+
+                @if (!logged)
                 {
-                    <a asp-page="/Login" class="nav_button">Signin</a>
+                    <a asp-page="/Login" class="nav_button">Sign-in</a>
                 }
-                @if(logged) {
-                    <a asp-page="/Logout" class="nav_button"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a>
+                else
+                {
+                    <form method="post" action="/logout">
+                        @* <a asp-page="/logout" class="nav_button"><i class="fa-solid fa-right-from-bracket"></i></a> *@
+                        <button type="submit" class="nav_button"><i class="fa-solid fa-right-from-bracket"></i></button>
+                    </form>
                 }
-                @*<a asp-page="/Home/Index" class="d-block btn btn btn-outline-primary text-decoration-none">Signin</a>*@
             </div>
 
         </header>
     </div>
-    <div class="m-0 p-0">
+    <div>
         @RenderBody()
     </div>
 
