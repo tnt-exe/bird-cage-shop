@@ -100,6 +100,7 @@ namespace BirdCageShopRazorPage
                 endpoints.MapPost("/logout", async (HttpContext context) =>
                 {
                     await context.SignOutAsync();
+                    context.Response.Cookies.Append("activeNavItem", "home");
                     context.Response.Redirect("/");
                 });
                 endpoints.MapControllers();

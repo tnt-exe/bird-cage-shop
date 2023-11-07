@@ -24,6 +24,21 @@
         $(document).ready(function () {
             var activeNavItem = localStorage.getItem('activeNavItem');
 
+            function getCookie(name) {
+                var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                if (match) {
+                    return match[2];
+                }
+                return null;
+            }
+
+            if (document.cookie.includes('activeNavItem')) {
+                var cookieValue = getCookie('activeNavItem');
+                localStorage.setItem('activeNavItem', cookieValue);
+                activeNavItem = cookieValue;
+                document.cookie = "activeNavItem" + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            }
+
             if (activeNavItem) {
                 $('.nav li a').removeClass('link-success border-3 border-bottom border-success');
                 $('.nav li a[data-target="' + activeNavItem + '"]').addClass('link-success border-3 border-bottom border-success');
@@ -119,3 +134,12 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<style>
+    .footer{
+        display: absolute;
+        bottom: 0;
+        right: 0; 
+        left: 0;
+    }
+</style>

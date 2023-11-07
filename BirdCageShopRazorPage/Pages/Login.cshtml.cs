@@ -47,6 +47,7 @@ namespace BirdCageShopRazorPage.Pages
                 var userPrincipal = new ClaimsPrincipal(new[] { userIdentity });
 
                 HttpContext.SignInAsync(userPrincipal);
+                HttpContext.Response.Cookies.Append("activeNavItem", "home");
 
                 return RedirectToPage("Index");
             }
