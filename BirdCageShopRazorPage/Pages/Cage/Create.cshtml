@@ -76,13 +76,14 @@
 
         <div class="col-8">
             <h2 class="mt-2 text-center">List of components</h2>
+            <div id="components">
                 @for (int i = 0; i < Model.Components.Count; i++)
                 {
+                    Model.CageComponents.Add(new DataTransferObject.CageComponentDTO());
                     @if (Model.Components[i].Required)
                     {
-                        Model.CageComponents.Add(new DataTransferObject.CageComponentDTO());
                         var totalPrice = Model.Components[i].ComponentPrice * Model.Components[i].QuantityRequired;
-                        <input type="hidden" asp-for="CageComponents[i].ComponentId" value="Components[i].ComponentId" />
+                        <input type="hidden" asp-for="CageComponents[i].ComponentId" value="@Model.Components[i].ComponentId" />
 
                         <div class="card my-1 rounded-2">
                             <div class="card-body row">
@@ -94,8 +95,8 @@
                                         <div class="col-7">
                                             <div class="mt-4 d-flex">
                                                 <text class="mt-2">Material: </text>
-                                                <select asp-for="CageComponents[i].Material" class="form-control ms-2" 
-                                                        asp-items="ViewBag.Material" style="padding-left: 0.3rem; width: 50%;"></select>
+                                                <select asp-for="CageComponents[i].Material" class="form-control ms-2"
+                                                asp-items="ViewBag.Material" style="padding-left: 0.3rem; width: 50%;"></select>
                                             </div>
                                             <div class="mt-4">
                                                 <text>Amount: </text>
@@ -105,19 +106,19 @@
                                                value="@Model.Components[i].QuantityRequired"
                                                min="@Model.Components[i].QuantityRequired"
                                                max="100"
-                                                       style="padding-left: 0.3rem;" />
+                                               style="padding-left: 0.3rem;" />
                                             </div>
                                         </div>
                                         <div class="col-5 text-center d-flex">
                                             <text class="mt-2">Color: </text>
                                             <select asp-for="CageComponents[i].Color" class="form-control ms-2"
-                                                asp-items="ViewBag.Color" style="padding-left: 0.3rem; width: 50%;"></select>
+                                            asp-items="ViewBag.Color" style="padding-left: 0.3rem; width: 50%;"></select>
                                         </div>
                                     </div>
                                     <div class="mt-3">
                                         <text class="fw-bold">Total Price: </text>
                                         <input class="totalPrice" asp-for="CageComponents[i].Price"
-                                               value="@totalPrice" readonly style="padding-left: 0.3rem;" /> VND
+                                       value="@totalPrice" readonly style="padding-left: 0.3rem;" /> VND
                                     </div>
                                 </div>
                                 <div class="col-6 d-flex justify-content-center align-items-center">
@@ -127,7 +128,10 @@
                             </div>
                         </div>
                     }
-            }
+                }
+            </div>
+            <select id="componentList" class="form-control" asp-items="ViewBag.Component"></select>
+            <button type="button" onclick="addComponent()">Add component</button>
         </div>
 
         @if(!checkRole){
@@ -157,10 +161,87 @@
 
     function updateToTalPrice(input){
         var quantity = input.value;
-        var price = input.parentElement.nextElementSibling.children[0].value;
-        var totalPrice = input.parentElement.nextElementSibling.nextElementSibling.children[0];
+        var price = input.parentElement.parentElement.parentElement.parentElement.nextElementSibling.children[0].value;
+        var totalPrice = input.parentElement.parentElement.parentElement.nextElementSibling.children[1];
 
         totalPrice.value = price * quantity;
+    }
+
+    async function addComponent() {
+        var components = document.getElementById("componentList");
+        var componentList = document.getElementById("components");
+        var count = componentList.children.length / 2;
+        var selectedComponent = components.options[components.selectedIndex];
+        var id = selectedComponent.value;
+        var name = selectedComponent.text;
+        var price = 0;
+        try {
+            const response = await fetch('/api/Component/' + id);
+            const data = await response.json();
+            price = data.price;
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
+
+        components.remove(components.selectedIndex);
+
+        var hidden = document.createElement('INPUT');
+        hidden.setAttribute("type", "hidden");
+        hidden.setAttribute("value", id);
+        hidden.setAttribute("id", "CageComponents_" + count + "__ComponentId");
+        hidden.setAttribute("name", "CageComponents[" + count + "].ComponentId");
+
+        var component = document.createElement('DIV');
+        component.className = "card my-1 rounded-2";
+        component.innerHTML = `<div class="card-body row">
+                                        <div class="col-6">
+                                            <div class="col-md-2 display-5">
+                                                <label class="mt-4 fw-bolder">` + name + `</label>
+                                            </div>
+                                            <div class="row justify-content-center align-items-center">
+                                                <div class="col-7">
+                                                        <div class="mt-4 d-flex">
+                                                        <text class="mt-2">Material: </text>
+                                                            <select class="form-control ms-2" style="padding-left: 0.3rem; width: 50%;" id="CageComponents_` + count + `__Material" name="CageComponents[` + count + `].Material">
+                                                                <option>Wood</option>
+                                                                <option>Iron</option>
+                                                                <option>Plastic</option>
+                                                                <option>Galvanized Steel</option>
+                                                                <option>Stainless Steel</option>
+                                                            </select>
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <text>Amount: </text>
+                                                            <input class="quantity" type="number" oninput="updateToTalPrice(this)" value="1" min="1" max="100" style="padding-left: 0.3rem;" data-val="true" data-val-required="The Quantity field is required." id="CageComponents_` + count + `__Quantity" name="CageComponents[` + count + `].Quantity" aria-describedby="CageComponents_` + count + `__Quantity-error" aria-invalid="false">
+                                                    </div>
+                                                </div>
+                                                <div class="col-5 text-center d-flex">
+                                                    <text>Color: </text>
+                                                    <select class="form-control ms-2" style="padding-left: 0.3rem; width: 50%;" id="CageComponents_` + count + `__Color" name="CageComponents[` + count + `].Color">
+                                                        <option>None</option>
+                                                        <option>Red</option>
+                                                        <option>Green</option>
+                                                        <option>Yellow</option>
+                                                        <option>Blue</option>
+                                                        <option>Black</option>
+                                                        <option>White</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <text class="fw-bold">Total Price: </text>
+                                                    <input class="totalPrice valid" value="` + price + `" readonly="" style="padding-left: 0.3rem;" type="text" data-val="true" data-val-number="The field Price must be a number." id="CageComponents_` + count + `__Price" name="CageComponents[` + count + `].Price" aria-describedby="CageComponents_` + count + `__Price-error">
+                                            </div>
+                                        </div>
+                                        <div class="col-6 d-flex justify-content-center align-items-center">
+                                                <input type="hidden" class="price" value="` + price + `" readonly="">
+                                            <label class="text-center display-6">` + price + `/cái</label>
+                                        </div>
+                                    </div>`;
+
+        document.getElementById("components").appendChild(hidden);
+        document.getElementById("components").appendChild(component);
     }
 </script>
 

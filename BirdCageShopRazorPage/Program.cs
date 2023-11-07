@@ -102,6 +102,7 @@ namespace BirdCageShopRazorPage
                     await context.SignOutAsync();
                     context.Response.Redirect("/");
                 });
+                endpoints.MapControllers();
             });
 
             app.Run();

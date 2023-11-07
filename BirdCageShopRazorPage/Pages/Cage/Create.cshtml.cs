@@ -41,7 +41,8 @@ namespace BirdCageShopRazorPage.Pages.Cage
                 return RedirectToPage("/Forbidden");
             }
 
-            Components = _componentRepository.GetAllComponent();
+            var componentList = _componentRepository.GetAllComponent();
+            Components = _componentRepository.GetAllComponent().Where(c => c.Required).ToList();
 
             ViewData["CageStatus"] = new SelectList(
                 new cageStatus[]
@@ -54,6 +55,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
             ViewData["CategoryId"] = new SelectList(_categoryRepository.GetAllCategories(), "CategoryId", "CategoryName");
             ViewData["Color"] = new SelectList(new string[] { "None", "Red", "Green", "Yellow", "Blue", "Black", "White" });
             ViewData["Material"] = new SelectList(new string[] { "Wood", "Iron", "Plastic", "Galvanized Steel", "Stainless Steel" });
+            ViewData["Component"] = new SelectList(componentList.Where(c => !c.Required), "ComponentId", "ComponentName");
             return Page();
         }
 
