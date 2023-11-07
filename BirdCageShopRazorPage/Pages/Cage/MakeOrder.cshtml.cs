@@ -87,7 +87,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
             var cage = _cageRepository.GetCageById(CageId);
             if (cage == null)
             {
-                TempData["notification"] = "Thêm vào giỏ hàng thất bại";
+                TempData["notification"] = "Add new cart failed";
                 return RedirectToPage("./Index");
             }
             else
@@ -102,7 +102,7 @@ namespace BirdCageShopRazorPage.Pages.Cage
                 {
                     if (Quantity == OrderDetail.Quantity)
                     {
-                        TempData["notification"] = "Cập nhật giỏ hàng thất bại";
+                        TempData["notification"] = "Update failed";
                     }
                     else
                     {
@@ -114,17 +114,17 @@ namespace BirdCageShopRazorPage.Pages.Cage
 
                         if (c1 && c2)
                         {
-                            TempData["notification"] = "Cập nhật giỏ hàng thành công";
+                            TempData["notification"] = "Update cart successfully";
                         }
                         else
                         {
-                            TempData["notification"] = "Cập nhật giỏ hàng thất bại";
+                            TempData["notification"] = "Update cart failed";
                         }
                     }
                 }
                 else
                 {
-                    TempData["notification"] = "Cập nhật giỏ hàng thất bại";
+                    TempData["notification"] = "Update cart failed";
                 }
             }
             else
@@ -159,11 +159,11 @@ namespace BirdCageShopRazorPage.Pages.Cage
 
                         if (result)
                         {
-                            TempData["notification"] = "Thêm vào giỏ hàng thành công";
+                            TempData["notification"] = "Add to cart successfully";
                         }
                         else
                         {
-                            TempData["notification"] = "Thêm vào giỏ hàng thất bại";
+                            TempData["notification"] = "Add to cart failed";
                         }
                     }
                     else
@@ -182,17 +182,17 @@ namespace BirdCageShopRazorPage.Pages.Cage
 
                         if (c1 && c2)
                         {
-                            TempData["notification"] = "Thêm vào giỏ hàng thành công";
+                            TempData["notification"] = "Add to cart successfully";
                         }
                         else
                         {
-                            TempData["notification"] = "Thêm vào giỏ hàng thất bại";
+                            TempData["notification"] = "Add to cart failed";
                         }
                     }
                 }
                 else
                 {
-                    TempData["notification"] = "Thêm vào giỏ hàng thất bại";
+                    TempData["notification"] = "Add to cart failed";
                 }
             }
 
