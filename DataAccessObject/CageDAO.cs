@@ -180,9 +180,11 @@ namespace DataAccessObject
             bool result = false;
             try
             {
-                using var db = new BirdCageShopContext();
-                db.Update(cageObj);
-                result = db.SaveChanges() > 0;
+                using (var db = new BirdCageShopContext())
+                {
+                    db.Cages.Update(cageObj);
+                    result = db.SaveChanges() > 0;
+                }
             }
             catch (Exception ex)
             {
