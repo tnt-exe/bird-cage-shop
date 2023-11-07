@@ -1,6 +1,7 @@
 ﻿@page
 @model BirdCageShopRazorPage.Pages.LoginModel
 @{
+    ViewData["Title"] = "Login";
 }
 
 @if (TempData["warning"] != null)
@@ -27,8 +28,10 @@
                 <input style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" type="password" asp-for="LoginUser.Password" />
                 <span asp-validation-for="LoginUser.Password"></span>
             </div>
+            <div>
+                <p>Don't have an account? <a style="color: #a4d587" href="./Register">Register</a> Here!</p>
+            </div>
             <button type="submit">Login</button>
         </div>
     </form>
 </section>
-

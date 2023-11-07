@@ -15,58 +15,54 @@
 }
 
 <section class="main">
-<h1>Register</h1>
-        <form method="post">
+    <h2>Register</h2>
+        <form method="post" class="w-100">
         <div class="main_content_container">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div>
                 Full Name
-                <input asp-for="User.FullName" class="form-control" />
+                <input asp-for="User.FullName" style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" required/>
                 <span asp-validation-for="User.FullName" class="text-danger"></span>
             </div>
             <div>
                 Email
-                <input asp-for="User.Email" class="form-control" required />
+                <input asp-for="User.Email" style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" required />
                 <span asp-validation-for="User.Email" class="text-danger"></span>
             </div>
             <div>
                 Password
-                <input asp-for="User.Password" class="form-control" required />
+                <input asp-for="User.Password" style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" required />
                 <span asp-validation-for="User.Password" class="text-danger"></span>
             </div>
             <div>
                 Phone Number
-                <input asp-for="User.Phone" class="form-control" required />
+                <input asp-for="User.Phone" style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" required />
                 <span asp-validation-for="User.Phone" class="text-danger"></span>
             </div>
             <div>
                 Date of Birth
-                <input asp-for="User.Dob" class="form-control" required />
+                <input asp-for="User.Dob" style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" required />
                 <span asp-validation-for="User.Dob" class="text-danger"></span>
             </div>
             <div>
                 Gender
-                <input asp-for="User.Gender" class="form-control" required />
+                <input asp-for="User.Gender" style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" required />
                 <span asp-validation-for="User.Gender" class="text-danger"></span>
             </div>
             <div>
                 Address
-                <input asp-for="User.Address" class="form-control" required />
+                <input asp-for="User.Address" style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" required />
                 <span asp-validation-for="User.Address" class="text-danger"></span>
             </div>
             <div>
                 Avatar
-                <input asp-for="User.AvatarUrl" class="form-control" />
+                <input asp-for="User.AvatarUrl" style="border: 1px solid #ddd; padding: 6px 10px; width: 100%" />
                 <span asp-validation-for="User.AvatarUrl" class="text-danger"></span>
             </div>
             <div>
-                <input type="submit" value="Register" class="btn btn-primary" />
-                <a class="btn btn-primary" asp-page="Index">Back</a>
+                <p>Already have an account? <a style="color: #a4d587" href="./Login">Login</a> Here!</p>
             </div>
-    </div>
+            <button type="submit" value="Register">Register</button>
+        </div>
         </form>
 </section>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
