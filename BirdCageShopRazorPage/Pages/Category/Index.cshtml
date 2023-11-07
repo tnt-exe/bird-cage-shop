@@ -11,7 +11,9 @@
 
 @if (TempData["cate-notification"] != null)
 {
-    <h2 style="color:green" class="text-center">@TempData["cate-notification"]</h2>
+    <div class="alert alert-info" style="position: fixed; top: 10%; right: 1%; width: 25%;">
+        @TempData["cate-notification"]
+    </div>
 }
 <div class="ms-3">
     <h2 class="text-center fw-bold display-4">Category List</h2>

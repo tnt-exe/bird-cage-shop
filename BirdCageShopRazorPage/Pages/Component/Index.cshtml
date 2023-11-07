@@ -7,8 +7,11 @@
 
 @if (TempData["comp-notification"] != null)
 {
-    <h2 style="color:blue">@TempData["comp-notification"]</h2>
+    <div class="alert alert-info" style="position: fixed; top: 10%; right: 1%; width: 25%;">
+        @TempData["comp-notification"]
+    </div>
 }
+
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>

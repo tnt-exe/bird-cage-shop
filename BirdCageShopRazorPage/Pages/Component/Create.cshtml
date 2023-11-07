@@ -5,24 +5,19 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="ms-3" style="width: 98.5%;">
-    <h1>Create</h1>
-
-    <h4>Component</h4>
-    <hr />
-</div>
-<div class="row ms-3">
-    <div class="col-md-4">
-        <form method="post">
+<section class="main">
+    <h2>Create Component</h2>
+    <form method="post" class="w-100">
+        <div class="main_content_container">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div>
                 <label asp-for="Component.ComponentName" class="control-label"></label>
-                <input asp-for="Component.ComponentName" class="form-control" required/>
+                <input asp-for="Component.ComponentName" class="form-control" required />
                 <span asp-validation-for="Component.ComponentName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div>
                 <label asp-for="Component.ComponentPrice" class="control-label"></label>
-                <input asp-for="Component.ComponentPrice" class="form-control" required min="1" type="number"/>
+                <input asp-for="Component.ComponentPrice" class="form-control" required min="1" type="number" />
                 <span asp-validation-for="Component.ComponentPrice" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -30,20 +25,15 @@
                     <input class="form-check-input" asp-for="Component.Required" /> @Html.DisplayNameFor(model => model.Component.Required)
                 </label>
             </div>
-            <div class="form-group">
+            <div>
                 <label asp-for="Component.QuantityRequired" class="control-label"></label>
-                <input asp-for="Component.QuantityRequired" class="form-control" required min="1"/>
+                <input asp-for="Component.QuantityRequired" class="form-control" required min="1" />
                 <span asp-validation-for="Component.QuantityRequired" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
                 <input type="submit" value="Create" class="btn btn-success" />
-                <a class="btn btn-primary" asp-page="Index">Back to List</a>
+                <a class="btn btn-primary" asp-page="Index">Back</a>
             </div>
-        </form>
-    </div>
-</div>
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        </div>
+    </form>
+</section>
