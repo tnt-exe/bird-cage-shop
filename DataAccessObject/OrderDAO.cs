@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.Enums;
+using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessObject
@@ -129,7 +130,8 @@ namespace DataAccessObject
             var order = db.Orders.Where(o => o.OrderId == orderId).FirstOrDefault();
             if (order != null)
             {
-                db.Orders.Remove(order);
+                order.Status = (int)OrderStatus.Undefined;
+                db.Orders.Update(order);
                 return db.SaveChanges() > 0;
             }
             return false;

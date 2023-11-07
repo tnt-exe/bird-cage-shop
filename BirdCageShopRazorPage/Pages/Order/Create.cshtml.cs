@@ -46,16 +46,17 @@ namespace BirdCageShopRazorPage.Pages.Order
                     UserId = id,
                     OrderDate = DateTime.Now,
                     Status = (int)BusinessObject.Enums.OrderStatus.Waiting,
+                    PaymentStatus = (int)BusinessObject.Enums.PaymentStatus.None,
                     TotalPrice = 0
                 };
                 var result = _orderRepository.CreateOrder(newOrder);
                 if (result)
                 {
-                    TempData["notification"] = "Tạo mới giỏ hàng thành công";
+                    TempData["notification"] = "New cart is created!";
                     return RedirectToPage("./Index");
                 }
             }
-            TempData["notification"] = "Tạo mới giỏ hàng thất bại";
+            TempData["notification"] = "Create new cart failed";
             return RedirectToPage("./Index");
         }
     }
