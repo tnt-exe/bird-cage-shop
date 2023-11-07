@@ -123,10 +123,10 @@ namespace DataAccessObject
             {
                 using (var db = new BirdCageShopContext())
                 {
-                    CageComponent componentObj = db.CageComponents
-                        .Where(component => component.ComponentId == cageComponentId)
+                    CageComponent cageComponentObj = db.CageComponents
+                        .Where(cageComponent => cageComponent.CageComponentId == cageComponentId)
                         .FirstOrDefault();
-                    db.Remove(componentObj);
+                    db.Remove(cageComponentObj);
                     result = db.SaveChanges() > 0;
                 }
             }
@@ -135,6 +135,35 @@ namespace DataAccessObject
                 return false;
             }
             return result;
+        }
+
+        public bool IsCageComponentRequired(int cageComponentId)
+        {
+            bool isRequired = false;
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    var cageComponent = db.CageComponents
+                        .SingleOrDefault(cageComponent => cageComponent.CageComponentId == cageComponentId);
+                    if (cageComponent == null)
+                    {
+                        return false;
+                    }
+                    var component = db.Components
+                        .SingleOrDefault(component => component.ComponentId == cageComponent.ComponentId);
+                    if (component == null)
+                    {
+                        return false;
+                    }
+                    isRequired = component.Required;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return isRequired;
         }
     }
 }
