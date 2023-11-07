@@ -8,6 +8,7 @@ namespace BusinessObject.Enums
         Completed = 2,
         Cancelled = 3,
         Waiting = 4,
-        Custom = 5
+        Custom = 5,
+        Dealing = 6
     }
 }

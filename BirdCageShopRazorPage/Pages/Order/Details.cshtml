@@ -4,115 +4,165 @@
 
 @{
     var checkRole = HttpContextAccessor.HttpContext?.User.Claims.Where(c => c.Type == "scope").Any(c => c.Value.Contains("Staff") || c.Value.Contains("Admin")) ?? false;
+    int status = Model.Order?.Status ?? -1;
 }
 
 <section class="wrapper">
     <h2>Chi tiết đơn hàng #@(Model.Order?.OrderId ?? -1)</h2>
-
-    <div class="row">
-        <div class="col-7">
-            @foreach (var item in Model.Order?.OrderDetails)
-            {
-                <div class="container">
-                    <div class="row mt-3">
-                        <div class="col-12 card">
-                            <div class="card-body row">
-                                <a asp-page="./Details" asp-route-id="@item.CageId" style="text-decoration: none; color: inherit;" class="row">
-                                    <div class="col-md-4">
-                                        @if (item.Cage?.ImageUrl is null)
-                                        {
-                                            <img src="https://raw.githubusercontent.com/khoaLe12/Public-Image/main/cage_image.png" style="height: auto; width: 100%;">
-                                        }
-                                        else
-                                        {
-                                            <img src="@item.Cage.ImageUrl" style="height: auto; width: 100%;">
-                                        }
-                                    </div>
-                                    <div class="col-md-8">
-                                        <label class="ml-3 mr-3">
-                                            Name: @(item.Cage?.CageName ?? "Undefined")
-                                        </label><br />
-                                        <label class="ml-3 mr-3">
-                                            Price: @item.Cage?.CagePrice
-                                        </label><br />
-                                        <label class="ml-3">
-                                            Status:
-                                            @switch (item.Cage.Status)
+    <form method="post">
+        <div class="row">
+            <div class="col-7">
+                @foreach (var item in Model.Order?.OrderDetails ?? new List<DataTransferObject.OrderDetailDTO>())
+                {
+                    <div class="container">
+                        <div class="row mt-3">
+                            <div class="col-12 card">
+                                <div class="card-body row">
+                                    <a asp-page="./Details" asp-route-id="@item.CageId" style="text-decoration: none; color: inherit;" class="row">
+                                        <div class="col-md-4">
+                                            @if (item.Cage?.ImageUrl is null)
                                             {
-                                                case (int)BusinessObject.Enums.CageStatus.Undefined:
-                                                    <span class="badge bg-dark text-white">Undefined</span>
-                                                    break;
-                                                case (int)BusinessObject.Enums.CageStatus.Unavailable:
-                                                    <span class="badge bg-danger">Unavailable</span>
-                                                    break;
-                                                case (int)BusinessObject.Enums.CageStatus.Available:
-                                                    <span class="badge bg-success">Available</span>
-                                                    break;
-                                                case (int)BusinessObject.Enums.CageStatus.Custom:
-                                                    <span class="badge bg-info text-dark">Custom</span>
-                                                    break;
+                                                <img src="https://raw.githubusercontent.com/khoaLe12/Public-Image/main/cage_image.png" style="height: auto; width: 100%;">
                                             }
-                                        </label><br />
-                                        <label>
-                                            Quantity: @item.Quantity
-                                        </label><br />
-                                        <label>
-                                            Total: @item.Price VND
-                                        </label><br />
-                                        @{
-                                            if (!checkRole)
+                                            else
                                             {
-                                                <a class="btn btn-danger mt-3" asp-route-detailId="@item.OrderDetailId" asp-route-orderId="@Model.Order.OrderId"
-                                                   asp-page-handler="removeCageItem">Remove</a>
+                                                <img src="@item.Cage.ImageUrl" style="height: auto; width: 100%;">
                                             }
-                                        }
-                                    </div>
-                                </a>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label class="ml-3 mr-3">
+                                                Name: @(item.Cage?.CageName ?? "Undefined")
+                                            </label><br />
+                                            <label class="ml-3 mr-3">
+                                                Price: @item.Cage?.CagePrice
+                                            </label><br />
+                                            <label class="ml-3">
+                                                Status:
+                                                @switch (item.Cage.Status)
+                                                {
+                                                    case (int)BusinessObject.Enums.CageStatus.Undefined:
+                                                        <span class="badge bg-dark text-white">Undefined</span>
+                                                        break;
+                                                    case (int)BusinessObject.Enums.CageStatus.Unavailable:
+                                                        <span class="badge bg-danger">Unavailable</span>
+                                                        break;
+                                                    case (int)BusinessObject.Enums.CageStatus.Available:
+                                                        <span class="badge bg-success">Available</span>
+                                                        break;
+                                                    case (int)BusinessObject.Enums.CageStatus.Custom:
+                                                        <span class="badge bg-info text-dark">Custom</span>
+                                                        break;
+                                                }
+                                            </label><br />
+                                            <label>
+                                                Quantity: @item.Quantity
+                                            </label><br />
+                                            <label>
+                                                Total: @item.Price VND
+                                            </label><br />
+                                            @{
+                                                if (!checkRole && status == 4)
+                                                {
+                                                            <a class="btn btn-danger mt-3" asp-route-detailId="@item.OrderDetailId" asp-route-orderId="@Model.Order.OrderId"
+                                           asp-page-handler="removeCageItem">Remove</a>
+                                                }
+                                            }
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
 
-        <div class="col-5 w-25 border position-relative p-4">
-            <h3 >Chi tiết hóa đơn</h3>
-            <div class="order_detail">
-                <div>
-                    <p>Total Price</p>
-                    <span>@Model.Order.TotalPrice</span>
-                </div>
-                <div>
-                    <p>Payment Status</p>
-                    <span>@Enum.GetName(typeof(BusinessObject.Enums.PaymentStatus), Model.Order.PaymentStatus ?? -1)</span>
-                </div>
-                <div>
-                    <p>Status</p>
-                    <span>@Enum.GetName(typeof(BusinessObject.Enums.OrderStatus), Model.Order.Status)</span>
-                </div>
-                <div>
-                    <p>Order Date</p>
-                    <span>@Model.Order.OrderDate</span>
-                </div>
-                <div>
-                    <p>Ship Date</p>
-                    <span>@Model.Order.ShipDate</span>
-                </div>
+                @if (status == 5 && checkRole)
+                {
+                    <input type="hidden" asp-for="CageId" />
+                    <input type="hidden" asp-for="OrderId" />
+                    <div class="row">
+                        Price: <input type="number" asp-for="Price" min="0" />
+                    </div>
+                }
             </div>
 
-            @if (!checkRole && Model.Order.OrderDetails.Count() > 0 && Model.Order.TotalPrice > 0)
-            {
-                <a class="btn btn-success mt-3" style="position: absolute; bottom: 0; width: 100%;"
-               asp-route-orderId="@Model.Order.OrderId" asp-page-handler="confirmOrder">Confirm</a>
-            }
+            <div class="col-5 w-25 border position-relative p-4">
+                <h3>Chi tiết hóa đơn</h3>
+                <div class="order_detail">
+                    <div>
+                        <p>Total Price</p>
+                        <span>@Model.Order?.TotalPrice</span>
+                    </div>
+                    <div>
+                        <p>Payment Status</p>
+                        <span>@Enum.GetName(typeof(BusinessObject.Enums.PaymentStatus), Model.Order?.PaymentStatus ?? -1)</span>
+                    </div>
+                    <div>
+                        <p>Status</p>
+                        <span>@Enum.GetName(typeof(BusinessObject.Enums.OrderStatus), Model.Order?.Status ?? -1)</span>
+                    </div>
+                    <div>
+                        <p>Order Date</p>
+                        <span>@Model.Order?.OrderDate</span>
+                    </div>
+                    <div>
+                        <p>Ship Date</p>
+                        <span>@Model.Order?.ShipDate</span>
+                    </div>
+                </div>
+                @if (!checkRole)
+                {
+                    if (status == 0 || status == 1 || status == 5)
+                    {
+                        <a class="btn btn-danger mt-3" style="position: absolute; bottom: 0; width: 100%;"
+                   asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel</a>
+                    }
+                    else if (status == 4 && Model.Order?.OrderDetails.Count() > 0)
+                    {
+                        <a class="btn btn-success mt-3" style="position: absolute; bottom: 0; width: 100%;"
+                   asp-route-orderId="@Model.Order?.OrderId" asp-route-status="@Model.Order?.Status" asp-page-handler="confirmOrder">Confirm</a>
+                    }
+                    else if (status == 6)
+                    {
+                        <div class="flex item-center justify-content-between">
+                            <a class="btn btn-success mt-3"
+                       asp-route-orderId="@Model.Order?.OrderId" asp-route-status="@Model.Order?.Status" asp-page-handler="confirmOrder">Confirm</a>
+
+                            <a class="btn btn-danger mt-3"
+                       asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel</a>
+                        </div>
+                    }
+                }
+                else if (checkRole)
+                {
+                    if (status == 0)
+                    {
+                        <div class="flex item-center justify-content-between">
+                            <a class="btn btn-success mt-3 py-3 px-4"
+                                asp-route-orderId="@Model.Order?.OrderId" asp-route-status="@Model.Order?.Status" asp-page-handler="confirmOrder">Confirm</a>
+
+                            <a class="btn btn-danger mt-3 py-3 px-4"
+                                asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel</a>
+                        </div>
+                    }
+                    else if(status == 5){
+                        <div class="flex item-center justify-content-between">
+                            <button type="submit" class="btn btn-success mt-3 py-3 px-4">
+                                Confirm
+                            </button>
+                            <a class="btn btn-danger mt-3 py-3 px-4"
+                                asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel</a>
+                        </div>
+                    }
+                }
+            </div>
         </div>
-    </div>
+    </form>
 
     <div class="mt-3 px-3">
         @{
-            if (!checkRole)
+            if (!checkRole && status != 5 && status != 6)
             {
-                <a asp-page="../Cage/Index" class="btn btn-info">Add Order</a>
+                            <a asp-page="../Cage/Index" class="btn btn-info">Add Order</a>
             }
         }
         <a asp-page="./Index" class="btn btn-secondary">Back</a>
