@@ -9,9 +9,46 @@
 
 @if (TempData["notification"] != null)
 {
-    <div class="alert alert-primary m-0" role="alert">
-        @TempData["notification"]
+    <div id="toast-container" class="toast-container position-fixed top-2 end-0 p-3">
+        <div class="toast position-relative" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="mr-auto">Notification</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <text class="text-info">@TempData["notification"]</text>
+            </div>
+        </div>
     </div>
+
+    <style>
+        .toast {
+            position: relative;
+        }
+
+            .toast .close {
+                position: absolute;
+                top: 0;
+                right: 0.5rem;
+                margin: 0.25rem;
+                border: none;
+                background: none;
+            }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('.toast').toast('show');
+        });
+        $('.close').click(function () {
+            $('.toast').toast('hide');
+        });
+        setTimeout(function () {
+            $('.toast').toast('hide');
+        }, 10000);
+    </script>
 }
 @if (!checkRole)
 {
@@ -101,14 +138,15 @@ else
                 @foreach (var item in Model.Cage)
                 {
                     <tr class="align-middle">
-                        <td class="w-25">
+                        <td style="max-width: 200px;">
                             @if (item.ImageUrl is null)
                             {
-                                <img src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg" />
+                                <img src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
+                                     style="width: 85%; height: 16%;" />
                             }
                             else
                             {
-                                <img src="@item.ImageUrl" />
+                                <img src="@item.ImageUrl" style="width: 85%; height: 16%;" />
                             }
 
                         </td>
@@ -162,11 +200,15 @@ else
                         <td>
                             @if (item.Status is not null && item.Status == 1)
                             {
-                                <a asp-page="./MakeOrder" asp-route-id="@item.CageId" class="text-center text-xl">Order</a>
-                                <br />
+                                <a asp-page="./MakeOrder" asp-route-id="@item.CageId" class="btn btn-sm btn-outline-info">
+                                    <i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i>
+                                    <span class="sr-only">Add to Cart</span>
+                                </a>
                             }
-                            <a class="btn btn-sm btn-outline-primary" asp-page="./Details" asp-route-id="@item.CageId"><i class="fa fa-info" style="font-size: 24px;"></i></a>
-                            <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.CageId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
+                            <a class="btn btn-sm btn-outline-primary" asp-page="./Details" asp-route-id="@item.CageId">
+                                <i class="fa fa-info px-1" style="font-size: 24px;"></i></a>
+                            <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.CageId">
+                                <i class="fa fa-edit" style="font-size: 24px;"></i></a>
                             <a class="btn btn-sm btn-outline-danger" asp-page="./Delete" asp-route-id="@item.CageId"><i class="fa fa-trash" style="font-size: 24px;"></i></a>
                         </td>
                     </tr>

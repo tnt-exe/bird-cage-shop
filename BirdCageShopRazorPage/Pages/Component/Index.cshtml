@@ -7,9 +7,45 @@
 
 @if (TempData["comp-notification"] != null)
 {
-    <div class="alert alert-info" style="position: fixed; top: 10%; right: 1%; width: 25%;">
-        @TempData["comp-notification"]
+    <div id="toast-container" class="toast-container position-fixed top-2 end-0 p-3">
+        <div class="toast position-relative" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="mr-auto">Notification</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <text class="text-info">@TempData["comp-notification"]</text>
+            </div>
+        </div>
     </div>
+
+    <style>
+        .toast {
+            position: relative;
+        }
+            .toast .close {
+                position: absolute;
+                top: 0;
+                right: 0.5rem;
+                margin: 0.25rem;
+                border: none;
+                background: none;
+            }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('.toast').toast('show');
+        });
+        $('.close').click(function () {
+            $('.toast').toast('hide');
+        });
+        setTimeout(function () {
+            $('.toast').toast('hide');
+        }, 10000);
+    </script>
 }
 
 <head>
@@ -54,7 +90,8 @@
                 @Html.DisplayFor(modelItem => item.QuantityRequired)
             </td>
             <td>
-                    <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.ComponentId"><i class="fa fa-edit" style="font-size: 24px;"></i></a>
+                    <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.ComponentId">
+                        <i class="fa fa-edit mt-1 ml-1" style="font-size: 24px;"></i></a>
             </td>
         </tr>
 }
