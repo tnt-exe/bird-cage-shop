@@ -19,10 +19,23 @@
         <div>
             <dl class="row">
                 <dt class="col-2">
-                    @Html.DisplayNameFor(model => model.Cage.ImageUrl)
+                    <label>Preview Image</label>
+                    @* @Html.DisplayNameFor(model => model.Cage.ImageUrl) *@
                 </dt>
                 <dd class="col-9">
-                    @Html.DisplayFor(model => model.Cage.ImageUrl)
+                    @* @Html.DisplayFor(model => model.Cage.ImageUrl) *@
+                    @if (Model.Cage.ImageUrl != null)
+                    {
+                        <img id="previewImage" src="@Model.Cage.ImageUrl"
+                             alt="Image Preview"
+                             style="height: 95%; width: 80%;">
+                    }
+                    else
+                    {
+                        <img id="previewImage" src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
+                             alt="Image Preview"
+                             style="height: 95%; width: 80%;">
+                    }
                 </dd>
                 <dt class="col-2">
                     @Html.DisplayNameFor(model => model.Cage.CageName)

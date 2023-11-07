@@ -27,14 +27,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Cage.CageId" />
             <div class="form-group">
-                <label asp-for="Cage.Image" class="control-label">Preview Image</label>
-                <input asp-for="Cage.Image" class="form-control" type="file" id="imageInput" accept="image/*" />
+                <label asp-for="Cage.ImageUrl" class="control-label">Preview Image</label>
+                <input asp-for="Cage.ImageUrl" class="form-control" type="file" id="imageInput" accept="image/*" />
                 <div class="col-12 mt-2">
-                    <img id="previewImage" src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
-                         alt="Picture Preview"
-                         class="img-fluid w-100 h-100">
+                    @if(Model.Cage.ImageUrl != null)
+                    {
+                        <img id="previewImage" src="@Model.Cage.ImageUrl"
+                             alt="Image Preview"
+                        class="img-fluid w-100 h-100">
+                    }
+                    else
+                    {
+                        <img id="previewImage" src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
+                             alt="Image Preview"
+                             class="img-fluid w-100 h-100">
+                    }
                 </div>
-                <span asp-validation-for="Cage.Image" class="text-danger"></span>
+                <span asp-validation-for="Cage.ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cage.CageName" class="control-label"></label>
@@ -117,13 +126,13 @@
                             <label> @(Model.CageComponents[i].Component?.ComponentName ?? "Undefined") </label>
                         </div>
                         <div class="col-md-2">
-                                <input asp-for="CageComponents[i].Color" style="width: 100%" />
+                                <input asp-for="CageComponents[i].Color" class="ps-2" style="width: 100%" />
                         </div>
                         <div class="col-md-2">
-                                <input asp-for="CageComponents[i].Material" style="width: 100%" />
+                                <input asp-for="CageComponents[i].Material" class="ps-2" style="width: 100%" />
                         </div>
                         <div class="col-md-2">
-                            <input class="quantity" type="number" asp-for="CageComponents[i].Quantity" oninput="updateToTalPrice(this)" 
+                            <input class="quantity ps-2" type="number" asp-for="CageComponents[i].Quantity" oninput="updateToTalPrice(this)" 
                             min="@maximum[Model.CageComponents[i].Component?.ComponentName ?? "0"]"
                             style="width: 100%"/>
                         </div>
@@ -132,7 +141,7 @@
                             <label>@(Model.CageComponents[i].Component?.ComponentPrice ?? 0) VNĐ</label>
                         </div>
                         <div class="col-md-2">
-                                <input class="totalPrice" asp-for="CageComponents[i].Price" readonly style="width: 100%" />
+                                <input class="totalPrice ps-2" asp-for="CageComponents[i].Price" readonly style="width: 100%" />
                         </div>
                     </div>
                 </div>

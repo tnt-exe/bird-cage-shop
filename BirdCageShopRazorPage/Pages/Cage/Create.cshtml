@@ -130,8 +130,9 @@
                     }
                 }
             </div>
+            <label for="componentList">Choose Custom Component</label>
             <select id="componentList" class="form-control" asp-items="ViewBag.Component"></select>
-            <button type="button" onclick="addComponent()">Add component</button>
+            <button type="button" onclick="addComponent()" class="btn btn-info mt-2">Add component</button>
         </div>
 
         @if(!checkRole){
