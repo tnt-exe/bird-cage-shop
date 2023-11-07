@@ -52,5 +52,10 @@ namespace Repository.Implement
             CageComponent cageComponent = _mapper.Map<CageComponent>(cageComponentDTO);
             return CageComponentDAO.SingletonInstance.UpdateCageComponent(cageComponent);
         }
+
+        public bool IsCageComponentRequired(int cageComponentId)
+        {
+            return CageComponentDAO.SingletonInstance.IsCageComponentRequired(cageComponentId);
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Repository.Interface
         ComponentDTO GetComponentById(int id);
         bool AddComponent(ComponentDTO component);
         bool UpdateComponent(ComponentDTO component);
+        bool DeleteComponent(int componentId);
     }
 }

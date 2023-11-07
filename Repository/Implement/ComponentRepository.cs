@@ -42,5 +42,10 @@ namespace Repository.Implement
         {
             return ComponentDAO.SingletonInstance.UpdateComponent(_mapper.Map<Component>(component));
         }
+
+        public bool DeleteComponent(int componentId)
+        {
+            return ComponentDAO.SingletonInstance.DeleteComponent(componentId);
+        }
     }
 }

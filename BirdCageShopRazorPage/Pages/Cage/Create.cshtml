@@ -130,9 +130,12 @@
                     }
                 }
             </div>
-            <label for="componentList">Choose Custom Component</label>
-            <select id="componentList" class="form-control" asp-items="ViewBag.Component"></select>
-            <button type="button" onclick="addComponent()" class="btn btn-info mt-2">Add component</button>
+            <hr/>
+            <div>
+                <label class="col-3">Select Component</label>
+                <select id="componentList" class="form-control" asp-items="ViewBag.Component"></select>
+                <button class="btn btn-primary" type="button" onclick="addComponent()">Add component</button>
+            </div>
         </div>
 
         @if(!checkRole){
@@ -144,7 +147,7 @@
 
         <div class="form-group mt-3 text-center">
             <input type="submit" value="Create" class="btn btn-success" />
-            <a asp-page="Index" class="btn btn-primary">Back to List</a>
+            <a asp-page="Index" class="btn btn-primary">Back</a>
         </div>
     </form>
 </div>

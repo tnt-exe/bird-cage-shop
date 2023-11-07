@@ -92,6 +92,9 @@
             <td>
                     <a class="btn btn-sm btn-outline-warning" asp-page="./Edit" asp-route-id="@item.ComponentId">
                         <i class="fa fa-edit mt-1 ml-1" style="font-size: 24px;"></i></a>
+                    <a class="btn btn-sm btn-outline-danger" asp-page-handler="deleteComponent" asp-route-id="@item.ComponentId" onclick="showToast('weird')">
+                        <i class="fa fa-trash" style="font-size: 24px;"></i>
+                    </a>
             </td>
         </tr>
 }

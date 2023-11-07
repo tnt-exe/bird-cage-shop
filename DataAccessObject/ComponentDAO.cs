@@ -109,5 +109,24 @@ namespace DataAccessObject
             }
             return true;
         }
+
+        public bool DeleteComponent(int componentId)
+        {
+            try
+            {
+                using (var db = new BirdCageShopContext())
+                {
+                    var component = db.Components
+                        .SingleOrDefault(component => component.ComponentId == componentId);
+                    db.Components.Remove(component);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return true;
+        }
     }
 }
