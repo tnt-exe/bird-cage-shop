@@ -168,6 +168,9 @@ else
                                 case (int)BusinessObject.Enums.CageStatus.Custom:
                                     <span class="badge bg-info text-dark">Custom</span>
                                     break;
+                                default:
+                                    <span class="badge bg-dark text-white">Undefined</span>
+                                    break;
                             }
                         </td>
                         <td>
@@ -198,7 +201,7 @@ else
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
                         <td>
-                            @if (item.Status is not null && item.Status == 1)
+                            @if (item.Status is not null && item.Status == 1 && !checkRole)
                             {
                                 <a asp-page="./MakeOrder" asp-route-id="@item.CageId" class="btn btn-sm btn-outline-info">
                                     <i class="fa-solid fa-cart-shopping" style="font-size: 24px;"></i>

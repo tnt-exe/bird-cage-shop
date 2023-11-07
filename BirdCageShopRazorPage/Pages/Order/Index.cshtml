@@ -96,6 +96,10 @@ else
                                 case (int)BusinessObject.Enums.PaymentStatus.Paid:
                                     <span class="badge bg-success">Paid</span>
                                     break;
+                                default:
+                                    <span class="badge bg-secondary">None</span>
+                                    break;
+
                             }
                         </td>
                         <td>
@@ -124,6 +128,9 @@ else
                                     break;
                                 case (int)BusinessObject.Enums.OrderStatus.Dealing:
                                     <span class="badge bg-primary">Dealing</span>
+                                    break;
+                                default:
+                                    <span class="badge bg-dark text-white">Undefined</span>
                                     break;
                             }
                         </td>
