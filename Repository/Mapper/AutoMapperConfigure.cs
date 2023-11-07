@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BusinessObject.Enums;
 using BusinessObject.Models;
 using DataTransferObject;
 
@@ -15,7 +14,7 @@ namespace Repository.Mapper
                 .ForMember(dest => dest.OrderDetails, opt => opt.MapFrom(src => src.OrderDetails))
                 .ReverseMap()
                 .ForMember(dest => dest.CageComponents, options => options.MapFrom(src => src.CageComponents));
-                //.ForMember(dest => dest.Status, options => options.MapFrom(src => (int)(CageStatus)Enum.Parse(typeof(CageStatus), src.Status ?? "Undefined")));
+            //.ForMember(dest => dest.Status, options => options.MapFrom(src => (int)(CageStatus)Enum.Parse(typeof(CageStatus), src.Status ?? "Undefined")));
 
             CreateMap<CageComponent, CageComponentDTO>().ReverseMap();
             CreateMap<CageImage, CageImageDTO>().ReverseMap();

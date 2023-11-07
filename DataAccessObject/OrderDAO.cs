@@ -123,5 +123,16 @@ namespace DataAccessObject
             return db.SaveChanges() > 0;
         }
 
+        public bool DeleteOrder(int orderId)
+        {
+            using var db = new BirdCageShopContext();
+            var order = db.Orders.Where(o => o.OrderId == orderId).FirstOrDefault();
+            if (order != null)
+            {
+                db.Orders.Remove(order);
+                return db.SaveChanges() > 0;
+            }
+            return false;
+        }
     }
 }

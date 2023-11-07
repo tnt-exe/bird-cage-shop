@@ -1,6 +1,4 @@
 ﻿using BusinessObject.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DataAccessObject
 {
@@ -134,7 +132,7 @@ namespace DataAccessObject
 
                 userObj.Status = user.Status;
                 userObj.Role = user.Role;
-                
+
                 db.Entry(user).CurrentValues.SetValues(userObj);
                 result = db.SaveChanges() > 0;
             }

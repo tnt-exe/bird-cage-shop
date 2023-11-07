@@ -1,5 +1,6 @@
 ﻿using BusinessObject.Enums;
 using DataTransferObject;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Interface;
 using System.Security.Claims;
@@ -36,6 +37,25 @@ namespace BirdCageShopRazorPage.Pages.Order
                 Order = _orderRepository.GetAllOrders()
                     .Where(o => o.Status != (int)OrderStatus.Waiting)
                     .ToList();
+            }
+        }
+
+        public IActionResult OnGetDeleteOrder(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var result = _orderRepository.DeleteOrder((int)id);
+
+            if (result)
+            {
+                return RedirectToPage();
+            }
+            else
+            {
+                return NotFound();
             }
         }
     }

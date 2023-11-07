@@ -64,5 +64,7 @@ namespace Repository.Implement
             return _mapper.Map<List<OrderDTO>>(orderList);
         }
 
+        public bool DeleteOrder(int orderId)
+            => OrderDAO.SingletonInstance.DeleteOrder(orderId);
     }
 }

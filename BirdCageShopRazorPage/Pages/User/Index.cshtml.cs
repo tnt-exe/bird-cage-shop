@@ -31,7 +31,7 @@ namespace BirdCageShopRazorPage.Pages.User
             {
                 return NotFound();
             }
-            
+
             var newStatus = (int)((currentStatus == (int)UserStatus.Active) ?
                 UserStatus.Ban : UserStatus.Active);
             _context.ChangeUserStatus((int)userId, newStatus);

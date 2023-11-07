@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using BusinessObject.Enums;
+﻿using BusinessObject.Enums;
 using DataTransferObject;
-using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -54,7 +52,7 @@ namespace BirdCageShopRazorPage.Pages.Order
                 _orderRepository.UpdateOrder(order);
 
                 _orderDetailRepository.DeleteOrderDetail((int)detailId);
-                return RedirectToPage();
+                return RedirectToPage("./Details", new { Id = orderId });
             }
             return NotFound();
         }

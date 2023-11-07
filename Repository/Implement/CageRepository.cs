@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using BusinessObject.Enums;
 using BusinessObject.Models;
-using CloudinaryDotNet.Actions;
 using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using DataAccessObject;
 using DataTransferObject;
 using Repository.Interface;

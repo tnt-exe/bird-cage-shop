@@ -13,5 +13,6 @@ namespace Repository.Interface
         List<OrderDTO> GetOrderListByStatus(Enum orderStatus);
         Order? GetLatestSuitableOrderOfUser(int userId);
         bool UpdateOrder(OrderDTO updateOrder);
+        bool DeleteOrder(int orderId);
     }
 }

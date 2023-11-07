@@ -1,5 +1,4 @@
-﻿using BusinessObject.Models;
-using DataTransferObject;
+﻿using DataTransferObject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -45,15 +44,15 @@ namespace BirdCageShopRazorPage.Pages.Cage
             Components = _componentRepository.GetAllComponent();
 
             ViewData["CageStatus"] = new SelectList(
-                new cageStatus[] 
-                { 
+                new cageStatus[]
+                {
                     new cageStatus("Unavailable", 0),
                     new cageStatus("Available", 1)
                 },
                 "intStatus", "stringStatus"
             );
             ViewData["CategoryId"] = new SelectList(_categoryRepository.GetAllCategories(), "CategoryId", "CategoryName");
-            ViewData["Color"] = new SelectList(new string[] { "None", "Red", "Green", "Yellow", "Blue", "Black", "White"});
+            ViewData["Color"] = new SelectList(new string[] { "None", "Red", "Green", "Yellow", "Blue", "Black", "White" });
             ViewData["Material"] = new SelectList(new string[] { "Wood", "Iron", "Plastic", "Galvanized Steel", "Stainless Steel" });
             return Page();
         }

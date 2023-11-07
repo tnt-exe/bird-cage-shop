@@ -59,7 +59,13 @@
                                         <label>
                                             Total: @item.Price VND
                                         </label><br />
-                                        <button type="submit" class="btn btn-sm btn-danger mt-3" asp-page-handler="RemoveCageItem" asp-route-orderId="@Model.Order.OrderId" asp-route-detailId="@item.OrderDetailId">Remove</button>
+                                        @{
+                                            if (!checkRole)
+                                            {
+                                                <a class="btn btn-danger mt-3" asp-route-detailId="@item.OrderDetailId" asp-route-orderId="@Model.Order.OrderId"
+                                                   asp-page-handler="removeCageItem">Remove</a>
+                                            }
+                                        }
                                     </div>
                                 </a>
                             </div>
@@ -103,7 +109,12 @@
     </div>
 
     <div class="mt-3 px-3">
-        @* <button class="btn btn-success">Thêm Order</button> *@
-        <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+        @{
+            if (!checkRole)
+            {
+                <button class="btn btn-info">Thêm Order</button>
+            }
+        }
+        <a asp-page="./Index" class="btn btn-secondary">Back</a>
     </div>
 </section>

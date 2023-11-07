@@ -1,7 +1,6 @@
 ﻿using DataTransferObject;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Repository.Interface;
 
 namespace BirdCageShopRazorPage.Pages.Component
