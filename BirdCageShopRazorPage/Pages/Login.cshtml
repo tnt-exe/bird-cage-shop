@@ -6,7 +6,7 @@
 
 @if (TempData["warning"] != null)
 {
-    <div class="alert alert-danger m-0" role="alert">
+    <div class="alert alert-info" style="position: fixed; top: 10%; right: 1%; width: 25%;">
         @TempData["warning"]
     </div>
     TempData.Remove("warning");
