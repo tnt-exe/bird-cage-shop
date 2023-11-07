@@ -20,14 +20,23 @@
             <h2>@Model.Cage.CageName</h2>
             <h5>Category: @Model.Cage.Category?.CategoryName</h5>
             <span>@Model.Cage.CagePrice VND</span>
+            <input type="hidden" id="price" value="@Model.Cage.CagePrice" readonly />
 
             <div class="content_selectable">
                 <form method="post" action="">
                     <input type="hidden" asp-for="CageId" value="@Model.Cage.CageId" />
                     <input type="hidden" asp-for="OrderDetailId" />
 
-                    Quantity: <input class="content_selectable_input" style="width: 80px; display: inline-block; height: 26px; font-size: 18px;padding-left: 10px; margin-bottom: 12px;" type="number" value="1" min="1" max="5" asp-for="Quantity" />
-                    <button class="content_selectable_button" type="submit"><i class="fa-solid fa-cart-plus me-2"></i>Add to Cart</button>
+                    Quantity: <input id="quantity" oninput="updateToTalPrice()" class="content_selectable_input" style="width: 80px; display: inline-block; height: 26px; font-size: 18px;padding-left: 10px; margin-bottom: 12px;" type="number" min="1" max="5" asp-for="Quantity" />
+                    Total: <input id="totalMoney" type="number" value="@Model.TotalMoney" readonly style="display: inline-block; height: 26px; font-size: 18px;padding-left: 10px; margin-bottom: 12px;" />
+                    @if (Model.OrderDetail is not null)
+                    {
+                        <button class="content_selectable_button" type="submit"><i class="fa-solid fa-cart-plus me-2"></i>Update Cart</button>
+                    }
+                    else
+                    {
+                        <button class="content_selectable_button" type="submit"><i class="fa-solid fa-cart-plus me-2"></i>Add to Cart</button>
+                    }
                 </form>
             </div>
 
