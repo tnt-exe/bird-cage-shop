@@ -1,5 +1,4 @@
 ﻿using BusinessObject.Enums;
-using BusinessObject.Models;
 using DataTransferObject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +44,7 @@ namespace BirdCageShopRazorPage.Pages.Order
             else
             {
                 Order = order;
-                if(order.Status == (int)OrderStatus.Custom)
+                if (order.Status == (int)OrderStatus.Custom)
                 {
                     CageId = order.OrderDetails.FirstOrDefault()?.CageId;
                     OrderId = order.OrderId;
@@ -56,7 +55,7 @@ namespace BirdCageShopRazorPage.Pages.Order
 
         public IActionResult OnPost()
         {
-            if(Price != null && Price != 0)
+            if (Price != null && Price != 0)
             {
                 var order = _orderRepository.GetOrderById(OrderId ?? 0);
                 var orderDetail = order.OrderDetails.Where(od => od.CageId == CageId).FirstOrDefault();
@@ -122,7 +121,7 @@ namespace BirdCageShopRazorPage.Pages.Order
 
         public IActionResult OnGetCancelOrder(int? orderId)
         {
-            if(orderId != null)
+            if (orderId != null)
             {
                 _orderRepository.ChangeOrderStatus((int)orderId, (int)OrderStatus.Cancelled);
                 return RedirectToPage("./Index");
