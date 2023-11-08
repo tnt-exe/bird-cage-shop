@@ -8,13 +8,10 @@
     var checkRole = HttpContextAccessor.HttpContext?.User.Claims.Where(c => c.Type == "scope").Any(c => c.Value.Contains("Staff") || c.Value.Contains("Admin")) ?? false;
 }
 
-<div class="mx-3">
-    <h1>Create</h1>
-
-    <h4>Cage</h4>
-    <hr />
+<div style="width: 80%; margin: 0 auto; padding: 16px; border-bottom: 1px solid gray">
+    <h1>Create Cage</h1>
 </div>
-<div>
+<div style="width: 80%; margin: 0 auto; padding: 32px;">
     <form method="post" class="row ml-3" enctype="multipart/form-data">
         <div class="col-4 border border-3 py-3">
             <h2>Cage Information</h2>
@@ -75,7 +72,7 @@
         </div>
 
         <div class="col-8">
-            <h2 class="mt-2 text-center">List of components</h2>
+            <h2 class="mt-2 text-left">List of components</h2>
             <div id="components">
                 @for (int i = 0; i < Model.Components.Count; i++)
                 {
@@ -88,8 +85,8 @@
                         <div class="card my-1 rounded-2">
                             <div class="card-body row">
                                 <div class="col-6">
-                                    <div class="col-md-2 display-5">
-                                        <label class="mt-4 fw-bolder">@Model.Components[i].ComponentName</label>
+                                    <div class="col-md-2" style="font-size: 32px">
+                                        <label class="mt-4"> @Model.Components[i].ComponentName</label>
                                     </div>
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-7">
@@ -134,7 +131,7 @@
             <div>
                 <label class="col-3">Select Component</label>
                 <select id="componentList" class="form-control" asp-items="ViewBag.Component"></select>
-                <button class="btn btn-primary" type="button" onclick="addComponent()">Add component</button>
+                <button class="btn btn-primary mt-3" type="button" onclick="addComponent()">Add component</button>
             </div>
         </div>
 
@@ -147,7 +144,7 @@
 
         <div class="form-group mt-3 text-center">
             <input type="submit" value="Create" class="btn btn-success" />
-            <a asp-page="Index" class="btn btn-primary">Back</a>
+            <a asp-page="Index" class="btn btn-secondary">Back</a>
         </div>
     </form>
 </div>
@@ -200,8 +197,8 @@
         component.className = "card my-1 rounded-2";
         component.innerHTML = `<div class="card-body row">
                                         <div class="col-6">
-                                            <div class="col-md-2 display-5">
-                                                <label class="mt-4 fw-bolder">` + name + `</label>
+                                                <div class="col-md-2"  style="font-size: 32px">
+                                                <label class="mt-4">` + name + `</label>
                                             </div>
                                             <div class="row justify-content-center align-items-center">
                                                 <div class="col-7">

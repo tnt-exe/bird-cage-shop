@@ -18,7 +18,7 @@
                         <div class="row mt-3">
                             <div class="col-12 card">
                                 <div class="card-body row">
-                                    <a asp-page="./Details" asp-route-id="@item.CageId" style="text-decoration: none; color: inherit;" class="row">
+                                    <a asp-page="/Cage/Details" asp-route-id="@item.CageId" style="text-decoration: none; color: inherit;" class="row">
                                         <div class="col-md-4">
                                             @if (item.Cage?.ImageUrl is null)
                                             {
@@ -74,13 +74,17 @@
                         </div>
                     </div>
                 }
-
+                    
                 @if (status == 5 && checkRole)
                 {
                     <input type="hidden" asp-for="CageId" />
                     <input type="hidden" asp-for="OrderId" />
-                    <div class="row">
-                        Price: <input type="number" asp-for="Price" min="0" />
+                    <div class="d-flex align-items-center justify-content-between p-2 border mt-5 mx-2 rounded-2">
+                        <p class="d-inline-block w-25 p-0 m-0">Deal Price</p>
+                        <div class="position-relative m-0">
+                            <span style="position: absolute; right: 10px; top: 10px;">VND</span>
+                            <input class="border p-2" type="number" asp-for="Price" min="40" value="40" />
+                        </div>
                     </div>
                 }
             </div>
@@ -113,44 +117,44 @@
                 {
                     if (status == 0 || status == 1 || status == 5)
                     {
-                        <a class="btn btn-danger mt-3" style="position: absolute; bottom: 0; width: 100%;"
-                   asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel</a>
+                        <a class="btn btn-danger mt-3" style="relative: absolute; bottom: 0;"
+                   asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel Order</a>
                     }
-                    else if (status == 4 && Model.Order?.OrderDetails.Count() > 0)
+                    else if (status == 4 && Model.Order?.OrderDetails.Count() > 0) // waiting
                     {
                         <a class="btn btn-success mt-3" style="position: absolute; bottom: 0; width: 100%;"
                    asp-route-orderId="@Model.Order?.OrderId" asp-route-status="@Model.Order?.Status" asp-page-handler="confirmOrder">Confirm</a>
                     }
-                    else if (status == 6)
+                    else if (status == 6) // dealing
                     {
                         <div class="flex item-center justify-content-between">
                             <a class="btn btn-success mt-3"
-                       asp-route-orderId="@Model.Order?.OrderId" asp-route-status="@Model.Order?.Status" asp-page-handler="confirmOrder">Confirm</a>
+                       asp-route-orderId="@Model.Order?.OrderId" asp-route-status="@Model.Order?.Status" asp-page-handler="confirmOrder">Confirm Price</a>
 
                             <a class="btn btn-danger mt-3"
-                       asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel</a>
+                       asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Reject Order</a>
                         </div>
                     }
                 }
                 else if (checkRole)
                 {
-                    if (status == 0)
+                    if (status == 0) // pending
                     {
                         <div class="flex item-center justify-content-between">
-                            <a class="btn btn-success mt-3 py-3 px-4"
+                            <a class="btn btn-success mt-3"
                                 asp-route-orderId="@Model.Order?.OrderId" asp-route-status="@Model.Order?.Status" asp-page-handler="confirmOrder">Confirm</a>
 
-                            <a class="btn btn-danger mt-3 py-3 px-4"
+                            <a class="btn btn-danger mt-3"
                                 asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel</a>
                         </div>
                     }
-                    else if(status == 5){
+                    else if(status == 5){   // custom
                         <div class="flex item-center justify-content-between">
-                            <button type="submit" class="btn btn-success mt-3 py-3 px-4">
+                            <button type="submit" class="btn btn-success mt-3">
                                 Confirm
                             </button>
-                            <a class="btn btn-danger mt-3 py-3 px-4"
-                                asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Cancel</a>
+                            <a class="btn btn-danger mt-3"
+                                asp-route-orderId="@Model.Order?.OrderId" asp-page-handler="cancelOrder">Reject Order</a>
                         </div>
                     }
                 }
