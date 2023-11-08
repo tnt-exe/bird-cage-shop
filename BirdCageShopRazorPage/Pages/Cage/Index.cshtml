@@ -76,11 +76,11 @@
                         <div class="product_item">
                             @if (item.ImageUrl is null)
                             {
-                                <img src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg" />
+                                <img src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg" style="width: 100%; height: 200px" />
                             }
                             else
                             {
-                                <img src="@item.ImageUrl" />
+                                <img src="@item.ImageUrl" style="width: 100%; height: 200px" />
                             }
                             <h3>@item.CageName</h3>
                             <h5>@item.Description</h5>
