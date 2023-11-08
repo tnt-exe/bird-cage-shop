@@ -4,13 +4,13 @@
 @{
     ViewData["Title"] = "Edit";
 
-    Dictionary<string,int> maximum = new Dictionary<string, int>();
-    maximum.Add("Đáy", 2);
-    maximum.Add("Trụ", 2);
-    maximum.Add("Móc", 1);
-    maximum.Add("Cửa", 2);
-    maximum.Add("Nan", 50);
-    maximum.Add("0", 0);
+    //Dictionary<string,int> maximum = new Dictionary<string, int>();
+    //maximum.Add("Đáy", 2);
+    //maximum.Add("Trụ", 2);
+    //maximum.Add("Móc", 1);
+    //maximum.Add("Cửa", 2);
+    //maximum.Add("Nan", 50);
+    //maximum.Add("0", 0);
 }
 
 <div class="px-3">
@@ -133,7 +133,7 @@
                         </div>
                         <div class="col-md-2">
                             <input class="quantity ps-2" type="number" asp-for="CageComponents[i].Quantity" oninput="updateToTalPrice(this)" 
-                            min="@maximum[Model.CageComponents[i].Component?.ComponentName ?? "0"]"
+                            min="@Model.CageComponents[i].Component?.QuantityRequired ?? 1"
                             style="width: 100%"/>
                         </div>
                         <div class="col-md-2">

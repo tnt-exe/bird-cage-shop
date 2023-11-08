@@ -29,11 +29,11 @@ namespace BirdCageShopRazorPage.Pages.Cage
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            /*var policyCheck = await _authorizationService.AuthorizeAsync(User, "Staff");
+            var policyCheck = await _authorizationService.AuthorizeAsync(User, "Staff");
             if (!policyCheck.Succeeded)
             {
                 return RedirectToPage("/Forbidden");
-            }*/
+            }
 
             var cage = _cageRepository.GetCageById(id ?? 0);
             if (cage == null)
@@ -49,11 +49,11 @@ namespace BirdCageShopRazorPage.Pages.Cage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            /*var policyCheck = await _authorizationService.AuthorizeAsync(User, "Staff");
+            var policyCheck = await _authorizationService.AuthorizeAsync(User, "Staff");
             if (!policyCheck.Succeeded)
             {
                 return RedirectToPage("/Forbidden");
-            }*/
+            }
 
             var checkCage = _cageRepository.GetCageById(Cage.CageId);
             if (checkCage == null)
